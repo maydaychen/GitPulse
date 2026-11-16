@@ -1,0 +1,40 @@
+# 系统与编辑器临时文件
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+
+# 任务临时目录与个人规则
+.tmp/
+AGENTS.local.md
+
+# 真实环境配置；无凭据示例允许提交
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# AI 本地认证与状态；保留共享配置和 skills
+.codex/auth.json
+.codex/history.jsonl
+.codex/sessions/
+.codex/log/
+.claude/settings.local.json
+
+# Xcode 用户状态、SwiftPM 缓存与生成产物
+Config/LocalSigning.xcconfig
+xcuserdata/
+*.xcuserstate
+DerivedData/
+.DerivedData/
+.build/
+.swiftpm/
+/build/
+build/
+*.xcarchive/
+*.ipa
+*.dSYM/
+*.dSYM.zip

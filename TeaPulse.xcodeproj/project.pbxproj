@@ -1,0 +1,1733 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		008538FCBBB17C8CFBD276BD /* TeaPulseShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7051831E69679A8C957927EB /* TeaPulseShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		030DD6A22819625F26152693 /* MermaidDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E096D38316431A0A590D46A /* MermaidDiagramView.swift */; };
+		03D2295B076197C1C48A9AFC /* TeaPulseWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB864719B42AB2CF39CED44F /* TeaPulseWidgetBundle.swift */; };
+		06ECEBDC6480EA8A0230B5B7 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
+		085E6F590FBD2D1F74EB685D /* OpsWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F60CE38EDBFD9564D59C43 /* OpsWorkspaceView.swift */; };
+		0C2EE9F74C24867BD809C541 /* AppStore+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB120576BD34A195CE8268EA /* AppStore+Actions.swift */; };
+		0C33AFA20E20DF08B0CF4ECC /* ClipboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CC853E61ED74B598E89A7F /* ClipboardService.swift */; };
+		0C96585F3DFBEF9E49E172EB /* ThemeContrastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A4336457BB472B2EAF922A /* ThemeContrastTests.swift */; };
+		0E19A6354DC5C4267D820FDE /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		108516AA0100534C39E332DA /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
+		1369EFA1062EDA742A9FA087 /* MacWorkspaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B903144E5397E6E75C202D /* MacWorkspaceTests.swift */; };
+		1567C4C427C84723284F7500 /* LiveActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FEEEB5A9FF9719EABE9AA5 /* LiveActivityCoordinator.swift */; };
+		1C15FB793445B2114712A9BD /* EndpointProbePill.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFF0EF4D531365E2EF7B6BD /* EndpointProbePill.swift */; };
+		1C4FDA650031AA6A4A84069C /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
+		21D028F78EE696B93CE8F0E7 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
+		21DFEA0BD69FCCC80D688716 /* TeaPulseMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */; };
+		232CE97091ECC2D1EDA5FB21 /* CommandPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701A239F331E352609F12885 /* CommandPaletteView.swift */; };
+		26B4FD12F3B98D9F64781C6A /* TeaPulseMacWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129F7C7821B7B8AD55AAC759 /* TeaPulseMacWidgetBundle.swift */; };
+		270F1BD71C1D0543B27B8F43 /* RunnersMonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650CC9C1271EFD38A538DA30 /* RunnersMonitorView.swift */; };
+		2AA9AB2335D22E137A07B966 /* PulseDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E14C12A069CC59DDA8218D6 /* PulseDashboardView.swift */; };
+		2E21309129DB9EDA84E10E9C /* CommandPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701A239F331E352609F12885 /* CommandPaletteView.swift */; };
+		30FE74390416334997D1131C /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
+		3230F398C117F2528FF19367 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
+		348C10B0CC3767881F66EE95 /* TeaPulseMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */; };
+		34DBE02A0E4FDC60E182E166 /* BarkPushConfigSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5AA259E9B87ACBD3F15CB /* BarkPushConfigSheet.swift */; };
+		366D284B66647E551A3CB8F7 /* InboxWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE82507D0FFE146100F5ECE /* InboxWorkspaceView.swift */; };
+		36DF90CAA4AB3B43A5F3E6A7 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
+		37741B8CC67E31B70367B5EB /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5637175A3F84F7D4A7C59947 /* GiteaKit */; };
+		3B3B0F820762734C8484B2BA /* RunnersMonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650CC9C1271EFD38A538DA30 /* RunnersMonitorView.swift */; };
+		3B4B9A74C5CF8ABCB8A86DCD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 3C4A5B590413BF3BD26A44CD /* PrivacyInfo.xcprivacy */; };
+		3BEE7827267AF3F17691781F /* LiveActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FEEEB5A9FF9719EABE9AA5 /* LiveActivityCoordinator.swift */; };
+		3C93D613C20902BE60E0C9FF /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27320413387CAEAE54F67B20 /* ShareViewController.swift */; };
+		440EC1B979BC8B20979E5DCB /* AppSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A2E3F215BA77B24C7B91FF /* AppSection.swift */; };
+		456CF15E8B5545C345ECC1B4 /* RepoCommitsAndBranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5ED740004675A6D869C8B /* RepoCommitsAndBranchesView.swift */; };
+		4795D56C73D360B0ED91FB25 /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
+		48706E556CCF69BC5EBF8A77 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5BC6D6F77FA7B5E8401A2286 /* GiteaKit */; };
+		48E286BA4EDB27CDDDA76338 /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
+		4A652232905E0648BBE771E9 /* RepositoryWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DB79AD97EC6816E80DD /* RepositoryWorkspaceView.swift */; };
+		4AE675EF94A735A6F1DE3C6F /* LiveConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C5063C5916D0BBB0B0660F /* LiveConnectionTests.swift */; };
+		4BC3A8A6CD77746613EAD65C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 3C4A5B590413BF3BD26A44CD /* PrivacyInfo.xcprivacy */; };
+		4C585A518B0FBA66F1F08D06 /* AppStore+WorkspaceEnhancements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7DC68D632157DFE76320C /* AppStore+WorkspaceEnhancements.swift */; };
+		4F8D8873AD0D03574C27EDBC /* AppStore+WorkspaceEnhancements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7DC68D632157DFE76320C /* AppStore+WorkspaceEnhancements.swift */; };
+		4FB1EFC5179E7D9F3373C6A0 /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		509FACE844DBAF0D146874C8 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
+		530F56A388B8BB21B8E3DB5C /* PulseDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E14C12A069CC59DDA8218D6 /* PulseDashboardView.swift */; };
+		53240F5D965ECFFF77F2077B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5CACB269E6351674396C253 /* Assets.xcassets */; };
+		54A146D7E41B72C4713A83A3 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5C45807EC99D16D1DEB06746 /* GiteaKit */; };
+		54CA2D8F1977DD413096722F /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23F2D83A1B47105152F5954 /* AppStore.swift */; };
+		55C265A247B7D84E8517BB24 /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
+		5948EC66284CDD6FC9AF3972 /* RepoOpsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B1408127418C25E4723978 /* RepoOpsSettingsView.swift */; };
+		59CCFABD491EB955FF1982C9 /* PulseStatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C8E00BDBCF19AEA831498A /* PulseStatusWidget.swift */; };
+		5A4E24F78F2F1981EE81BDDB /* AppSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A2E3F215BA77B24C7B91FF /* AppSection.swift */; };
+		5B49A26320022C3AF5261832 /* InstanceConnectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D1A11443F55CF4D625CB9 /* InstanceConnectionSheet.swift */; };
+		5CB71C40A42822399C3AC529 /* ANSITerminalLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C285CFF87DA3784E42F91DF0 /* ANSITerminalLogView.swift */; };
+		5FA50D0CFFF1D0F30B6C1078 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CFDACD944AD4910A499055 /* RootContainerView.swift */; };
+		60DCBAC912972CA206BCF715 /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		60E8D2F9BC81E430B0A9642A /* BuildLiveActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB3AD1D255CD30E5E679E7A /* BuildLiveActivityWidget.swift */; };
+		6169F0BE04714D724A590366 /* TeaPulseSmokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A778A6751C3CFB607AE269 /* TeaPulseSmokeUITests.swift */; };
+		638A6B4E2D51F2F296120F5C /* MenuBarBuildExtraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DF645F8F2962D71ED4BB17 /* MenuBarBuildExtraView.swift */; };
+		65499BDFEE71D196F2C32137 /* TeaPulseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F42C4FC7192355F5F602B2 /* TeaPulseApp.swift */; };
+		6594687813D679B02EDBC30B /* TeaPulseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F42C4FC7192355F5F602B2 /* TeaPulseApp.swift */; };
+		660E75C0EE5371C967D129D5 /* DiffReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE145335AF30BAF8660E287 /* DiffReaderView.swift */; };
+		66D511462118580F8F730FC2 /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
+		66D852C4AF7C6A30314B9CE3 /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
+		69D5306F31E6C5E9E115628B /* DiffReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE145335AF30BAF8660E287 /* DiffReaderView.swift */; };
+		69E9BCDC379C193A07961BA9 /* RepoCommitsAndBranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5ED740004675A6D869C8B /* RepoCommitsAndBranchesView.swift */; };
+		6AF5D432499A96C121E12A6C /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
+		6B85065E13C96F0DC2313D84 /* TeaPulseMacWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B6BEECE96F5BC8B8299C7B69 /* TeaPulseMacWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6D6D2EF3DC6F0319C2EF1096 /* AuditRegressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E8FD1D0225AB84ACDE81A /* AuditRegressionTests.swift */; };
+		6E3247FB4ED9356BEED9801B /* ANSITerminalLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C285CFF87DA3784E42F91DF0 /* ANSITerminalLogView.swift */; };
+		6F868A48C526855825D44D6D /* AppSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A2E3F215BA77B24C7B91FF /* AppSection.swift */; };
+		709BAC99CCA9FC987BCDCC79 /* TeaPulseMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */; };
+		71762A1F825A9DE51F977A12 /* AppStore+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8290D8AF4285281A3F51DA7 /* AppStore+Repositories.swift */; };
+		71F17E1A3FAA0DCC1AEB235A /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
+		73AE735BD99EEA77F02874BF /* OpsWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F60CE38EDBFD9564D59C43 /* OpsWorkspaceView.swift */; };
+		7BF98AD7BC0CB020D7463914 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = BD35E73CD447883DFD3CE660 /* GiteaKit */; };
+		7E08A3E8E07CA6B3680C3B60 /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
+		7F57F33200BAC1E5FE0700FF /* MacShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D1376F8752BD194AC1B2A1 /* MacShareViewController.swift */; };
+		83CE67B9776C8DE8C3F4A469 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23F2D83A1B47105152F5954 /* AppStore.swift */; };
+		8ADFAA4BE6934AAE69502E84 /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
+		8AF86693EF4C78549AE116F2 /* AppStore+WorkspaceEnhancements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7DC68D632157DFE76320C /* AppStore+WorkspaceEnhancements.swift */; };
+		8DDEFE86E1BB4C26FF18393A /* ClipboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CC853E61ED74B598E89A7F /* ClipboardService.swift */; };
+		8F53254C4B6D643A3CABFB8B /* TeaPulseMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */; };
+		8F89160396F135F81FA9B428 /* AppStore+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB120576BD34A195CE8268EA /* AppStore+Actions.swift */; };
+		919F74FBF22D1ED58BA2534D /* AppStore+Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F021CE4E0B75B16F7C11421 /* AppStore+Connection.swift */; };
+		92636EFBE4AE6B766A9F4840 /* TeaPulseMacShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0082BBDC6903EE8F6469808E /* TeaPulseMacShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9325910A9075265E49A95BAE /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
+		9327B3227F69E08F57C987D0 /* HeatmapGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D348D3EA09579F66D648B9 /* HeatmapGridView.swift */; };
+		9571BA244CFA9B905D96FB07 /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
+		95E1E0D09F6B0F325603772D /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
+		979D3EDCFC80EF7890258A03 /* ActionsWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845DB3B1FB952608E0F6CC4 /* ActionsWorkspaceView.swift */; };
+		994056F1FC5824E1863F9503 /* AppStore+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB120576BD34A195CE8268EA /* AppStore+Actions.swift */; };
+		9979C0ADD58404C3C0F71333 /* RepoOpsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B1408127418C25E4723978 /* RepoOpsSettingsView.swift */; };
+		9FF63D79F3C9857BD5670418 /* RepositoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73015760C41C02EF42B473BB /* RepositoryListView.swift */; };
+		A24298030FB108B1DFB24042 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
+		AA813DD80BAEF57CA5BF94BC /* InboxWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE82507D0FFE146100F5ECE /* InboxWorkspaceView.swift */; };
+		AB8D25E2F958A01E181EE7A3 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23F2D83A1B47105152F5954 /* AppStore.swift */; };
+		AEBA9276C6FBAB693B972281 /* HeatmapGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D348D3EA09579F66D648B9 /* HeatmapGridView.swift */; };
+		B01D55A984B60FD3E9AF292C /* AppStore+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8290D8AF4285281A3F51DA7 /* AppStore+Repositories.swift */; };
+		B222453F11FF40393B766328 /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
+		B5DCC1BB98FC9134706F884F /* InstanceConnectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5D1A11443F55CF4D625CB9 /* InstanceConnectionSheet.swift */; };
+		B73ACF88E8890EF3351AD99A /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		BA60173638BB17F6065BA2F1 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECF0CC07AAA1A48CB480486 /* GiteaKit */; };
+		BB1326E11C64DFC20FDF375E /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
+		BC9EE447B0DB9F49ACFB85AC /* TeaPulseMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */; };
+		BD7D5A444812207674D5EB02 /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
+		BEA357AEA201BFB49FED910A /* TeaPulseWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CB53818078DE1DBD25AFFC8C /* TeaPulseWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C18D733CBB6CF18871940BFB /* MermaidDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E096D38316431A0A590D46A /* MermaidDiagramView.swift */; };
+		C29AD7B62668E2EF11231282 /* RepositoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73015760C41C02EF42B473BB /* RepositoryListView.swift */; };
+		C4110DCB80AE6B05FC913AA3 /* InstanceOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35BE901E11DE683C1BB054B /* InstanceOnboardingView.swift */; };
+		C75B9BEE20227BB144869F35 /* ClipboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CC853E61ED74B598E89A7F /* ClipboardService.swift */; };
+		CA029B1EDE8075B3D91F019D /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		CC1F41F5EF6FBE4A3BC795E7 /* PulseStatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C8E00BDBCF19AEA831498A /* PulseStatusWidget.swift */; };
+		CDE01077B992DB532D1D377F /* AppStore+Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F021CE4E0B75B16F7C11421 /* AppStore+Connection.swift */; };
+		D3D89F65978B826DD6C4E302 /* RepositoryWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DB79AD97EC6816E80DD /* RepositoryWorkspaceView.swift */; };
+		D50071F4FE66577944610BFE /* EndpointProbePill.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFF0EF4D531365E2EF7B6BD /* EndpointProbePill.swift */; };
+		D6D66E73D13FFD1992D6E3D3 /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CFDACD944AD4910A499055 /* RootContainerView.swift */; };
+		D706B8DCA0B3B087573B6BD0 /* TeaPulseMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */; };
+		D8BE3852B374B1AB7A0AA3CE /* ActionsWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4845DB3B1FB952608E0F6CC4 /* ActionsWorkspaceView.swift */; };
+		DB577A536B1182FA23C887AD /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
+		DC048F7ACFBB684D537F0E22 /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
+		DCE27C66B14DD99DCB9DDA83 /* AppStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28819C9AF5626E9FFBA21B4 /* AppStoreTests.swift */; };
+		E0E2D11629B9B99F5F08A8F9 /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
+		E129BE741A3A77F4E6447890 /* BarkPushConfigSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5AA259E9B87ACBD3F15CB /* BarkPushConfigSheet.swift */; };
+		E1AF88ED10DAAA2D8369C488 /* TeaPulseMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */; };
+		E1D0254DDBD217CDBA0C2667 /* WorkspaceEnhancementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD296D22FE36F2973D16F2CA /* WorkspaceEnhancementsTests.swift */; };
+		E1E30FC63B116B4D80A72DFE /* AppStore+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8290D8AF4285281A3F51DA7 /* AppStore+Repositories.swift */; };
+		E69CECEC7EB2A182FBC1F553 /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
+		E8AD4DA4CD9B16A3487537DB /* LiveActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FEEEB5A9FF9719EABE9AA5 /* LiveActivityCoordinator.swift */; };
+		EDE70A4F12946E435B74FBEA /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		EE96EBFB2DD6CE02B1010C7A /* InstanceOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35BE901E11DE683C1BB054B /* InstanceOnboardingView.swift */; };
+		F0BA21FE0F2646B8553FA076 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0518DD393356FC2C2F315C99 /* GiteaKit */; };
+		F14C2ADADC7C01A0F612F1ED /* PullRequestWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6920B58307914B5BB89CA59 /* PullRequestWorkspaceView.swift */; };
+		F1F013EC0876973FCC3B268A /* MenuBarBuildExtraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DF645F8F2962D71ED4BB17 /* MenuBarBuildExtraView.swift */; };
+		F5435765D0C5CC3A67A1A42E /* PullRequestWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6920B58307914B5BB89CA59 /* PullRequestWorkspaceView.swift */; };
+		F817AF47C8CB189A77202C42 /* AppStore+Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F021CE4E0B75B16F7C11421 /* AppStore+Connection.swift */; };
+		F8F538058334848CF9E4101B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5CACB269E6351674396C253 /* Assets.xcassets */; };
+		F9455F12996DD896C34E43BE /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		FEF73A1ECEFB5744E245C02E /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 34B7198453713C76FF19BB91 /* GiteaKit */; };
+		FF8ABBEDA1D0984B9ADFF456 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A83B61E0A675A65BE07F0B3 /* GiteaKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		11073A7CC681393FA76F30F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B8E9B74B86D6D99DE300D1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 373A703543714E4013C6369B;
+			remoteInfo = TeaPulse;
+		};
+		BD4033BF9E4AA88424528F1E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B8E9B74B86D6D99DE300D1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9A26D7470DDFCA101FD23EF;
+			remoteInfo = TeaPulseWidgets;
+		};
+		C13F6DBFAC465D5390C43B2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B8E9B74B86D6D99DE300D1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 373A703543714E4013C6369B;
+			remoteInfo = TeaPulse;
+		};
+		CBD4CE5EF02D1FCEDEDB95CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B8E9B74B86D6D99DE300D1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A08DA512A1382D3A9BE5C8D3;
+			remoteInfo = TeaPulseMacWidgets;
+		};
+		D7F6A2AA1B6D64808E18749D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B8E9B74B86D6D99DE300D1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A2267A76F8D4129AC95EC04;
+			remoteInfo = TeaPulseShareExtension;
+		};
+		E429612535B058193D586783 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B8E9B74B86D6D99DE300D1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C473C470A1E23FAEBC67ECF4;
+			remoteInfo = TeaPulseMacShareExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		08213490A021FA4F0592C16E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6B85065E13C96F0DC2313D84 /* TeaPulseMacWidgets.appex in Embed Foundation Extensions */,
+				92636EFBE4AE6B766A9F4840 /* TeaPulseMacShareExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBBA2EAAEEE9168A8A28DCEB /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BEA357AEA201BFB49FED910A /* TeaPulseWidgets.appex in Embed Foundation Extensions */,
+				008538FCBBB17C8CFBD276BD /* TeaPulseShareExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0082BBDC6903EE8F6469808E /* TeaPulseMacShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TeaPulseMacShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		09CC853E61ED74B598E89A7F /* ClipboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardService.swift; sourceTree = "<group>"; };
+		129F7C7821B7B8AD55AAC759 /* TeaPulseMacWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaPulseMacWidgetBundle.swift; sourceTree = "<group>"; };
+		16C8E00BDBCF19AEA831498A /* PulseStatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseStatusWidget.swift; sourceTree = "<group>"; };
+		27320413387CAEAE54F67B20 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaPulseMotion.swift; sourceTree = "<group>"; };
+		2FE145335AF30BAF8660E287 /* DiffReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffReaderView.swift; sourceTree = "<group>"; };
+		322B2226D298AD37E1C55BA6 /* TeaPulseUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TeaPulseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38515959A57CB389CB273990 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		3C4A5B590413BF3BD26A44CD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		46FEEEB5A9FF9719EABE9AA5 /* LiveActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityCoordinator.swift; sourceTree = "<group>"; };
+		477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTargetCardView.swift; sourceTree = "<group>"; };
+		4845DB3B1FB952608E0F6CC4 /* ActionsWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsWorkspaceView.swift; sourceTree = "<group>"; };
+		52D348D3EA09579F66D648B9 /* HeatmapGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapGridView.swift; sourceTree = "<group>"; };
+		56A4336457BB472B2EAF922A /* ThemeContrastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeContrastTests.swift; sourceTree = "<group>"; };
+		60F42C4FC7192355F5F602B2 /* TeaPulseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaPulseApp.swift; sourceTree = "<group>"; };
+		61A2E3F215BA77B24C7B91FF /* AppSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSection.swift; sourceTree = "<group>"; };
+		62DF645F8F2962D71ED4BB17 /* MenuBarBuildExtraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarBuildExtraView.swift; sourceTree = "<group>"; };
+		650CC9C1271EFD38A538DA30 /* RunnersMonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnersMonitorView.swift; sourceTree = "<group>"; };
+		69C5063C5916D0BBB0B0660F /* LiveConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveConnectionTests.swift; sourceTree = "<group>"; };
+		701A239F331E352609F12885 /* CommandPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandPaletteView.swift; sourceTree = "<group>"; };
+		7051831E69679A8C957927EB /* TeaPulseShareExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = TeaPulseShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		73015760C41C02EF42B473BB /* RepositoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListView.swift; sourceTree = "<group>"; };
+		7E096D38316431A0A590D46A /* MermaidDiagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MermaidDiagramView.swift; sourceTree = "<group>"; };
+		859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaPulseComponents.swift; sourceTree = "<group>"; };
+		86B1408127418C25E4723978 /* RepoOpsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoOpsSettingsView.swift; sourceTree = "<group>"; };
+		896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaPulseTheme.swift; sourceTree = "<group>"; };
+		8E14C12A069CC59DDA8218D6 /* PulseDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseDashboardView.swift; sourceTree = "<group>"; };
+		90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupBridge.swift; sourceTree = "<group>"; };
+		90A778A6751C3CFB607AE269 /* TeaPulseSmokeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaPulseSmokeUITests.swift; sourceTree = "<group>"; };
+		9B3E8FD1D0225AB84ACDE81A /* AuditRegressionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditRegressionTests.swift; sourceTree = "<group>"; };
+		9CA5AA259E9B87ACBD3F15CB /* BarkPushConfigSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarkPushConfigSheet.swift; sourceTree = "<group>"; };
+		9F021CE4E0B75B16F7C11421 /* AppStore+Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore+Connection.swift"; sourceTree = "<group>"; };
+		A31B57F7BC5EEC3A4DE598F6 /* TeaPulseTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TeaPulseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A35BE901E11DE683C1BB054B /* InstanceOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceOnboardingView.swift; sourceTree = "<group>"; };
+		A6920B58307914B5BB89CA59 /* PullRequestWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestWorkspaceView.swift; sourceTree = "<group>"; };
+		ACE6A02E8AFF118A42689F86 /* TeaPulseMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeaPulseMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACE82507D0FFE146100F5ECE /* InboxWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxWorkspaceView.swift; sourceTree = "<group>"; };
+		AD296D22FE36F2973D16F2CA /* WorkspaceEnhancementsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEnhancementsTests.swift; sourceTree = "<group>"; };
+		B6BEECE96F5BC8B8299C7B69 /* TeaPulseMacWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TeaPulseMacWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA7966A86D88FEED0CDF88A9 /* tea-pulse */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tea-pulse"; path = .; sourceTree = SOURCE_ROOT; };
+		C0CFDACD944AD4910A499055 /* RootContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerView.swift; sourceTree = "<group>"; };
+		C285CFF87DA3784E42F91DF0 /* ANSITerminalLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSITerminalLogView.swift; sourceTree = "<group>"; };
+		C5D1376F8752BD194AC1B2A1 /* MacShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacShareViewController.swift; sourceTree = "<group>"; };
+		CB120576BD34A195CE8268EA /* AppStore+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore+Actions.swift"; sourceTree = "<group>"; };
+		CB53818078DE1DBD25AFFC8C /* TeaPulseWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = TeaPulseWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1B903144E5397E6E75C202D /* MacWorkspaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacWorkspaceTests.swift; sourceTree = "<group>"; };
+		D23F2D83A1B47105152F5954 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		D28819C9AF5626E9FFBA21B4 /* AppStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreTests.swift; sourceTree = "<group>"; };
+		D5CACB269E6351674396C253 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D83A9DB79AD97EC6816E80DD /* RepositoryWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryWorkspaceView.swift; sourceTree = "<group>"; };
+		DDFF0EF4D531365E2EF7B6BD /* EndpointProbePill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProbePill.swift; sourceTree = "<group>"; };
+		DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildActivityAttributes.swift; sourceTree = "<group>"; };
+		E2F60CE38EDBFD9564D59C43 /* OpsWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpsWorkspaceView.swift; sourceTree = "<group>"; };
+		E975DE30CE6C2887F03E7AB6 /* TeaPulse.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TeaPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAB3AD1D255CD30E5E679E7A /* BuildLiveActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildLiveActivityWidget.swift; sourceTree = "<group>"; };
+		EE43947163AFDAC487CE4828 /* TeaPulseMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeaPulseMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8290D8AF4285281A3F51DA7 /* AppStore+Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore+Repositories.swift"; sourceTree = "<group>"; };
+		FAD5ED740004675A6D869C8B /* RepoCommitsAndBranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCommitsAndBranchesView.swift; sourceTree = "<group>"; };
+		FB864719B42AB2CF39CED44F /* TeaPulseWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeaPulseWidgetBundle.swift; sourceTree = "<group>"; };
+		FD5D1A11443F55CF4D625CB9 /* InstanceConnectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceConnectionSheet.swift; sourceTree = "<group>"; };
+		FFB7DC68D632157DFE76320C /* AppStore+WorkspaceEnhancements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore+WorkspaceEnhancements.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		293F940BD08584B1953DC19A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48706E556CCF69BC5EBF8A77 /* GiteaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43DAA1FFDEAC169BA9FBE787 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37741B8CC67E31B70367B5EB /* GiteaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8752E71B30E47E82019D4DBB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEF73A1ECEFB5744E245C02E /* GiteaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE5182AFA1062F122510BF6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF8ABBEDA1D0984B9ADFF456 /* GiteaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C387665795DC9A61F5504C48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0BA21FE0F2646B8553FA076 /* GiteaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD574B682D3B582FDF9A5215 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BF98AD7BC0CB020D7463914 /* GiteaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F217DB9D06B65235F2B34CDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA60173638BB17F6065BA2F1 /* GiteaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBA0D2A8AD51FC9CA8EF6A02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54A146D7E41B72C4713A83A3 /* GiteaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01E99B3705C12DEFF138B611 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				0F73617B6E0643550FC7449F /* Actions */,
+				1B8CAFC7AE66962D0DB113F9 /* Inbox */,
+				F7FE8C83D39C0330442098D6 /* Ops */,
+				DCAC20E355DE56EF0EA835C6 /* PullRequests */,
+				FD52C6361CF06B9612EEE3DE /* Pulse */,
+				DF1C8062FEA779E05C0FB718 /* Repos */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		0583A3021EE698E16799893C /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				701A239F331E352609F12885 /* CommandPaletteView.swift */,
+				DDFF0EF4D531365E2EF7B6BD /* EndpointProbePill.swift */,
+				FD5D1A11443F55CF4D625CB9 /* InstanceConnectionSheet.swift */,
+				A35BE901E11DE683C1BB054B /* InstanceOnboardingView.swift */,
+				C0CFDACD944AD4910A499055 /* RootContainerView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		0BE09E3668829927F266E8D7 /* TeaPulseTests */ = {
+			isa = PBXGroup;
+			children = (
+				D28819C9AF5626E9FFBA21B4 /* AppStoreTests.swift */,
+				9B3E8FD1D0225AB84ACDE81A /* AuditRegressionTests.swift */,
+				69C5063C5916D0BBB0B0660F /* LiveConnectionTests.swift */,
+				56A4336457BB472B2EAF922A /* ThemeContrastTests.swift */,
+				AD296D22FE36F2973D16F2CA /* WorkspaceEnhancementsTests.swift */,
+			);
+			path = TeaPulseTests;
+			sourceTree = "<group>";
+		};
+		0CC12A17977F2BDBC07B0B75 /* TeaPulseMacShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				C5D1376F8752BD194AC1B2A1 /* MacShareViewController.swift */,
+			);
+			path = TeaPulseMacShareExtension;
+			sourceTree = "<group>";
+		};
+		0F73617B6E0643550FC7449F /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				4845DB3B1FB952608E0F6CC4 /* ActionsWorkspaceView.swift */,
+				C285CFF87DA3784E42F91DF0 /* ANSITerminalLogView.swift */,
+				650CC9C1271EFD38A538DA30 /* RunnersMonitorView.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		10BB629EF81DF3180E79507D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D5CACB269E6351674396C253 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		153921F9C3634AE6951A5B2E /* TeaPulseShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				27320413387CAEAE54F67B20 /* ShareViewController.swift */,
+			);
+			path = TeaPulseShareExtension;
+			sourceTree = "<group>";
+		};
+		1B8CAFC7AE66962D0DB113F9 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				9CA5AA259E9B87ACBD3F15CB /* BarkPushConfigSheet.swift */,
+				ACE82507D0FFE146100F5ECE /* InboxWorkspaceView.swift */,
+			);
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+		1FF09029D00AEB40C03C2035 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E975DE30CE6C2887F03E7AB6 /* TeaPulse.app */,
+				EE43947163AFDAC487CE4828 /* TeaPulseMac.app */,
+				0082BBDC6903EE8F6469808E /* TeaPulseMacShareExtension.appex */,
+				ACE6A02E8AFF118A42689F86 /* TeaPulseMacTests.xctest */,
+				B6BEECE96F5BC8B8299C7B69 /* TeaPulseMacWidgets.appex */,
+				7051831E69679A8C957927EB /* TeaPulseShareExtension.appex */,
+				A31B57F7BC5EEC3A4DE598F6 /* TeaPulseTests.xctest */,
+				322B2226D298AD37E1C55BA6 /* TeaPulseUITests.xctest */,
+				CB53818078DE1DBD25AFFC8C /* TeaPulseWidgets.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CD7B8B114EE9962DC232205 /* TeaPulseWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				EAB3AD1D255CD30E5E679E7A /* BuildLiveActivityWidget.swift */,
+				16C8E00BDBCF19AEA831498A /* PulseStatusWidget.swift */,
+				FB864719B42AB2CF39CED44F /* TeaPulseWidgetBundle.swift */,
+			);
+			path = TeaPulseWidgets;
+			sourceTree = "<group>";
+		};
+		38EC44446ED345E47837FC1A /* TeaPulseMacTests */ = {
+			isa = PBXGroup;
+			children = (
+				D1B903144E5397E6E75C202D /* MacWorkspaceTests.swift */,
+			);
+			path = TeaPulseMacTests;
+			sourceTree = "<group>";
+		};
+		A39ABACF469332D78C3A0845 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				62DF645F8F2962D71ED4BB17 /* MenuBarBuildExtraView.swift */,
+				60F42C4FC7192355F5F602B2 /* TeaPulseApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A86A77044992A18F5A60FB5D /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				61A2E3F215BA77B24C7B91FF /* AppSection.swift */,
+				D23F2D83A1B47105152F5954 /* AppStore.swift */,
+				CB120576BD34A195CE8268EA /* AppStore+Actions.swift */,
+				9F021CE4E0B75B16F7C11421 /* AppStore+Connection.swift */,
+				F8290D8AF4285281A3F51DA7 /* AppStore+Repositories.swift */,
+				FFB7DC68D632157DFE76320C /* AppStore+WorkspaceEnhancements.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		B8EB4F926BEED89106583F18 /* TeaPulseUITests */ = {
+			isa = PBXGroup;
+			children = (
+				90A778A6751C3CFB607AE269 /* TeaPulseSmokeUITests.swift */,
+			);
+			path = TeaPulseUITests;
+			sourceTree = "<group>";
+		};
+		BAB0AB7A4A8DE457994B5384 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				BA7966A86D88FEED0CDF88A9 /* tea-pulse */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		BCDACEDD9B1AB5C9FDC5CE0F /* TeaPulseMacWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				129F7C7821B7B8AD55AAC759 /* TeaPulseMacWidgetBundle.swift */,
+			);
+			path = TeaPulseMacWidgets;
+			sourceTree = "<group>";
+		};
+		BEBABCCC02E510355620C833 = {
+			isa = PBXGroup;
+			children = (
+				D77D46E9B3479AEFC965A88F /* Config */,
+				BAB0AB7A4A8DE457994B5384 /* Packages */,
+				EB0E46D3BA77384326E0E657 /* SharedExtensionSupport */,
+				F3FDD1724A4035C8C507A845 /* TeaPulse */,
+				0CC12A17977F2BDBC07B0B75 /* TeaPulseMacShareExtension */,
+				38EC44446ED345E47837FC1A /* TeaPulseMacTests */,
+				BCDACEDD9B1AB5C9FDC5CE0F /* TeaPulseMacWidgets */,
+				153921F9C3634AE6951A5B2E /* TeaPulseShareExtension */,
+				0BE09E3668829927F266E8D7 /* TeaPulseTests */,
+				B8EB4F926BEED89106583F18 /* TeaPulseUITests */,
+				2CD7B8B114EE9962DC232205 /* TeaPulseWidgets */,
+				1FF09029D00AEB40C03C2035 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D77D46E9B3479AEFC965A88F /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				3C4A5B590413BF3BD26A44CD /* PrivacyInfo.xcprivacy */,
+				38515959A57CB389CB273990 /* Signing.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		DCAC20E355DE56EF0EA835C6 /* PullRequests */ = {
+			isa = PBXGroup;
+			children = (
+				2FE145335AF30BAF8660E287 /* DiffReaderView.swift */,
+				A6920B58307914B5BB89CA59 /* PullRequestWorkspaceView.swift */,
+			);
+			path = PullRequests;
+			sourceTree = "<group>";
+		};
+		DF1C8062FEA779E05C0FB718 /* Repos */ = {
+			isa = PBXGroup;
+			children = (
+				7E096D38316431A0A590D46A /* MermaidDiagramView.swift */,
+				FAD5ED740004675A6D869C8B /* RepoCommitsAndBranchesView.swift */,
+				86B1408127418C25E4723978 /* RepoOpsSettingsView.swift */,
+				73015760C41C02EF42B473BB /* RepositoryListView.swift */,
+				D83A9DB79AD97EC6816E80DD /* RepositoryWorkspaceView.swift */,
+			);
+			path = Repos;
+			sourceTree = "<group>";
+		};
+		EB0E46D3BA77384326E0E657 /* SharedExtensionSupport */ = {
+			isa = PBXGroup;
+			children = (
+				90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */,
+				DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */,
+				477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */,
+				859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */,
+				29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */,
+				896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */,
+			);
+			path = SharedExtensionSupport;
+			sourceTree = "<group>";
+		};
+		F3FDD1724A4035C8C507A845 /* TeaPulse */ = {
+			isa = PBXGroup;
+			children = (
+				A39ABACF469332D78C3A0845 /* App */,
+				01E99B3705C12DEFF138B611 /* Features */,
+				0583A3021EE698E16799893C /* Navigation */,
+				10BB629EF81DF3180E79507D /* Resources */,
+				FE08D4E6B784A43DF63117F3 /* Services */,
+				A86A77044992A18F5A60FB5D /* Store */,
+			);
+			path = TeaPulse;
+			sourceTree = "<group>";
+		};
+		F7FE8C83D39C0330442098D6 /* Ops */ = {
+			isa = PBXGroup;
+			children = (
+				E2F60CE38EDBFD9564D59C43 /* OpsWorkspaceView.swift */,
+			);
+			path = Ops;
+			sourceTree = "<group>";
+		};
+		FD52C6361CF06B9612EEE3DE /* Pulse */ = {
+			isa = PBXGroup;
+			children = (
+				52D348D3EA09579F66D648B9 /* HeatmapGridView.swift */,
+				8E14C12A069CC59DDA8218D6 /* PulseDashboardView.swift */,
+			);
+			path = Pulse;
+			sourceTree = "<group>";
+		};
+		FE08D4E6B784A43DF63117F3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				09CC853E61ED74B598E89A7F /* ClipboardService.swift */,
+				46FEEEB5A9FF9719EABE9AA5 /* LiveActivityCoordinator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1A2267A76F8D4129AC95EC04 /* TeaPulseShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F43597489855149A28FE5DE3 /* Build configuration list for PBXNativeTarget "TeaPulseShareExtension" */;
+			buildPhases = (
+				0F6B5B44A916172617A1BBC5 /* Sources */,
+				BE5182AFA1062F122510BF6F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeaPulseShareExtension;
+			packageProductDependencies = (
+				0A83B61E0A675A65BE07F0B3 /* GiteaKit */,
+			);
+			productName = TeaPulseShareExtension;
+			productReference = 7051831E69679A8C957927EB /* TeaPulseShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		373A703543714E4013C6369B /* TeaPulse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9C305A7374BA228FE1D9574 /* Build configuration list for PBXNativeTarget "TeaPulse" */;
+			buildPhases = (
+				5D52E774C82CADF0FDA653CD /* Sources */,
+				2F5D61466B35FB34939EC44F /* Resources */,
+				43DAA1FFDEAC169BA9FBE787 /* Frameworks */,
+				EBBA2EAAEEE9168A8A28DCEB /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A26E3F7543E3817FEC46BC7 /* PBXTargetDependency */,
+				0C2F50BD4C11EF8EE2E7F023 /* PBXTargetDependency */,
+			);
+			name = TeaPulse;
+			packageProductDependencies = (
+				5637175A3F84F7D4A7C59947 /* GiteaKit */,
+			);
+			productName = TeaPulse;
+			productReference = E975DE30CE6C2887F03E7AB6 /* TeaPulse.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3A4D7C493E6B8479FD2E6F14 /* TeaPulseMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08B6F9A9627211BBF0E29B06 /* Build configuration list for PBXNativeTarget "TeaPulseMac" */;
+			buildPhases = (
+				718ABD26ADF62869C8A7F4D9 /* Sources */,
+				AD7C6C625B35B455FAAA1902 /* Resources */,
+				293F940BD08584B1953DC19A /* Frameworks */,
+				08213490A021FA4F0592C16E /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC84EE16B364BD93B3C9229F /* PBXTargetDependency */,
+				EAB27ECA304C28D72CF153D9 /* PBXTargetDependency */,
+			);
+			name = TeaPulseMac;
+			packageProductDependencies = (
+				5BC6D6F77FA7B5E8401A2286 /* GiteaKit */,
+			);
+			productName = TeaPulseMac;
+			productReference = EE43947163AFDAC487CE4828 /* TeaPulseMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5C00CA13F2D39E1F060E3391 /* TeaPulseMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE6EA1F56476BC2BE1E9C970 /* Build configuration list for PBXNativeTarget "TeaPulseMacTests" */;
+			buildPhases = (
+				FD1F3088FBA90B410FA4D931 /* Sources */,
+				8752E71B30E47E82019D4DBB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeaPulseMacTests;
+			packageProductDependencies = (
+				34B7198453713C76FF19BB91 /* GiteaKit */,
+			);
+			productName = TeaPulseMacTests;
+			productReference = ACE6A02E8AFF118A42689F86 /* TeaPulseMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A08DA512A1382D3A9BE5C8D3 /* TeaPulseMacWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE6CBABAB27263932730EDAA /* Build configuration list for PBXNativeTarget "TeaPulseMacWidgets" */;
+			buildPhases = (
+				7F69629D6F5F1F22F45274D1 /* Sources */,
+				C387665795DC9A61F5504C48 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeaPulseMacWidgets;
+			packageProductDependencies = (
+				0518DD393356FC2C2F315C99 /* GiteaKit */,
+			);
+			productName = TeaPulseMacWidgets;
+			productReference = B6BEECE96F5BC8B8299C7B69 /* TeaPulseMacWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A6BB436179BC50C65B3A3F95 /* TeaPulseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 093EA74671D142175D48F703 /* Build configuration list for PBXNativeTarget "TeaPulseTests" */;
+			buildPhases = (
+				BD3BB4009A7B85B5A53CE28D /* Sources */,
+				CD574B682D3B582FDF9A5215 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E6087905A7920B67A4024D7 /* PBXTargetDependency */,
+			);
+			name = TeaPulseTests;
+			packageProductDependencies = (
+				BD35E73CD447883DFD3CE660 /* GiteaKit */,
+			);
+			productName = TeaPulseTests;
+			productReference = A31B57F7BC5EEC3A4DE598F6 /* TeaPulseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C473C470A1E23FAEBC67ECF4 /* TeaPulseMacShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18C479BCAB950490E96CDD0F /* Build configuration list for PBXNativeTarget "TeaPulseMacShareExtension" */;
+			buildPhases = (
+				D8A5CF14C966F9F24CDDBBF0 /* Sources */,
+				FBA0D2A8AD51FC9CA8EF6A02 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeaPulseMacShareExtension;
+			packageProductDependencies = (
+				5C45807EC99D16D1DEB06746 /* GiteaKit */,
+			);
+			productName = TeaPulseMacShareExtension;
+			productReference = 0082BBDC6903EE8F6469808E /* TeaPulseMacShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F36420CD71BBCF18E2F9D3A9 /* TeaPulseUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDBD137E30EA9B8321D5B070 /* Build configuration list for PBXNativeTarget "TeaPulseUITests" */;
+			buildPhases = (
+				65B558A3A4840F188A64D64C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BDCC0F5A15E2D81DA0ABA7E5 /* PBXTargetDependency */,
+			);
+			name = TeaPulseUITests;
+			packageProductDependencies = (
+			);
+			productName = TeaPulseUITests;
+			productReference = 322B2226D298AD37E1C55BA6 /* TeaPulseUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		F9A26D7470DDFCA101FD23EF /* TeaPulseWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFD722F1485EDAD10FB6405B /* Build configuration list for PBXNativeTarget "TeaPulseWidgets" */;
+			buildPhases = (
+				065CBB3B351581C1534F724C /* Sources */,
+				F217DB9D06B65235F2B34CDB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeaPulseWidgets;
+			packageProductDependencies = (
+				7ECF0CC07AAA1A48CB480486 /* GiteaKit */,
+			);
+			productName = TeaPulseWidgets;
+			productReference = CB53818078DE1DBD25AFFC8C /* TeaPulseWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0B8E9B74B86D6D99DE300D1C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2720;
+				TargetAttributes = {
+					1A2267A76F8D4129AC95EC04 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					373A703543714E4013C6369B = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					3A4D7C493E6B8479FD2E6F14 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					5C00CA13F2D39E1F060E3391 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					A08DA512A1382D3A9BE5C8D3 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					A6BB436179BC50C65B3A3F95 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					C473C470A1E23FAEBC67ECF4 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					F36420CD71BBCF18E2F9D3A9 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 373A703543714E4013C6369B;
+					};
+					F9A26D7470DDFCA101FD23EF = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 73D7E79D90B14C1DF6EF03F9 /* Build configuration list for PBXProject "TeaPulse" */;
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = BEBABCCC02E510355620C833;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BE79E3FD4A2B26DED1AC7255 /* XCLocalSwiftPackageReference "." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1FF09029D00AEB40C03C2035 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				373A703543714E4013C6369B /* TeaPulse */,
+				3A4D7C493E6B8479FD2E6F14 /* TeaPulseMac */,
+				C473C470A1E23FAEBC67ECF4 /* TeaPulseMacShareExtension */,
+				5C00CA13F2D39E1F060E3391 /* TeaPulseMacTests */,
+				A08DA512A1382D3A9BE5C8D3 /* TeaPulseMacWidgets */,
+				1A2267A76F8D4129AC95EC04 /* TeaPulseShareExtension */,
+				A6BB436179BC50C65B3A3F95 /* TeaPulseTests */,
+				F36420CD71BBCF18E2F9D3A9 /* TeaPulseUITests */,
+				F9A26D7470DDFCA101FD23EF /* TeaPulseWidgets */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F5D61466B35FB34939EC44F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53240F5D965ECFFF77F2077B /* Assets.xcassets in Resources */,
+				4BC3A8A6CD77746613EAD65C /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD7C6C625B35B455FAAA1902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8F538058334848CF9E4101B /* Assets.xcassets in Resources */,
+				3B4B9A74C5CF8ABCB8A86DCD /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		065CBB3B351581C1534F724C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9325910A9075265E49A95BAE /* AppGroupBridge.swift in Sources */,
+				4795D56C73D360B0ED91FB25 /* BuildActivityAttributes.swift in Sources */,
+				60E8D2F9BC81E430B0A9642A /* BuildLiveActivityWidget.swift in Sources */,
+				59CCFABD491EB955FF1982C9 /* PulseStatusWidget.swift in Sources */,
+				EDE70A4F12946E435B74FBEA /* ShareTargetCardView.swift in Sources */,
+				B222453F11FF40393B766328 /* TeaPulseComponents.swift in Sources */,
+				21DFEA0BD69FCCC80D688716 /* TeaPulseMotion.swift in Sources */,
+				21D028F78EE696B93CE8F0E7 /* TeaPulseTheme.swift in Sources */,
+				03D2295B076197C1C48A9AFC /* TeaPulseWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F6B5B44A916172617A1BBC5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FE74390416334997D1131C /* AppGroupBridge.swift in Sources */,
+				6AF5D432499A96C121E12A6C /* BuildActivityAttributes.swift in Sources */,
+				B73ACF88E8890EF3351AD99A /* ShareTargetCardView.swift in Sources */,
+				3C93D613C20902BE60E0C9FF /* ShareViewController.swift in Sources */,
+				108516AA0100534C39E332DA /* TeaPulseComponents.swift in Sources */,
+				348C10B0CC3767881F66EE95 /* TeaPulseMotion.swift in Sources */,
+				36DF90CAA4AB3B43A5F3E6A7 /* TeaPulseTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D52E774C82CADF0FDA653CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E3247FB4ED9356BEED9801B /* ANSITerminalLogView.swift in Sources */,
+				979D3EDCFC80EF7890258A03 /* ActionsWorkspaceView.swift in Sources */,
+				BD7D5A444812207674D5EB02 /* AppGroupBridge.swift in Sources */,
+				440EC1B979BC8B20979E5DCB /* AppSection.swift in Sources */,
+				0C2EE9F74C24867BD809C541 /* AppStore+Actions.swift in Sources */,
+				CDE01077B992DB532D1D377F /* AppStore+Connection.swift in Sources */,
+				E1E30FC63B116B4D80A72DFE /* AppStore+Repositories.swift in Sources */,
+				8AF86693EF4C78549AE116F2 /* AppStore+WorkspaceEnhancements.swift in Sources */,
+				54CA2D8F1977DD413096722F /* AppStore.swift in Sources */,
+				34DBE02A0E4FDC60E182E166 /* BarkPushConfigSheet.swift in Sources */,
+				BB1326E11C64DFC20FDF375E /* BuildActivityAttributes.swift in Sources */,
+				0C33AFA20E20DF08B0CF4ECC /* ClipboardService.swift in Sources */,
+				232CE97091ECC2D1EDA5FB21 /* CommandPaletteView.swift in Sources */,
+				660E75C0EE5371C967D129D5 /* DiffReaderView.swift in Sources */,
+				1C15FB793445B2114712A9BD /* EndpointProbePill.swift in Sources */,
+				9327B3227F69E08F57C987D0 /* HeatmapGridView.swift in Sources */,
+				366D284B66647E551A3CB8F7 /* InboxWorkspaceView.swift in Sources */,
+				5B49A26320022C3AF5261832 /* InstanceConnectionSheet.swift in Sources */,
+				EE96EBFB2DD6CE02B1010C7A /* InstanceOnboardingView.swift in Sources */,
+				3BEE7827267AF3F17691781F /* LiveActivityCoordinator.swift in Sources */,
+				638A6B4E2D51F2F296120F5C /* MenuBarBuildExtraView.swift in Sources */,
+				C18D733CBB6CF18871940BFB /* MermaidDiagramView.swift in Sources */,
+				085E6F590FBD2D1F74EB685D /* OpsWorkspaceView.swift in Sources */,
+				F14C2ADADC7C01A0F612F1ED /* PullRequestWorkspaceView.swift in Sources */,
+				530F56A388B8BB21B8E3DB5C /* PulseDashboardView.swift in Sources */,
+				69E9BCDC379C193A07961BA9 /* RepoCommitsAndBranchesView.swift in Sources */,
+				5948EC66284CDD6FC9AF3972 /* RepoOpsSettingsView.swift in Sources */,
+				C29AD7B62668E2EF11231282 /* RepositoryListView.swift in Sources */,
+				4A652232905E0648BBE771E9 /* RepositoryWorkspaceView.swift in Sources */,
+				5FA50D0CFFF1D0F30B6C1078 /* RootContainerView.swift in Sources */,
+				3B3B0F820762734C8484B2BA /* RunnersMonitorView.swift in Sources */,
+				60DCBAC912972CA206BCF715 /* ShareTargetCardView.swift in Sources */,
+				65499BDFEE71D196F2C32137 /* TeaPulseApp.swift in Sources */,
+				E69CECEC7EB2A182FBC1F553 /* TeaPulseComponents.swift in Sources */,
+				8F53254C4B6D643A3CABFB8B /* TeaPulseMotion.swift in Sources */,
+				DB577A536B1182FA23C887AD /* TeaPulseTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65B558A3A4840F188A64D64C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6169F0BE04714D724A590366 /* TeaPulseSmokeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		718ABD26ADF62869C8A7F4D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CB71C40A42822399C3AC529 /* ANSITerminalLogView.swift in Sources */,
+				D8BE3852B374B1AB7A0AA3CE /* ActionsWorkspaceView.swift in Sources */,
+				66D511462118580F8F730FC2 /* AppGroupBridge.swift in Sources */,
+				5A4E24F78F2F1981EE81BDDB /* AppSection.swift in Sources */,
+				994056F1FC5824E1863F9503 /* AppStore+Actions.swift in Sources */,
+				919F74FBF22D1ED58BA2534D /* AppStore+Connection.swift in Sources */,
+				B01D55A984B60FD3E9AF292C /* AppStore+Repositories.swift in Sources */,
+				4F8D8873AD0D03574C27EDBC /* AppStore+WorkspaceEnhancements.swift in Sources */,
+				AB8D25E2F958A01E181EE7A3 /* AppStore.swift in Sources */,
+				E129BE741A3A77F4E6447890 /* BarkPushConfigSheet.swift in Sources */,
+				8ADFAA4BE6934AAE69502E84 /* BuildActivityAttributes.swift in Sources */,
+				8DDEFE86E1BB4C26FF18393A /* ClipboardService.swift in Sources */,
+				2E21309129DB9EDA84E10E9C /* CommandPaletteView.swift in Sources */,
+				69D5306F31E6C5E9E115628B /* DiffReaderView.swift in Sources */,
+				D50071F4FE66577944610BFE /* EndpointProbePill.swift in Sources */,
+				AEBA9276C6FBAB693B972281 /* HeatmapGridView.swift in Sources */,
+				AA813DD80BAEF57CA5BF94BC /* InboxWorkspaceView.swift in Sources */,
+				B5DCC1BB98FC9134706F884F /* InstanceConnectionSheet.swift in Sources */,
+				C4110DCB80AE6B05FC913AA3 /* InstanceOnboardingView.swift in Sources */,
+				1567C4C427C84723284F7500 /* LiveActivityCoordinator.swift in Sources */,
+				F1F013EC0876973FCC3B268A /* MenuBarBuildExtraView.swift in Sources */,
+				030DD6A22819625F26152693 /* MermaidDiagramView.swift in Sources */,
+				73AE735BD99EEA77F02874BF /* OpsWorkspaceView.swift in Sources */,
+				F5435765D0C5CC3A67A1A42E /* PullRequestWorkspaceView.swift in Sources */,
+				2AA9AB2335D22E137A07B966 /* PulseDashboardView.swift in Sources */,
+				456CF15E8B5545C345ECC1B4 /* RepoCommitsAndBranchesView.swift in Sources */,
+				9979C0ADD58404C3C0F71333 /* RepoOpsSettingsView.swift in Sources */,
+				9FF63D79F3C9857BD5670418 /* RepositoryListView.swift in Sources */,
+				D3D89F65978B826DD6C4E302 /* RepositoryWorkspaceView.swift in Sources */,
+				D6D66E73D13FFD1992D6E3D3 /* RootContainerView.swift in Sources */,
+				270F1BD71C1D0543B27B8F43 /* RunnersMonitorView.swift in Sources */,
+				F9455F12996DD896C34E43BE /* ShareTargetCardView.swift in Sources */,
+				6594687813D679B02EDBC30B /* TeaPulseApp.swift in Sources */,
+				E0E2D11629B9B99F5F08A8F9 /* TeaPulseComponents.swift in Sources */,
+				BC9EE447B0DB9F49ACFB85AC /* TeaPulseMotion.swift in Sources */,
+				3230F398C117F2528FF19367 /* TeaPulseTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F69629D6F5F1F22F45274D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E08A3E8E07CA6B3680C3B60 /* AppGroupBridge.swift in Sources */,
+				48E286BA4EDB27CDDDA76338 /* BuildActivityAttributes.swift in Sources */,
+				CC1F41F5EF6FBE4A3BC795E7 /* PulseStatusWidget.swift in Sources */,
+				CA029B1EDE8075B3D91F019D /* ShareTargetCardView.swift in Sources */,
+				95E1E0D09F6B0F325603772D /* TeaPulseComponents.swift in Sources */,
+				26B4FD12F3B98D9F64781C6A /* TeaPulseMacWidgetBundle.swift in Sources */,
+				D706B8DCA0B3B087573B6BD0 /* TeaPulseMotion.swift in Sources */,
+				509FACE844DBAF0D146874C8 /* TeaPulseTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD3BB4009A7B85B5A53CE28D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCE27C66B14DD99DCB9DDA83 /* AppStoreTests.swift in Sources */,
+				6D6D2EF3DC6F0319C2EF1096 /* AuditRegressionTests.swift in Sources */,
+				4AE675EF94A735A6F1DE3C6F /* LiveConnectionTests.swift in Sources */,
+				0C96585F3DFBEF9E49E172EB /* ThemeContrastTests.swift in Sources */,
+				E1D0254DDBD217CDBA0C2667 /* WorkspaceEnhancementsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8A5CF14C966F9F24CDDBBF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C4FDA650031AA6A4A84069C /* AppGroupBridge.swift in Sources */,
+				71F17E1A3FAA0DCC1AEB235A /* BuildActivityAttributes.swift in Sources */,
+				7F57F33200BAC1E5FE0700FF /* MacShareViewController.swift in Sources */,
+				0E19A6354DC5C4267D820FDE /* ShareTargetCardView.swift in Sources */,
+				66D852C4AF7C6A30314B9CE3 /* TeaPulseComponents.swift in Sources */,
+				709BAC99CCA9FC987BCDCC79 /* TeaPulseMotion.swift in Sources */,
+				A24298030FB108B1DFB24042 /* TeaPulseTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD1F3088FBA90B410FA4D931 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9571BA244CFA9B905D96FB07 /* AppGroupBridge.swift in Sources */,
+				6F868A48C526855825D44D6D /* AppSection.swift in Sources */,
+				8F89160396F135F81FA9B428 /* AppStore+Actions.swift in Sources */,
+				F817AF47C8CB189A77202C42 /* AppStore+Connection.swift in Sources */,
+				71762A1F825A9DE51F977A12 /* AppStore+Repositories.swift in Sources */,
+				4C585A518B0FBA66F1F08D06 /* AppStore+WorkspaceEnhancements.swift in Sources */,
+				83CE67B9776C8DE8C3F4A469 /* AppStore.swift in Sources */,
+				55C265A247B7D84E8517BB24 /* BuildActivityAttributes.swift in Sources */,
+				C75B9BEE20227BB144869F35 /* ClipboardService.swift in Sources */,
+				E8AD4DA4CD9B16A3487537DB /* LiveActivityCoordinator.swift in Sources */,
+				1369EFA1062EDA742A9FA087 /* MacWorkspaceTests.swift in Sources */,
+				4FB1EFC5179E7D9F3373C6A0 /* ShareTargetCardView.swift in Sources */,
+				DC048F7ACFBB684D537F0E22 /* TeaPulseComponents.swift in Sources */,
+				E1AF88ED10DAAA2D8369C488 /* TeaPulseMotion.swift in Sources */,
+				06ECEBDC6480EA8A0230B5B7 /* TeaPulseTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0C2F50BD4C11EF8EE2E7F023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A2267A76F8D4129AC95EC04 /* TeaPulseShareExtension */;
+			targetProxy = D7F6A2AA1B6D64808E18749D /* PBXContainerItemProxy */;
+		};
+		7A26E3F7543E3817FEC46BC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9A26D7470DDFCA101FD23EF /* TeaPulseWidgets */;
+			targetProxy = BD4033BF9E4AA88424528F1E /* PBXContainerItemProxy */;
+		};
+		9E6087905A7920B67A4024D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 373A703543714E4013C6369B /* TeaPulse */;
+			targetProxy = 11073A7CC681393FA76F30F4 /* PBXContainerItemProxy */;
+		};
+		BDCC0F5A15E2D81DA0ABA7E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 373A703543714E4013C6369B /* TeaPulse */;
+			targetProxy = C13F6DBFAC465D5390C43B2E /* PBXContainerItemProxy */;
+		};
+		DC84EE16B364BD93B3C9229F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A08DA512A1382D3A9BE5C8D3 /* TeaPulseMacWidgets */;
+			targetProxy = CBD4CE5EF02D1FCEDEDB95CE /* PBXContainerItemProxy */;
+		};
+		EAB27ECA304C28D72CF153D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C473C470A1E23FAEBC67ECF4 /* TeaPulseMacShareExtension */;
+			targetProxy = E429612535B058193D586783 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1070DA65F1638A18A689AFA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseMacShareExtension.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseMacShareExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.macshare;
+				PRODUCT_NAME = TeaPulseMacShareExtension;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		13A6358CF4460564A8E871CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulse.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulse-Info.plist";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse;
+				PRODUCT_NAME = TeaPulse;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		47DC5110878DA165AECC7C29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38515959A57CB389CB273990 /* Signing.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		49CC2D5CAA6F2682316F4E41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.mactests;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4C4938AF6DD43C2E9DE016BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeaPulse.app/TeaPulse";
+			};
+			name = Debug;
+		};
+		534EB0F12ED5A7BFC841A2B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.mactests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		556CEA85ECF2BC18ECD5FC21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeaPulse.app/TeaPulse";
+			};
+			name = Release;
+		};
+		5606F17021CF2C41750376B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulse.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulse-Info.plist";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse;
+				PRODUCT_NAME = TeaPulse;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		69F0101D0034F41C6784DCDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TeaPulse;
+			};
+			name = Debug;
+		};
+		72D98BF1C56D457B7B221056 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseMacShareExtension.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseMacShareExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.macshare;
+				PRODUCT_NAME = TeaPulseMacShareExtension;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		76F48A609A693D176FE8AD15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseWidgets.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseWidgets-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.widgets;
+				PRODUCT_NAME = TeaPulseWidgets;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		77312798B3A35C06452B05B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseWidgets.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseWidgets-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.widgets;
+				PRODUCT_NAME = TeaPulseWidgets;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AC1D5C0ADCC34B26D5C675F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseShareExtension.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseShareExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.share;
+				PRODUCT_NAME = TeaPulseShareExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B9DA9E48B67514B68B253AAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38515959A57CB389CB273990 /* Signing.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		C59A2F79A69DE75DCDAB58FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseMacWidgets.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseMacWidgets-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.macwidgets;
+				PRODUCT_NAME = TeaPulseMacWidgets;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D5597A8488311BF6C8E4ECBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseShareExtension.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseShareExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.share;
+				PRODUCT_NAME = TeaPulseShareExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F21AC437A0421935CC1ACEBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseMac.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseMac-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse;
+				PRODUCT_MODULE_NAME = TeaPulse;
+				PRODUCT_NAME = TeaPulse;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F633E80A946CDD1D6F56FF66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseMacWidgets.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseMacWidgets-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.macwidgets;
+				PRODUCT_NAME = TeaPulseMacWidgets;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F9095A69F762F857DD5F1635 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TeaPulse;
+			};
+			name = Release;
+		};
+		FDFF081C664E119B5EF10652 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Config/TeaPulseMac.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/TeaPulseMac-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maydaychen.teapulse;
+				PRODUCT_MODULE_NAME = TeaPulse;
+				PRODUCT_NAME = TeaPulse;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08B6F9A9627211BBF0E29B06 /* Build configuration list for PBXNativeTarget "TeaPulseMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F21AC437A0421935CC1ACEBF /* Debug */,
+				FDFF081C664E119B5EF10652 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		093EA74671D142175D48F703 /* Build configuration list for PBXNativeTarget "TeaPulseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C4938AF6DD43C2E9DE016BB /* Debug */,
+				556CEA85ECF2BC18ECD5FC21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		18C479BCAB950490E96CDD0F /* Build configuration list for PBXNativeTarget "TeaPulseMacShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1070DA65F1638A18A689AFA5 /* Debug */,
+				72D98BF1C56D457B7B221056 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		73D7E79D90B14C1DF6EF03F9 /* Build configuration list for PBXProject "TeaPulse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47DC5110878DA165AECC7C29 /* Debug */,
+				B9DA9E48B67514B68B253AAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AFD722F1485EDAD10FB6405B /* Build configuration list for PBXNativeTarget "TeaPulseWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76F48A609A693D176FE8AD15 /* Debug */,
+				77312798B3A35C06452B05B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BDBD137E30EA9B8321D5B070 /* Build configuration list for PBXNativeTarget "TeaPulseUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69F0101D0034F41C6784DCDD /* Debug */,
+				F9095A69F762F857DD5F1635 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CE6CBABAB27263932730EDAA /* Build configuration list for PBXNativeTarget "TeaPulseMacWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F633E80A946CDD1D6F56FF66 /* Debug */,
+				C59A2F79A69DE75DCDAB58FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DE6EA1F56476BC2BE1E9C970 /* Build configuration list for PBXNativeTarget "TeaPulseMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				534EB0F12ED5A7BFC841A2B4 /* Debug */,
+				49CC2D5CAA6F2682316F4E41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E9C305A7374BA228FE1D9574 /* Build configuration list for PBXNativeTarget "TeaPulse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5606F17021CF2C41750376B4 /* Debug */,
+				13A6358CF4460564A8E871CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F43597489855149A28FE5DE3 /* Build configuration list for PBXNativeTarget "TeaPulseShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5597A8488311BF6C8E4ECBB /* Debug */,
+				AC1D5C0ADCC34B26D5C675F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BE79E3FD4A2B26DED1AC7255 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0518DD393356FC2C2F315C99 /* GiteaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GiteaKit;
+		};
+		0A83B61E0A675A65BE07F0B3 /* GiteaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GiteaKit;
+		};
+		34B7198453713C76FF19BB91 /* GiteaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GiteaKit;
+		};
+		5637175A3F84F7D4A7C59947 /* GiteaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GiteaKit;
+		};
+		5BC6D6F77FA7B5E8401A2286 /* GiteaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GiteaKit;
+		};
+		5C45807EC99D16D1DEB06746 /* GiteaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GiteaKit;
+		};
+		7ECF0CC07AAA1A48CB480486 /* GiteaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GiteaKit;
+		};
+		BD35E73CD447883DFD3CE660 /* GiteaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GiteaKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 0B8E9B74B86D6D99DE300D1C /* Project object */;
+}

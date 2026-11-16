@@ -1,0 +1,281 @@
+name: TeaPulse
+options:
+  developmentLanguage: zh-Hans
+  bundleIdPrefix: com.maydaychen
+  deploymentTarget:
+    iOS: "26.0"
+    macOS: "15.0"
+  xcodeVersion: "27.2"
+  knownRegions: [en, zh-Hans]
+packages:
+  GiteaKit:
+    path: .
+configFiles:
+  Debug: Config/Signing.xcconfig
+  Release: Config/Signing.xcconfig
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "4"
+schemes:
+  TeaPulse:
+    build:
+      targets:
+        TeaPulse: all
+        TeaPulseWidgets: all
+        TeaPulseShareExtension: all
+        TeaPulseTests: [test]
+        TeaPulseUITests: [test]
+    test:
+      config: Debug
+      targets:
+        - TeaPulseTests
+        - TeaPulseUITests
+  TeaPulseMac:
+    build:
+      targets:
+        TeaPulseMac: all
+        TeaPulseMacWidgets: all
+        TeaPulseMacShareExtension: all
+        TeaPulseMacTests: [test]
+    test:
+      config: Debug
+      targets:
+        - TeaPulseMacTests
+targets:
+  TeaPulse:
+    type: application
+    platform: iOS
+    sources:
+      - path: TeaPulse
+      - path: SharedExtensionSupport
+      - path: Config/PrivacyInfo.xcprivacy
+    dependencies:
+      - package: GiteaKit
+      - target: TeaPulseWidgets
+        embed: true
+      - target: TeaPulseShareExtension
+        embed: true
+    info:
+      path: Config/TeaPulse-Info.plist
+      properties:
+        CFBundleDisplayName: TeaPulse
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        ITSAppUsesNonExemptEncryption: false
+        NSSupportsLiveActivities: true
+        UILaunchScreen: {}
+        CFBundleURLTypes:
+          - CFBundleURLName: com.maydaychen.teapulse
+            CFBundleURLSchemes:
+              - teapulse
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse
+        PRODUCT_NAME: TeaPulse
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_ENTITLEMENTS: Config/TeaPulse.entitlements
+        SUPPORTS_MACCATALYST: NO
+
+  TeaPulseWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: TeaPulseWidgets
+      - path: SharedExtensionSupport
+    dependencies:
+      - package: GiteaKit
+    info:
+      path: Config/TeaPulseWidgets-Info.plist
+      properties:
+        CFBundleDisplayName: TeaPulse 小组件
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse.widgets
+        PRODUCT_NAME: TeaPulseWidgets
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SKIP_INSTALL: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGN_ENTITLEMENTS: Config/TeaPulseWidgets.entitlements
+
+  TeaPulseShareExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: TeaPulseShareExtension
+      - path: SharedExtensionSupport
+    dependencies:
+      - package: GiteaKit
+    info:
+      path: Config/TeaPulseShareExtension-Info.plist
+      properties:
+        CFBundleDisplayName: 发送到 TeaPulse
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.share-services
+          NSExtensionPrincipalClass: ShareViewController
+          NSExtensionAttributes:
+            NSExtensionActivationRule:
+              NSExtensionActivationSupportsWebURLWithMaxCount: 1
+              NSExtensionActivationSupportsText: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse.share
+        PRODUCT_NAME: TeaPulseShareExtension
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SKIP_INSTALL: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGN_ENTITLEMENTS: Config/TeaPulseShareExtension.entitlements
+
+  TeaPulseTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: TeaPulseTests
+    dependencies:
+      - target: TeaPulse
+      - package: GiteaKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+  TeaPulseUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: TeaPulseUITests
+    dependencies:
+      - target: TeaPulse
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: TeaPulse
+
+  TeaPulseMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: TeaPulse
+      - path: SharedExtensionSupport
+      - path: Config/PrivacyInfo.xcprivacy
+    dependencies:
+      - package: GiteaKit
+      - target: TeaPulseMacWidgets
+        embed: true
+      - target: TeaPulseMacShareExtension
+        embed: true
+    info:
+      path: Config/TeaPulseMac-Info.plist
+      properties:
+        CFBundleDisplayName: TeaPulse
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSApplicationCategoryType: public.app-category.developer-tools
+        ITSAppUsesNonExemptEncryption: false
+        CFBundleURLTypes:
+          - CFBundleURLName: com.maydaychen.teapulse.mac
+            CFBundleURLSchemes:
+              - teapulse
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse
+        PRODUCT_NAME: TeaPulse
+        PRODUCT_MODULE_NAME: TeaPulse
+        GENERATE_INFOPLIST_FILE: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_ENTITLEMENTS: Config/TeaPulseMac.entitlements
+
+  TeaPulseMacWidgets:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: TeaPulseMacWidgets
+      - path: TeaPulseWidgets/PulseStatusWidget.swift
+      - path: SharedExtensionSupport
+    dependencies:
+      - package: GiteaKit
+    info:
+      path: Config/TeaPulseMacWidgets-Info.plist
+      properties:
+        CFBundleDisplayName: TeaPulse 小组件
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse.macwidgets
+        PRODUCT_NAME: TeaPulseMacWidgets
+        GENERATE_INFOPLIST_FILE: YES
+        SKIP_INSTALL: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGN_ENTITLEMENTS: Config/TeaPulseMacWidgets.entitlements
+
+  TeaPulseMacShareExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: TeaPulseMacShareExtension
+      - path: SharedExtensionSupport
+    dependencies:
+      - package: GiteaKit
+    info:
+      path: Config/TeaPulseMacShareExtension-Info.plist
+      properties:
+        CFBundleDisplayName: 发送到 TeaPulse
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.share-services
+          NSExtensionPrincipalClass: MacShareViewController
+          NSExtensionAttributes:
+            NSExtensionActivationRule:
+              NSExtensionActivationSupportsWebURLWithMaxCount: 1
+              NSExtensionActivationSupportsText: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse.macshare
+        PRODUCT_NAME: TeaPulseMacShareExtension
+        GENERATE_INFOPLIST_FILE: YES
+        SKIP_INSTALL: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGN_ENTITLEMENTS: Config/TeaPulseMacShareExtension.entitlements
+
+  TeaPulseMacTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: TeaPulseMacTests
+      - path: TeaPulse/Store
+      - path: TeaPulse/Services
+      - path: SharedExtensionSupport
+    dependencies:
+      - package: GiteaKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maydaychen.teapulse.mactests
+        GENERATE_INFOPLIST_FILE: YES

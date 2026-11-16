@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  verify:
+    name: GiteaKit & Design Lint
+    runs-on: macos-15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js for Design lint
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install @google/design.md CLI
+        run: npm install -g @google/design.md
+
+      - name: Check design tokens
+        run: python3 scripts/check-design-tokens.py
+
+      - name: Lint DESIGN.md
+        run: python3 scripts/lint-design-md.py DESIGN.md
+
+      - name: Run GiteaKit Swift package tests
+        run: swift test
