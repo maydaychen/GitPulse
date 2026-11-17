@@ -54,7 +54,17 @@
 
 ## 快速上手 · Demo 模式零门槛体验
 
-无需现成 Gitea 服务器或 Apple Developer 付费账号，即可通过 SwiftPM 单元测试和内置 `--demo-mode` 在本机体验完整工作流。
+可以直接下载双端匿名安装包体验，或在没有现成 Gitea 服务器与 Apple Developer 付费账号的情况下，通过 SwiftPM 单元测试和内置 `--demo-mode` 在本机体验完整工作流。
+
+### 方式一：下载预编译匿名安装包（[GitHub Releases](https://github.com/maydaychen/GitPulse/releases)）
+
+> [!IMPORTANT]
+> 为保证开源构建完全剥离个人 Apple 实名信息，Releases 安装包默认不嵌入开发者 Team ID 与公证证书（macOS 为本地 `adhoc` 签名，iOS 为无签名 `.ipa`）。
+
+- **macOS（`TeaPulse-<version>-macOS.dmg`）**：打开 DMG 将 `TeaPulse.app` 拖入「应用程序」。首次打开时会触发系统未认证提示（[Apple 官方说明](https://support.apple.com/zh-cn/102445)）：
+  - **界面操作**：弹窗点击「完成」，进入 **系统设置 -> 隐私与安全性** 底部点击 **「仍要打开」** 放行一次即可。
+  - **终端命令**：在终端执行一次 `xattr -cr /Applications/TeaPulse.app` 清除下载隔离标志后直接双击运行。
+- **iOS / iPadOS（`TeaPulse-<version>-iOS-unsigned.ipa`）**：使用 **AltStore / SideStore** 配合个人 Apple ID 侧载安装，或按下方步骤使用免费个人 Apple ID 通过 Xcode 编译装机。
 
 ### 1. 运行核心测试（`GiteaKitTests`）
 
@@ -119,6 +129,7 @@ GitPulse/
 | 核心 Swift Package | `swift test` | 覆盖 URL 构造、双端点探针、REST 解析、Diff / ANSI / Markdown 与 DeepLink 路由 |
 | 设计令牌门禁 | `python3 scripts/check-design-tokens.py` | 校验所有 UI 视图均消费 [`SharedExtensionSupport`](SharedExtensionSupport/TeaPulseTheme.swift) 令牌 |
 | 设计规范 Lint | `python3 scripts/lint-design-md.py DESIGN.md` | 校验 [`DESIGN.md`](DESIGN.md) 结构与语义合规 |
+| 匿名双端 Release 打包 | `bash scripts/build-anonymous-release.sh` | 构建剥离 Team ID 的 `macOS .dmg`、无签名 `iOS .ipa` 与 `SHA256SUMS.txt` |
 | 开源快照导出 | `bash scripts/export-clean-opensource.sh` | 在临时目录生成单提交、剔除内部开发脚手架的纯净公开快照 |
 
 ## 开源协议（License）

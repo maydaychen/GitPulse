@@ -54,7 +54,17 @@ Generic Git mobile apps typically assume standard port `443` at the root domainâ
 
 ## Quick Start & Demo Mode
 
-Explore the entire interface and run core package tests locally without an existing Gitea server or paid Apple Developer account.
+Explore the prebuilt anonymous releases on macOS/iOS, or run tests and build locally without an existing Gitea server or paid Apple Developer account.
+
+### Option A: Install Prebuilt Anonymous Releases ([GitHub Releases](https://github.com/maydaychen/GitPulse/releases))
+
+> [!IMPORTANT]
+> All prebuilt release binaries are compiled without a personal Apple Developer Team ID or notarization certificate (`Signature=adhoc` on macOS, unsigned `.ipa` on iOS).
+
+- **macOS (`TeaPulse-<version>-macOS.dmg`)**: Open the DMG and drag `TeaPulse.app` into `/Applications`. Because the app uses anonymous ad-hoc signing, on first launch macOS Gatekeeper shows an unidentified-developer prompt ([Apple Support Guide](https://support.apple.com/en-us/102445)):
+  - **GUI**: Click **Done**, open **System Settings -> Privacy & Security**, scroll down, and click **Open Anyway**.
+  - **Terminal**: Run `xattr -cr /Applications/TeaPulse.app` once to clear the download quarantine attribute.
+- **iOS / iPadOS (`TeaPulse-<version>-iOS-unsigned.ipa`)**: Sideload via **AltStore** or **SideStore** using your own Apple ID, or build from source in Xcode with a personal Apple ID.
 
 ### 1. Run Core Package Tests (`GiteaKitTests`)
 
@@ -118,6 +128,7 @@ GitPulse/
 | Core Swift Package | `swift test` | URL builder, 800ms endpoint probe, Gitea REST parsing, Diff / ANSI / Markdown & DeepLinks |
 | Design Token Guard | `python3 scripts/check-design-tokens.py` | Enforces zero hardcoded visual hex literals outside [`TeaPulseTheme.swift`](SharedExtensionSupport/TeaPulseTheme.swift) |
 | Design Spec Lint | `python3 scripts/lint-design-md.py DESIGN.md` | Validates [`DESIGN.md`](DESIGN.md) token structure and contrast rules |
+| Anonymous Release | `bash scripts/build-anonymous-release.sh` | Builds ad-hoc `macOS .dmg`, unsigned `iOS .ipa`, and SHA-256 checksums without Team IDs |
 | Clean Public Snapshot | `bash scripts/export-clean-opensource.sh` | Exports a single-commit open-source snapshot without internal harness tooling |
 
 ## License
