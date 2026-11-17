@@ -3,9 +3,6 @@ import Network
 import Observation
 import SwiftUI
 import GiteaKit
-#if canImport(WidgetKit)
-import WidgetKit
-#endif
 
 public enum ThemePreference: String, CaseIterable, Identifiable, Sendable {
     case system = "自动"
@@ -437,22 +434,7 @@ public final class AppStore {
 
     public func syncWidgetSnapshot() {
         guard writesWidgetSnapshot else { return }
-        let runningRun = runs.first { $0.status == .running }
-        let snapshot = WidgetDashboardSnapshot(
-            probePillText: health.probePillText,
-            serverVersion: health.serverVersion,
-            unreadInboxCount: unreadInboxCount,
-            runningBuildCount: runs.filter { $0.status == .running }.count,
-            failedBuildCount: runs.filter { $0.status == .failure }.count,
-            onlineRunnerCount: runners.filter { $0.status != .offline }.count,
-            offlineRunnerCount: runners.filter { $0.status == .offline }.count,
-            activeRunRepo: runningRun?.repoFullName,
-            activeRunStep: runningRun?.steps.last?.name
-        )
-        AppGroupBridge.saveWidgetSnapshot(snapshot)
-        #if canImport(WidgetKit)
-        WidgetCenter.shared.reloadAllTimelines()
-        #endif
+        buildAndSyncWidgetState()
     }
 
     public func showToast(_ message: String, tone: ToastTone? = nil) {

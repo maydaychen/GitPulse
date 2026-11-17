@@ -5,6 +5,7 @@ import SwiftUI
 struct TeaPulseWidgetBundle: WidgetBundle {
     var body: some Widget {
         PulseStatusWidget()
+        CommitHeatmapWidget()
         #if canImport(ActivityKit) && os(iOS)
         BuildLiveActivityWidget()
         #endif

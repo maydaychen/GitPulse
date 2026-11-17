@@ -17,7 +17,7 @@
 专为使用 **自定义端口 TLS 反代**（如 Nginx / Caddy、子路径部署、Cloudflare Access 请求头）以及 **内网直连 / 公网回落切换** 的 Gitea 管理员与开发者打造。底层由共享 Swift 6 核心库 `GiteaKit` 驱动，一次维护同步支持 iPhone、iPad、macOS、菜单栏监控、WidgetKit 小组件、Live Activity 与 Share Extension。
 
 > [!NOTE]
-> **当前开源状态说明（v0.1.0）**：核心网络层 `GiteaKitTests`（29 项）、iOS 单元与 UI 冒烟测试、macOS 单元测试及 `--demo-mode` 离线演示数据均已稳定运行并通过本地回归；连接真实自托管 Gitea 实例的端到端验收以及 iOS 真机灵动岛（ActivityKit）、系统 Share Extension 面板仍处于持续真机联调阶段。
+> **当前开源状态说明（v0.1.1）**：核心网络层 `GiteaKitTests`（32 项）、iOS 单元测试（31 项）与 UI 冒烟测试（5 项）、macOS 单元测试（3 项）及 `--demo-mode` 离线演示数据均已稳定运行并通过本地回归；连接真实自托管 Gitea 实例的端到端验收以及 iOS 真机灵动岛（ActivityKit）、桌面与锁屏小组件后台真机联调、系统 Share Extension 面板仍处于持续真机联调阶段。
 
 ## 真实界面预览（Demo 模式实机截图）
 
@@ -30,6 +30,7 @@
       <h3>专为高频运维设计的核心视图</h3>
       <ul>
         <li><strong>概览看板（Pulse）</strong>：聚合待审 PR、失败工作流与离线 Runner 到优先队列；支持 4 仓首页自定义置顶、16 周提交热力图动态波纹与个人主页活动流。</li>
+        <li><strong>双端桌面与锁屏小组件（iOS / iPadOS / macOS）</strong>：内置 <code>PulseStatusWidget</code>（小／中／大号可点击优先队列与 iOS 锁屏圆形／矩形组件）及 <code>CommitHeatmapWidget</code>（10 周／16 周绿格子贡献热力图与连续活跃天数），支持桌面 <code>AppIntent</code> 一键刷新与后台双端点独立联网同步。</li>
         <li><strong>双端点 800ms 竞速探针</strong>：优先探测内网直连 <code>/api/healthz</code>（800ms 超时阈值），不可达时自动无感切换至 TLS 反代端点，并在状态胶囊实时显示当前通道与延迟。</li>
         <li><strong>仓库、分支与目录浏览</strong>：支持个人 / 组织 / 镜像分范围筛选、按具体组织筛选（<code>/user/orgs</code>）、收藏点星、分支 / Tag 切换、最近提交与单次 Commit Diff，以及 Markdown + 内联 Mermaid 渲染。</li>
         <li><strong>代码评审与只读 Diff</strong>：内嵌解析 Unified Diff，支持 Unified / Split 视图切换与携带旧行 / 新行侧定位的行内批注（<code>POST /pulls/{index}/reviews</code>）。</li>
@@ -49,7 +50,7 @@
 
 - **严格分离 URL 构造边界**：`GiteaURLBuilder` 对路径段逐段单次百分号编码并无损保留自定义端口与反代前缀；`/api/healthz` 健康探针独立于 `/api/v1`，避免误拼版本前缀。
 - **反代常见故障语义提示**：发布资产上传命中 Nginx HTTP `413` 时直接提示检查 `client_max_body_size`；流式日志拉取适配 `proxy_buffering off` 增量分段。
-- **多端扩展共享同一路由协议**：iOS / macOS Share Extension 将任意 Gitea 网页 URL 规范化为 `teapulse://repo/...`、`teapulse://pull/...`、`teapulse://actions/...` 并通过 App Group 投递给主应用，冷启动或未预加载仓库可按需拉取跳转。
+- **多端扩展共享同一路由协议**：iOS / macOS Share Extension 将任意 Gitea 网页 URL 规范化为 `teapulse://repo/...`、`teapulse://pull/...`、`teapulse://actions/...` 并通过 App Group 投递给主应用，冷启动或未预加载仓库可按需拉取跳转；WidgetKit 扩展通过 `AppGroupBridge` 仅共享非敏感实例上下文（`WidgetConnectionContext`），PAT 凭据继续严格留在 Keychain 中，离线或无凭据时自动保留缓存快照不清空数据。
 - **纯本地凭据安全边界**：个人访问令牌（PAT）与自定义反代请求头仅存放在 Apple Keychain；无任何第三方统计或中转服务器。
 
 ## 快速上手 · Demo 模式零门槛体验
@@ -112,11 +113,11 @@ GitPulse/
 ├── DESIGN.md                        # 单一视觉规范源（深浅双色、字号与间距令牌）
 ├── Sources/GiteaKit/                # 领域模型、双端点探针、REST 客户端、Diff/ANSI/Markdown 解析器
 ├── Tests/GiteaKitTests/             # Swift Testing 核心单测套件
-├── SharedExtensionSupport/          # TeaPulseTheme 主题令牌、共享组件与 AppGroupBridge IPC
+├── SharedExtensionSupport/          # TeaPulseTheme 主题令牌、共享组件、AppGroupBridge IPC 与 WidgetLiveRefresher
 ├── TeaPulse/                        # Universal SwiftUI 主工程源码（App / Navigation / Store / Features）
-├── TeaPulseWidgets/                 # iOS WidgetKit 小组件 & ActivityKit 灵动岛
+├── TeaPulseWidgets/                 # iOS WidgetKit（状态、提交热力图、锁屏组件、AppIntent）& Live Activity
 ├── TeaPulseShareExtension/          # iOS 系统分享扩展
-├── TeaPulseMacWidgets/              # macOS WidgetKit 小组件
+├── TeaPulseMacWidgets/              # macOS WidgetKit 小组件扩展（共享状态、提交热力图与 AppIntent）
 ├── TeaPulseMacShareExtension/       # macOS 系统分享扩展
 ├── TeaPulseTests/ & TeaPulseUITests/# iOS 单元与 UI 冒烟测试
 ├── TeaPulseMacTests/                # macOS 单元测试

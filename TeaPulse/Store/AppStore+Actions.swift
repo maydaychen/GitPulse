@@ -30,6 +30,8 @@ extension AppStore {
             return
         }
         switch route {
+        case .pulse:
+            selectedSection = .pulse
         case .pullRequest(let owner, let repo, let index):
             let full = "\(owner)/\(repo)"
             let matchedRepo = repository(named: full)
@@ -178,7 +180,7 @@ extension AppStore {
                 showToast("未找到目标构建：\(full) #\(runID)")
             }
             routeNavigationID += 1
-        case .opsRunners:
+        case .opsRunners, .pulse:
             break
         }
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		008538FCBBB17C8CFBD276BD /* TeaPulseShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7051831E69679A8C957927EB /* TeaPulseShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		02CD2ADFF9D9D5E5DDA6718D /* WidgetLiveRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */; };
 		030DD6A22819625F26152693 /* MermaidDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E096D38316431A0A590D46A /* MermaidDiagramView.swift */; };
 		03D2295B076197C1C48A9AFC /* TeaPulseWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB864719B42AB2CF39CED44F /* TeaPulseWidgetBundle.swift */; };
 		06ECEBDC6480EA8A0230B5B7 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
@@ -16,6 +17,7 @@
 		0C33AFA20E20DF08B0CF4ECC /* ClipboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CC853E61ED74B598E89A7F /* ClipboardService.swift */; };
 		0C96585F3DFBEF9E49E172EB /* ThemeContrastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A4336457BB472B2EAF922A /* ThemeContrastTests.swift */; };
 		0E19A6354DC5C4267D820FDE /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		0EC1E698ED0B351DC7A20815 /* WidgetLiveRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */; };
 		108516AA0100534C39E332DA /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
 		1369EFA1062EDA742A9FA087 /* MacWorkspaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B903144E5397E6E75C202D /* MacWorkspaceTests.swift */; };
 		1567C4C427C84723284F7500 /* LiveActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FEEEB5A9FF9719EABE9AA5 /* LiveActivityCoordinator.swift */; };
@@ -50,7 +52,9 @@
 		4C585A518B0FBA66F1F08D06 /* AppStore+WorkspaceEnhancements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7DC68D632157DFE76320C /* AppStore+WorkspaceEnhancements.swift */; };
 		4F8D8873AD0D03574C27EDBC /* AppStore+WorkspaceEnhancements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7DC68D632157DFE76320C /* AppStore+WorkspaceEnhancements.swift */; };
 		4FB1EFC5179E7D9F3373C6A0 /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		4FF240D8A7D7B281DD446393 /* RefreshPulseWidgetsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67012F8632B1428BE523521B /* RefreshPulseWidgetsIntent.swift */; };
 		509FACE844DBAF0D146874C8 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
+		50B4D3FD989AF8710CD27605 /* CommitHeatmapWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65CD9338042CA0ABBB089 /* CommitHeatmapWidget.swift */; };
 		530F56A388B8BB21B8E3DB5C /* PulseDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E14C12A069CC59DDA8218D6 /* PulseDashboardView.swift */; };
 		53240F5D965ECFFF77F2077B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5CACB269E6351674396C253 /* Assets.xcassets */; };
 		54A146D7E41B72C4713A83A3 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5C45807EC99D16D1DEB06746 /* GiteaKit */; };
@@ -67,22 +71,27 @@
 		6169F0BE04714D724A590366 /* TeaPulseSmokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A778A6751C3CFB607AE269 /* TeaPulseSmokeUITests.swift */; };
 		638A6B4E2D51F2F296120F5C /* MenuBarBuildExtraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DF645F8F2962D71ED4BB17 /* MenuBarBuildExtraView.swift */; };
 		65499BDFEE71D196F2C32137 /* TeaPulseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F42C4FC7192355F5F602B2 /* TeaPulseApp.swift */; };
+		657A898070582198FDA1EB6D /* WidgetSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73B6A8BEAD310436FEC95CB /* WidgetSyncTests.swift */; };
 		6594687813D679B02EDBC30B /* TeaPulseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F42C4FC7192355F5F602B2 /* TeaPulseApp.swift */; };
 		660E75C0EE5371C967D129D5 /* DiffReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE145335AF30BAF8660E287 /* DiffReaderView.swift */; };
 		66D511462118580F8F730FC2 /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
 		66D852C4AF7C6A30314B9CE3 /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
+		6760A0D313896BF8E5FA9307 /* RefreshPulseWidgetsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67012F8632B1428BE523521B /* RefreshPulseWidgetsIntent.swift */; };
 		69D5306F31E6C5E9E115628B /* DiffReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE145335AF30BAF8660E287 /* DiffReaderView.swift */; };
 		69E9BCDC379C193A07961BA9 /* RepoCommitsAndBranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5ED740004675A6D869C8B /* RepoCommitsAndBranchesView.swift */; };
 		6AF5D432499A96C121E12A6C /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
 		6B85065E13C96F0DC2313D84 /* TeaPulseMacWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B6BEECE96F5BC8B8299C7B69 /* TeaPulseMacWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6D6D2EF3DC6F0319C2EF1096 /* AuditRegressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E8FD1D0225AB84ACDE81A /* AuditRegressionTests.swift */; };
 		6E3247FB4ED9356BEED9801B /* ANSITerminalLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C285CFF87DA3784E42F91DF0 /* ANSITerminalLogView.swift */; };
+		6E6708B7E7769A057AD105AC /* WidgetLiveRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */; };
 		6F868A48C526855825D44D6D /* AppSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A2E3F215BA77B24C7B91FF /* AppSection.swift */; };
 		709BAC99CCA9FC987BCDCC79 /* TeaPulseMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */; };
 		71762A1F825A9DE51F977A12 /* AppStore+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8290D8AF4285281A3F51DA7 /* AppStore+Repositories.swift */; };
 		71F17E1A3FAA0DCC1AEB235A /* BuildActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA7548088FCC261C7F98FED /* BuildActivityAttributes.swift */; };
 		73AE735BD99EEA77F02874BF /* OpsWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F60CE38EDBFD9564D59C43 /* OpsWorkspaceView.swift */; };
+		79B2DF733592E01038872787 /* WidgetSharedComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CFEBFDE2A52788514FF345 /* WidgetSharedComponents.swift */; };
 		7BF98AD7BC0CB020D7463914 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = BD35E73CD447883DFD3CE660 /* GiteaKit */; };
+		7CA93061EC16B03C7DFCEF02 /* WidgetSharedComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CFEBFDE2A52788514FF345 /* WidgetSharedComponents.swift */; };
 		7E08A3E8E07CA6B3680C3B60 /* AppGroupBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90262AE2F82DEB822BDDF29E /* AppGroupBridge.swift */; };
 		7F57F33200BAC1E5FE0700FF /* MacShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D1376F8752BD194AC1B2A1 /* MacShareViewController.swift */; };
 		83CE67B9776C8DE8C3F4A469 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23F2D83A1B47105152F5954 /* AppStore.swift */; };
@@ -104,6 +113,7 @@
 		A24298030FB108B1DFB24042 /* TeaPulseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */; };
 		AA813DD80BAEF57CA5BF94BC /* InboxWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE82507D0FFE146100F5ECE /* InboxWorkspaceView.swift */; };
 		AB8D25E2F958A01E181EE7A3 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23F2D83A1B47105152F5954 /* AppStore.swift */; };
+		AD56067511B2DA01EB4004E3 /* WidgetLiveRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */; };
 		AEBA9276C6FBAB693B972281 /* HeatmapGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D348D3EA09579F66D648B9 /* HeatmapGridView.swift */; };
 		B01D55A984B60FD3E9AF292C /* AppStore+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8290D8AF4285281A3F51DA7 /* AppStore+Repositories.swift */; };
 		B222453F11FF40393B766328 /* TeaPulseComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */; };
@@ -116,9 +126,12 @@
 		BEA357AEA201BFB49FED910A /* TeaPulseWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CB53818078DE1DBD25AFFC8C /* TeaPulseWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C18D733CBB6CF18871940BFB /* MermaidDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E096D38316431A0A590D46A /* MermaidDiagramView.swift */; };
 		C29AD7B62668E2EF11231282 /* RepositoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73015760C41C02EF42B473BB /* RepositoryListView.swift */; };
+		C2A40DA332BB38C8922B31ED /* WidgetLiveRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */; };
 		C4110DCB80AE6B05FC913AA3 /* InstanceOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35BE901E11DE683C1BB054B /* InstanceOnboardingView.swift */; };
 		C75B9BEE20227BB144869F35 /* ClipboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CC853E61ED74B598E89A7F /* ClipboardService.swift */; };
+		C99901A059BBD192E4B96C6E /* WidgetLiveRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */; };
 		CA029B1EDE8075B3D91F019D /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		CAA3499A37DCFB6A1B9FE399 /* WidgetLiveRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */; };
 		CC1F41F5EF6FBE4A3BC795E7 /* PulseStatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C8E00BDBCF19AEA831498A /* PulseStatusWidget.swift */; };
 		CDE01077B992DB532D1D377F /* AppStore+Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F021CE4E0B75B16F7C11421 /* AppStore+Connection.swift */; };
 		D3D89F65978B826DD6C4E302 /* RepositoryWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83A9DB79AD97EC6816E80DD /* RepositoryWorkspaceView.swift */; };
@@ -145,6 +158,7 @@
 		F817AF47C8CB189A77202C42 /* AppStore+Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F021CE4E0B75B16F7C11421 /* AppStore+Connection.swift */; };
 		F8F538058334848CF9E4101B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5CACB269E6351674396C253 /* Assets.xcassets */; };
 		F9455F12996DD896C34E43BE /* ShareTargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */; };
+		FA98A31CF3726F92301BB39C /* CommitHeatmapWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65CD9338042CA0ABBB089 /* CommitHeatmapWidget.swift */; };
 		FEF73A1ECEFB5744E245C02E /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 34B7198453713C76FF19BB91 /* GiteaKit */; };
 		FF8ABBEDA1D0984B9ADFF456 /* GiteaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A83B61E0A675A65BE07F0B3 /* GiteaKit */; };
 /* End PBXBuildFile section */
@@ -232,6 +246,8 @@
 		322B2226D298AD37E1C55BA6 /* TeaPulseUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TeaPulseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38515959A57CB389CB273990 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		3C4A5B590413BF3BD26A44CD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLiveRefresher.swift; sourceTree = "<group>"; };
+		40CFEBFDE2A52788514FF345 /* WidgetSharedComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSharedComponents.swift; sourceTree = "<group>"; };
 		46FEEEB5A9FF9719EABE9AA5 /* LiveActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityCoordinator.swift; sourceTree = "<group>"; };
 		477CA91AFE61EC0DB3274D60 /* ShareTargetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTargetCardView.swift; sourceTree = "<group>"; };
 		4845DB3B1FB952608E0F6CC4 /* ActionsWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsWorkspaceView.swift; sourceTree = "<group>"; };
@@ -241,6 +257,7 @@
 		61A2E3F215BA77B24C7B91FF /* AppSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSection.swift; sourceTree = "<group>"; };
 		62DF645F8F2962D71ED4BB17 /* MenuBarBuildExtraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarBuildExtraView.swift; sourceTree = "<group>"; };
 		650CC9C1271EFD38A538DA30 /* RunnersMonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnersMonitorView.swift; sourceTree = "<group>"; };
+		67012F8632B1428BE523521B /* RefreshPulseWidgetsIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshPulseWidgetsIntent.swift; sourceTree = "<group>"; };
 		69C5063C5916D0BBB0B0660F /* LiveConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveConnectionTests.swift; sourceTree = "<group>"; };
 		701A239F331E352609F12885 /* CommandPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandPaletteView.swift; sourceTree = "<group>"; };
 		7051831E69679A8C957927EB /* TeaPulseShareExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = TeaPulseShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,6 +272,7 @@
 		9B3E8FD1D0225AB84ACDE81A /* AuditRegressionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditRegressionTests.swift; sourceTree = "<group>"; };
 		9CA5AA259E9B87ACBD3F15CB /* BarkPushConfigSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarkPushConfigSheet.swift; sourceTree = "<group>"; };
 		9F021CE4E0B75B16F7C11421 /* AppStore+Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore+Connection.swift"; sourceTree = "<group>"; };
+		A1A65CD9338042CA0ABBB089 /* CommitHeatmapWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitHeatmapWidget.swift; sourceTree = "<group>"; };
 		A31B57F7BC5EEC3A4DE598F6 /* TeaPulseTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TeaPulseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A35BE901E11DE683C1BB054B /* InstanceOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceOnboardingView.swift; sourceTree = "<group>"; };
 		A6920B58307914B5BB89CA59 /* PullRequestWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestWorkspaceView.swift; sourceTree = "<group>"; };
@@ -266,6 +284,7 @@
 		C0CFDACD944AD4910A499055 /* RootContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerView.swift; sourceTree = "<group>"; };
 		C285CFF87DA3784E42F91DF0 /* ANSITerminalLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ANSITerminalLogView.swift; sourceTree = "<group>"; };
 		C5D1376F8752BD194AC1B2A1 /* MacShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacShareViewController.swift; sourceTree = "<group>"; };
+		C73B6A8BEAD310436FEC95CB /* WidgetSyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSyncTests.swift; sourceTree = "<group>"; };
 		CB120576BD34A195CE8268EA /* AppStore+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore+Actions.swift"; sourceTree = "<group>"; };
 		CB53818078DE1DBD25AFFC8C /* TeaPulseWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = TeaPulseWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1B903144E5397E6E75C202D /* MacWorkspaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacWorkspaceTests.swift; sourceTree = "<group>"; };
@@ -386,6 +405,7 @@
 				9B3E8FD1D0225AB84ACDE81A /* AuditRegressionTests.swift */,
 				69C5063C5916D0BBB0B0660F /* LiveConnectionTests.swift */,
 				56A4336457BB472B2EAF922A /* ThemeContrastTests.swift */,
+				C73B6A8BEAD310436FEC95CB /* WidgetSyncTests.swift */,
 				AD296D22FE36F2973D16F2CA /* WorkspaceEnhancementsTests.swift */,
 			);
 			path = TeaPulseTests;
@@ -454,8 +474,11 @@
 			isa = PBXGroup;
 			children = (
 				EAB3AD1D255CD30E5E679E7A /* BuildLiveActivityWidget.swift */,
+				A1A65CD9338042CA0ABBB089 /* CommitHeatmapWidget.swift */,
 				16C8E00BDBCF19AEA831498A /* PulseStatusWidget.swift */,
+				67012F8632B1428BE523521B /* RefreshPulseWidgetsIntent.swift */,
 				FB864719B42AB2CF39CED44F /* TeaPulseWidgetBundle.swift */,
+				40CFEBFDE2A52788514FF345 /* WidgetSharedComponents.swift */,
 			);
 			path = TeaPulseWidgets;
 			sourceTree = "<group>";
@@ -571,6 +594,7 @@
 				859B5F0DD51ECFCD908D1AA2 /* TeaPulseComponents.swift */,
 				29866251F81D128DFDA23FFA /* TeaPulseMotion.swift */,
 				896FAF16F4E52FB703CBAF5A /* TeaPulseTheme.swift */,
+				3D7798B92264441EB401A59B /* WidgetLiveRefresher.swift */,
 			);
 			path = SharedExtensionSupport;
 			sourceTree = "<group>";
@@ -903,12 +927,16 @@
 				9325910A9075265E49A95BAE /* AppGroupBridge.swift in Sources */,
 				4795D56C73D360B0ED91FB25 /* BuildActivityAttributes.swift in Sources */,
 				60E8D2F9BC81E430B0A9642A /* BuildLiveActivityWidget.swift in Sources */,
+				FA98A31CF3726F92301BB39C /* CommitHeatmapWidget.swift in Sources */,
 				59CCFABD491EB955FF1982C9 /* PulseStatusWidget.swift in Sources */,
+				4FF240D8A7D7B281DD446393 /* RefreshPulseWidgetsIntent.swift in Sources */,
 				EDE70A4F12946E435B74FBEA /* ShareTargetCardView.swift in Sources */,
 				B222453F11FF40393B766328 /* TeaPulseComponents.swift in Sources */,
 				21DFEA0BD69FCCC80D688716 /* TeaPulseMotion.swift in Sources */,
 				21D028F78EE696B93CE8F0E7 /* TeaPulseTheme.swift in Sources */,
 				03D2295B076197C1C48A9AFC /* TeaPulseWidgetBundle.swift in Sources */,
+				6E6708B7E7769A057AD105AC /* WidgetLiveRefresher.swift in Sources */,
+				79B2DF733592E01038872787 /* WidgetSharedComponents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +951,7 @@
 				108516AA0100534C39E332DA /* TeaPulseComponents.swift in Sources */,
 				348C10B0CC3767881F66EE95 /* TeaPulseMotion.swift in Sources */,
 				36DF90CAA4AB3B43A5F3E6A7 /* TeaPulseTheme.swift in Sources */,
+				C99901A059BBD192E4B96C6E /* WidgetLiveRefresher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +995,7 @@
 				E69CECEC7EB2A182FBC1F553 /* TeaPulseComponents.swift in Sources */,
 				8F53254C4B6D643A3CABFB8B /* TeaPulseMotion.swift in Sources */,
 				DB577A536B1182FA23C887AD /* TeaPulseTheme.swift in Sources */,
+				CAA3499A37DCFB6A1B9FE399 /* WidgetLiveRefresher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,6 +1047,7 @@
 				E0E2D11629B9B99F5F08A8F9 /* TeaPulseComponents.swift in Sources */,
 				BC9EE447B0DB9F49ACFB85AC /* TeaPulseMotion.swift in Sources */,
 				3230F398C117F2528FF19367 /* TeaPulseTheme.swift in Sources */,
+				C2A40DA332BB38C8922B31ED /* WidgetLiveRefresher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1026,12 +1057,16 @@
 			files = (
 				7E08A3E8E07CA6B3680C3B60 /* AppGroupBridge.swift in Sources */,
 				48E286BA4EDB27CDDDA76338 /* BuildActivityAttributes.swift in Sources */,
+				50B4D3FD989AF8710CD27605 /* CommitHeatmapWidget.swift in Sources */,
 				CC1F41F5EF6FBE4A3BC795E7 /* PulseStatusWidget.swift in Sources */,
+				6760A0D313896BF8E5FA9307 /* RefreshPulseWidgetsIntent.swift in Sources */,
 				CA029B1EDE8075B3D91F019D /* ShareTargetCardView.swift in Sources */,
 				95E1E0D09F6B0F325603772D /* TeaPulseComponents.swift in Sources */,
 				26B4FD12F3B98D9F64781C6A /* TeaPulseMacWidgetBundle.swift in Sources */,
 				D706B8DCA0B3B087573B6BD0 /* TeaPulseMotion.swift in Sources */,
 				509FACE844DBAF0D146874C8 /* TeaPulseTheme.swift in Sources */,
+				0EC1E698ED0B351DC7A20815 /* WidgetLiveRefresher.swift in Sources */,
+				7CA93061EC16B03C7DFCEF02 /* WidgetSharedComponents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,6 +1078,7 @@
 				6D6D2EF3DC6F0319C2EF1096 /* AuditRegressionTests.swift in Sources */,
 				4AE675EF94A735A6F1DE3C6F /* LiveConnectionTests.swift in Sources */,
 				0C96585F3DFBEF9E49E172EB /* ThemeContrastTests.swift in Sources */,
+				657A898070582198FDA1EB6D /* WidgetSyncTests.swift in Sources */,
 				E1D0254DDBD217CDBA0C2667 /* WorkspaceEnhancementsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1058,6 +1094,7 @@
 				66D852C4AF7C6A30314B9CE3 /* TeaPulseComponents.swift in Sources */,
 				709BAC99CCA9FC987BCDCC79 /* TeaPulseMotion.swift in Sources */,
 				A24298030FB108B1DFB24042 /* TeaPulseTheme.swift in Sources */,
+				02CD2ADFF9D9D5E5DDA6718D /* WidgetLiveRefresher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,6 +1117,7 @@
 				DC048F7ACFBB684D537F0E22 /* TeaPulseComponents.swift in Sources */,
 				E1AF88ED10DAAA2D8369C488 /* TeaPulseMotion.swift in Sources */,
 				06ECEBDC6480EA8A0230B5B7 /* TeaPulseTheme.swift in Sources */,
+				AD56067511B2DA01EB4004E3 /* WidgetLiveRefresher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1197,7 +1235,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1217,7 +1255,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1450,7 +1488,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1464,7 +1502,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

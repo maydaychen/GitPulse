@@ -1,5 +1,8 @@
 import Foundation
 import GiteaKit
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
 
 extension AppStore {
     private struct PinnedSelection: Codable {
@@ -274,5 +277,44 @@ extension AppStore {
         variablesByRepo[key]?.removeAll { $0.id == id }
         showToast("已删除变量 \(target.name)")
         return true
+    }
+
+    // MARK: - Widget Context & Snapshot Sync
+
+    internal func buildAndSyncWidgetState(userDefaults: UserDefaults? = nil) {
+        let context = WidgetConnectionContext(
+            profileID: profile.id,
+            displayName: profile.displayName,
+            publicURL: profile.publicURL,
+            lanURL: profile.lanURL,
+            activeChannel: profile.activeChannel,
+            username: profile.username,
+            isDemoMode: isDemoMode
+        )
+        AppGroupBridge.saveWidgetConnectionContext(context, userDefaults: userDefaults)
+
+        let runningRun = runs.first { $0.status == .running }
+        let displayName = profile.displayName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let instanceName = isDemoMode ? "TeaPulse" : (displayName.isEmpty ? "TeaPulse" : displayName)
+        let snapshot = WidgetDashboardSnapshot(
+            instanceName: instanceName,
+            probePillText: health.probePillText,
+            serverVersion: health.serverVersion,
+            unreadInboxCount: unreadInboxCount,
+            runningBuildCount: runs.filter { $0.status == .running }.count,
+            failedBuildCount: runs.filter { $0.status == .failure }.count,
+            onlineRunnerCount: runners.filter { $0.status != .offline }.count,
+            offlineRunnerCount: runners.filter { $0.status == .offline }.count,
+            activeRunRepo: runningRun?.repoFullName,
+            activeRunStep: runningRun?.steps.last?.name,
+            heatmapDays: Array(heatmap.suffix(112)),
+            triageItems: Array(triage.prefix(4))
+        )
+        AppGroupBridge.saveWidgetSnapshot(snapshot, userDefaults: userDefaults)
+        #if canImport(WidgetKit)
+        if userDefaults == nil {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        #endif
     }
 }

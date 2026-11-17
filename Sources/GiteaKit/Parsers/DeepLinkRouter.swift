@@ -1,6 +1,7 @@
 import Foundation
 
 public enum TeaPulseRoute: Equatable, Sendable {
+    case pulse
     case pullRequest(owner: String, repo: String, index: Int)
     case actionRun(owner: String, repo: String, runID: Int, focusFailedStep: Bool)
     case opsRunners
@@ -8,6 +9,8 @@ public enum TeaPulseRoute: Equatable, Sendable {
 
     public var deepLinkString: String {
         switch self {
+        case .pulse:
+            return "teapulse://pulse"
         case .pullRequest(let owner, let repo, let index):
             return "teapulse://pull/\(owner)/\(repo)/\(index)"
         case .actionRun(let owner, let repo, let runID, let focusFailedStep):
@@ -22,6 +25,8 @@ public enum TeaPulseRoute: Equatable, Sendable {
 
     public var displayTitle: String {
         switch self {
+        case .pulse:
+            return "概览脉冲看板"
         case .pullRequest(let owner, let repo, let index):
             return "\(owner)/\(repo) PR #\(index)"
         case .actionRun(let owner, let repo, let runID, _):
@@ -52,6 +57,8 @@ public enum DeepLinkRouter {
         let parts = url.pathComponents.filter { $0 != "/" }
 
         switch host {
+        case "pulse":
+            return .pulse
         case "pull":
             guard parts.count >= 3, let index = Int(parts[2]) else { return nil }
             return .pullRequest(owner: parts[0], repo: parts[1], index: index)

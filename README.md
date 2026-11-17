@@ -17,7 +17,7 @@
 Built specifically for operators and developers running **self-hosted Gitea 1.27+** behind custom reverse-proxy ports, subpaths (such as `/gitea`), gateway auth headers, or LAN/WAN split networks. Powered by a shared Swift 6 core package (`GiteaKit`), one codebase drives iPhone, iPad, macOS, Menu Bar monitoring, WidgetKit widgets, Live Activities, and URL Share Extensions.
 
 > [!NOTE]
-> **v0.1.0 Open-Source Status**: Core networking (`GiteaKitTests`, 29 tests), mocked live-connection & `AppStore` tests, iOS unit/UI smoke tests, macOS tests, and the offline `--demo-mode` workspace are verified locally. End-to-end validation against live production Gitea hardware, physical iPhone Dynamic Island (`ActivityKit`), and hardware Share Extension panels remains in active integration testing.
+> **v0.1.1 Open-Source Status**: Core networking (`GiteaKitTests`, 32 tests), mocked live-connection & `AppStore` tests (`TeaPulseTests`, 31 tests), iOS UI smoke tests (`5` tests), macOS tests (`3` tests), and the offline `--demo-mode` workspace are verified locally. End-to-end validation against live production Gitea hardware, physical iPhone Dynamic Island (`ActivityKit`), interactive desktop/Lock Screen WidgetKit refreshes, and hardware Share Extension panels remains in active integration testing.
 
 ## Live Preview (`--demo-mode` Simulator Capture)
 
@@ -30,6 +30,7 @@ Built specifically for operators and developers running **self-hosted Gitea 1.27
       <h3>Designed for High-Signal Gitea Operations</h3>
       <ul>
         <li><strong>Pulse Operations Dashboard</strong>: Aggregates open pull requests, failed workflow runs, and offline runners into a Priority Queue alongside 4 custom pinned repositories, an interactive 16-week animated commit heatmap, and activity feeds.</li>
+        <li><strong>Desktop &amp; Lock Screen Widgets (iOS / iPadOS / macOS)</strong>: Ships <code>PulseStatusWidget</code> (Small / Medium / Large Priority Queue with deep-linked PR &amp; failed-run rows + iOS Lock Screen circular/rectangular accessories) and <code>CommitHeatmapWidget</code> (10-week &amp; 16-week contribution grid with streak tracking), powered by interactive <code>AppIntent</code> one-tap refresh and autonomous background endpoint probing via <code>WidgetSnapshotService</code>.</li>
         <li><strong>800ms Dual-Endpoint Race Probe</strong>: Races direct LAN <code>/api/healthz</code> (800ms cutoff) against your HTTPS reverse proxy, switching channels transparently without stalling navigation.</li>
         <li><strong>Repositories, Organizations &amp; Branches</strong>: Filters personal, organization (<code>/user/orgs</code>), and mirror repositories; supports starring toggles, branch/tag switching, commit history, single-commit diffs, and Markdown + inline Mermaid rendering.</li>
         <li><strong>Inline Code Review &amp; Diff Reader</strong>: Parses unified diffs natively with Unified / Split view modes and inline review drafts anchored to exact old/new lines (<code>POST /pulls/{index}/reviews</code>).</li>
@@ -49,7 +50,7 @@ Generic Git mobile apps typically assume standard port `443` at the root domain�
 
 - **Strict URL Boundary Isolation**: `GiteaURLBuilder` percent-encodes path segments once while preserving custom `:port` numbers and subpaths; `/api/healthz` probes bypass `/api/v1` prefixes automatically.
 - **Reverse-Proxy Diagnostics**: Surfaces explicit `client_max_body_size` remediation hints when Nginx returns HTTP `413` on release uploads, and polls `Range: bytes=` job logs for `proxy_buffering off` setups.
-- **Shared Extension Routing**: iOS & macOS Share Extensions normalize web URLs into `teapulse://repo/...`, `teapulse://pull/...`, and `teapulse://actions/...` routes via App Group IPC, loading uncached targets on demand on cold start.
+- **Shared Extension Routing**: iOS & macOS Share Extensions normalize web URLs into `teapulse://repo/...`, `teapulse://pull/...`, and `teapulse://actions/...` routes via App Group IPC, loading uncached targets on demand on cold start; WidgetKit extensions share non-secret endpoint context (`WidgetConnectionContext`) via `AppGroupBridge` while keeping PATs strictly in Keychain, falling back cleanly to cached snapshots when offline.
 - **Local-Only Security Boundary**: Personal Access Tokens (PAT) and custom proxy headers live exclusively in Apple Keychain—zero telemetry servers or external relays.
 
 ## Quick Start & Demo Mode
@@ -111,11 +112,11 @@ GitPulse/
 ├── DESIGN.md                        # Single source of truth for dark/light design tokens
 ├── Sources/GiteaKit/                # Models, dual-endpoint probe, REST client, Diff/ANSI/Markdown parsers
 ├── Tests/GiteaKitTests/             # Swift Testing unit suite
-├── SharedExtensionSupport/          # TeaPulseTheme tokens, shared components, AppGroupBridge IPC
+├── SharedExtensionSupport/          # TeaPulseTheme tokens, shared components, AppGroupBridge IPC & WidgetLiveRefresher
 ├── TeaPulse/                        # Universal SwiftUI app (App / Navigation / Store / Features)
-├── TeaPulseWidgets/                 # iOS WidgetKit & ActivityKit Live Activity
+├── TeaPulseWidgets/                 # iOS WidgetKit (Status, Commit Heatmap, Lock Screen, AppIntent) & Live Activity
 ├── TeaPulseShareExtension/          # iOS Share Extension
-├── TeaPulseMacWidgets/              # macOS WidgetKit extension
+├── TeaPulseMacWidgets/              # macOS WidgetKit extension (shared Status, Heatmap & AppIntent)
 ├── TeaPulseMacShareExtension/       # macOS Share Extension
 ├── TeaPulseTests/ & TeaPulseUITests/# iOS unit & UI smoke tests
 ├── TeaPulseMacTests/                # macOS workspace unit tests

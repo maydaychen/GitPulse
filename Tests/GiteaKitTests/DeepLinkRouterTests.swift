@@ -6,6 +6,8 @@ import Testing
 struct DeepLinkRouterTests {
     @Test("Parses all canonical teapulse:// routes")
     func parsesCustomSchemeRoutes() {
+        #expect(DeepLinkRouter.parse("teapulse://pulse") == .pulse)
+        #expect(TeaPulseRoute.pulse.deepLinkString == "teapulse://pulse")
         #expect(
             DeepLinkRouter.parse("teapulse://pull/alex/teapulse-core/42")
                 == .pullRequest(owner: "alex", repo: "teapulse-core", index: 42)

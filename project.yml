@@ -18,8 +18,8 @@ settings:
     SWIFT_VERSION: "6.0"
     SWIFT_STRICT_CONCURRENCY: complete
     CODE_SIGN_STYLE: Automatic
-    MARKETING_VERSION: "0.1.0"
-    CURRENT_PROJECT_VERSION: "4"
+    MARKETING_VERSION: "0.1.1"
+    CURRENT_PROJECT_VERSION: "5"
 schemes:
   TeaPulse:
     build:
@@ -214,7 +214,10 @@ targets:
     platform: macOS
     sources:
       - path: TeaPulseMacWidgets
-      - path: TeaPulseWidgets/PulseStatusWidget.swift
+      - path: TeaPulseWidgets
+        excludes:
+          - TeaPulseWidgetBundle.swift
+          - BuildLiveActivityWidget.swift
       - path: SharedExtensionSupport
     dependencies:
       - package: GiteaKit

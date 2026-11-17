@@ -27,6 +27,16 @@ cleanup() {
 }
 trap cleanup EXIT
 
+strip_macho_binaries() {
+  local app_path="$1"
+  while IFS= read -r -d '' bin; do
+    if file -b "$bin" | grep -q 'Mach-O'; then
+      codesign --remove-signature "$bin" >/dev/null 2>&1 || true
+      xcrun strip -x "$bin"
+    fi
+  done < <(find "$app_path" -type f -print0)
+}
+
 assert_anonymous_bundle() {
   local app_path="$1"
   local mode="$2" # adhoc | unsigned
@@ -55,6 +65,23 @@ assert_anonymous_bundle() {
     }
     codesign --verify --deep --strict "$app_path"
   fi
+
+  python3 - "$app_path" <<'PY'
+import pathlib, sys
+root = pathlib.Path(sys.argv[1])
+host_prefixes = (
+    b"/" + b"Users" + b"/",
+    b"/" + b"home" + b"/",
+)
+for p in sorted(root.rglob("*")):
+    if not p.is_file() or p.is_symlink():
+        continue
+    raw = p.read_bytes()
+    for needle in host_prefixes:
+        if needle in raw:
+            print(f"ERROR: build-host path prefix {needle!r} leaked in {p}", file=sys.stderr)
+            sys.exit(1)
+PY
 }
 
 echo "[1/4] Building macOS Release (TeaPulseMac) without team identity..."
@@ -71,6 +98,7 @@ MAC_APP_SRC="$MAC_DERIVED/Build/Products/Release/TeaPulse.app"
 MAC_APP_DST="$STAGE_DIR/mac/TeaPulse.app"
 cp -R "$MAC_APP_SRC" "$MAC_APP_DST"
 find "$MAC_APP_DST" -name "*.provisionprofile" -delete
+strip_macho_binaries "$MAC_APP_DST"
 
 if [ -d "$MAC_APP_DST/Contents/Frameworks" ]; then
   find "$MAC_APP_DST/Contents/Frameworks" -maxdepth 1 \( -name "*.framework" -o -name "*.dylib" \) -print0 \
@@ -110,6 +138,7 @@ cp -R "$IOS_APP_SRC" "$IOS_APP_DST"
 find "$IOS_APP_DST" \( -name "embedded.mobileprovision" -o -name "*.provisionprofile" \) -delete
 rm -rf "$IOS_APP_DST/_CodeSignature"
 find "$IOS_APP_DST/PlugIns" -maxdepth 2 -name "_CodeSignature" -exec rm -rf {} + 2>/dev/null || true
+strip_macho_binaries "$IOS_APP_DST"
 find "$STAGE_DIR/ios" \( -name '._*' -o -name '.DS_Store' \) -delete
 
 assert_anonymous_bundle "$IOS_APP_DST" "unsigned"

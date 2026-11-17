@@ -28,4 +28,33 @@ struct MacWorkspaceTests {
         #expect(consumed?.deepLink == route.deepLink)
         #expect(AppGroupBridge.consumePendingSharedRoute() == nil)
     }
+
+    @Test("WidgetLiveRefresher reloads demo context and preserves heatmap and triage items")
+    func refreshesWidgetSnapshotFromSharedContext() async {
+        let suiteName = "teapulse.macwidget.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let context = WidgetConnectionContext(
+            profileID: "demo-gitea",
+            displayName: "Demo Gitea",
+            publicURL: "https://git.teapulse.example:8443",
+            username: "alex",
+            isDemoMode: true
+        )
+        AppGroupBridge.saveWidgetConnectionContext(context, userDefaults: defaults)
+        let refreshedAt = Date(timeIntervalSince1970: 1_795_000_000)
+
+        let updated = await WidgetLiveRefresher.refreshFromSharedContext(
+            forceDemoTimestampUpdate: true,
+            credentialStore: InMemoryCredentialStore(),
+            userDefaults: defaults,
+            now: refreshedAt
+        )
+
+        #expect(updated?.updatedAt == refreshedAt)
+        #expect(updated?.heatmapDays.count == 112)
+        #expect(updated?.triageItems.isEmpty == false)
+        #expect(AppGroupBridge.loadWidgetSnapshot(userDefaults: defaults)?.updatedAt == refreshedAt)
+    }
 }
