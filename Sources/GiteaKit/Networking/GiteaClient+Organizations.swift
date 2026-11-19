@@ -83,26 +83,31 @@ extension GiteaClient {
         }
 
         let pageSize = 50
-        for org in organizations.prefix(12) {
+        let batches = await boundedConcurrentMap(Array(organizations.prefix(12)), maxConcurrency: 6) { org in
+            var orgRepos: [RepositorySummary] = []
             for page in 1...maxPagesPerOrg {
-                guard let batch = try? await fetchOrganizationRepositories(
+                guard let batch = try? await self.fetchOrganizationRepositories(
                     org: org.username,
                     page: page,
                     limit: pageSize,
                     currentUsername: currentUsername
                 ) else { break }
+                orgRepos.append(contentsOf: batch)
+                if batch.count < pageSize { break }
+            }
+            return orgRepos
+        }
 
-                for repo in batch {
-                    if seenIDs.insert(repo.id).inserted {
-                        merged.append(repo)
-                    } else if let idx = merged.firstIndex(where: { $0.id == repo.id }) {
-                        merged[idx].isOrganizationOwned = true
-                        if !merged[idx].isMirror {
-                            merged[idx].scope = .org
-                        }
+        for batch in batches {
+            for repo in batch {
+                if seenIDs.insert(repo.id).inserted {
+                    merged.append(repo)
+                } else if let idx = merged.firstIndex(where: { $0.id == repo.id }) {
+                    merged[idx].isOrganizationOwned = true
+                    if !merged[idx].isMirror {
+                        merged[idx].scope = .org
                     }
                 }
-                if batch.count < pageSize { break }
             }
         }
 

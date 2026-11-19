@@ -84,11 +84,23 @@ for p in sorted(root.rglob("*")):
 PY
 }
 
+assert_universal_macos_binary() {
+  local bin_path="$1"
+  local archs
+  archs=$(lipo -archs "$bin_path" 2>/dev/null || true)
+  for required in arm64 x86_64; do
+    if ! echo " $archs " | grep -q " $required "; then
+      echo "ERROR: $bin_path is missing architecture '$required' (found: '$archs')" >&2
+      exit 1
+    fi
+  done
+}
+
 echo "[1/4] Building macOS Release (TeaPulseMac) without team identity..."
 xcodebuild -project TeaPulse.xcodeproj \
   -scheme TeaPulseMac \
   -configuration Release \
-  -destination 'platform=macOS,arch=arm64' \
+  -destination 'generic/platform=macOS' \
   -derivedDataPath "$MAC_DERIVED" \
   DEVELOPMENT_TEAM="" \
   CODE_SIGNING_ALLOWED=NO \
@@ -114,6 +126,9 @@ codesign --force --sign - --entitlements Config/TeaPulseMac.entitlements --times
 assert_anonymous_bundle "$MAC_APP_DST" "adhoc"
 [ -d "$WIDGET_EXT" ] && assert_anonymous_bundle "$WIDGET_EXT" "adhoc"
 [ -d "$SHARE_EXT" ] && assert_anonymous_bundle "$SHARE_EXT" "adhoc"
+assert_universal_macos_binary "$MAC_APP_DST/Contents/MacOS/TeaPulse"
+[ -d "$WIDGET_EXT" ] && assert_universal_macos_binary "$WIDGET_EXT/Contents/MacOS/TeaPulseMacWidgets"
+[ -d "$SHARE_EXT" ] && assert_universal_macos_binary "$SHARE_EXT/Contents/MacOS/TeaPulseMacShareExtension"
 
 echo "[2/4] Packaging compressed macOS DMG..."
 find "$STAGE_DIR/mac" \( -name '._*' -o -name '.DS_Store' \) -delete
@@ -154,7 +169,7 @@ cat > "$OUT_DIR/RELEASE_NOTES.md" <<EOF
 
 All binaries in this release are built without an Apple Developer Team ID or certificate authority (\`Signature=adhoc\` on macOS; unsigned \`Payload\` on iOS). Verify artifact integrity against \`SHA256SUMS.txt\`.
 
-## macOS (\`TeaPulse-${VERSION}-macOS.dmg\`)
+## macOS (\`TeaPulse-${VERSION}-macOS.dmg\`, Universal Apple Silicon + Intel)
 
 1. Open the DMG and drag \`TeaPulse.app\` into \`/Applications\`.
 2. On first launch, macOS Gatekeeper warns because the app is ad-hoc signed without Apple notarization:
@@ -171,7 +186,7 @@ All binaries in this release are built without an Apple Developer Team ID or cer
 
 本版本所有安装包均未嵌入开发者 Team ID 或实名证书链（macOS 为 \`adhoc\` 本地签名，iOS 为无签名 \`Payload\`），下载后可结合 \`SHA256SUMS.txt\` 核对校验和。
 
-## macOS（\`TeaPulse-${VERSION}-macOS.dmg\`）
+## macOS（\`TeaPulse-${VERSION}-macOS.dmg\`，Universal 通用版：同时支持 Apple Silicon 与 Intel）
 
 1. 打开 DMG 并把 \`TeaPulse.app\` 拖入「应用程序」。
 2. 由于未接入 Apple 实名公证，首次打开时系统会提示来自未验证开发者：

@@ -17,14 +17,21 @@ public struct DiffReaderView: View {
     public var allowsCommenting = true
 
     @State private var mode: Mode = .unified
-    private struct CommentTarget: Equatable {
+    private struct CommentTarget: Hashable {
         let path: String
         let line: Int
         let side: DiffSide
     }
 
+    private struct InlineEntry: Identifiable {
+        let id: String
+        let author: String
+        let body: String
+    }
+
     @State private var commentingTarget: CommentTarget?
     @State private var draftBody = ""
+    @State private var availableWidth: CGFloat = 560
 
     public init(
         prID: String,
@@ -41,7 +48,11 @@ public struct DiffReaderView: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
+        let drafts = allowsCommenting ? (store.pendingInlineDrafts[prID] ?? []) : []
+        let draftCount = drafts.count
+        let inlineLookup = buildInlineLookup(drafts: drafts)
+
+        LazyVStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
             HStack {
                 Picker("对比模式", selection: Binding(
                     get: { mode },
@@ -52,9 +63,9 @@ public struct DiffReaderView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .labelsHidden()
                 .frame(maxWidth: 220)
                 Spacer()
-                let draftCount = (store.pendingInlineDrafts[prID] ?? []).count
                 if allowsCommenting, draftCount > 0 {
                     StatusBadge("草稿 \(draftCount)", tone: .warning)
                         .teaPulseNumericTransition(value: draftCount)
@@ -102,19 +113,19 @@ public struct DiffReaderView: View {
 
                         Group {
                             if mode == .unified {
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    VStack(alignment: .leading, spacing: 0) {
+                                ScrollView(.horizontal, showsIndicators: TeaPulsePlatform.showsCodeHorizontalIndicators) {
+                                    LazyVStack(alignment: .leading, spacing: 0) {
                                         ForEach(hunk.lines) { line in
-                                            unifiedRow(line, filePath: file.path)
+                                            unifiedRow(line, filePath: file.path, inlineLookup: inlineLookup)
                                         }
                                     }
                                 }
                                 .background(TeaPulseTheme.codeSurface)
                             } else {
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    VStack(alignment: .leading, spacing: 0) {
+                                ScrollView(.horizontal, showsIndicators: TeaPulsePlatform.showsCodeHorizontalIndicators) {
+                                    LazyVStack(alignment: .leading, spacing: 0) {
                                         ForEach(hunk.splitRows) { row in
-                                            splitRowView(row, filePath: file.path)
+                                            splitRowView(row, filePath: file.path, inlineLookup: inlineLookup)
                                         }
                                     }
                                 }
@@ -128,6 +139,7 @@ public struct DiffReaderView: View {
                 .overlay(RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous).stroke(TeaPulseTheme.cardBorder, lineWidth: 1))
             }
         }
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { availableWidth = $0 }
     }
 
     @ViewBuilder
@@ -178,8 +190,8 @@ public struct DiffReaderView: View {
     }
 
     @ViewBuilder
-    private func inlineBubbleList(entries: [(id: String, author: String, body: String)], lineNumber: Int) -> some View {
-        ForEach(entries, id: \.id) { entry in
+    private func inlineBubbleList(entries: [InlineEntry], lineNumber: Int) -> some View {
+        ForEach(entries) { entry in
             HStack(spacing: TeaPulseSpacing.xs) {
                 Text("@\(entry.author)")
                     .font(TeaPulseTypography.codeSm)
@@ -201,41 +213,66 @@ public struct DiffReaderView: View {
         }
     }
 
-    private func unifiedRow(_ line: DiffLine, filePath: String) -> some View {
+    private func buildInlineLookup(drafts: [InlineReviewDraft]) -> [CommentTarget: [InlineEntry]] {
+        var map: [CommentTarget: [InlineEntry]] = [:]
+        for comment in comments {
+            guard let path = comment.filePath, let line = comment.lineNumber else { continue }
+            let target = CommentTarget(path: path, line: line, side: comment.side)
+            map[target, default: []].append(InlineEntry(id: comment.id, author: comment.author, body: comment.body))
+        }
+        for (idx, draft) in drafts.enumerated() {
+            let target = CommentTarget(path: draft.filePath, line: draft.lineNumber, side: draft.side)
+            map[target, default: []].append(
+                InlineEntry(id: "draft-\(draft.filePath)-\(draft.lineNumber)-\(idx)", author: "草稿", body: draft.body)
+            )
+        }
+        return map
+    }
+
+    private func unifiedRow(
+        _ line: DiffLine,
+        filePath: String,
+        inlineLookup: [CommentTarget: [InlineEntry]]
+    ) -> some View {
         let lineNum = line.newLineNumber ?? line.oldLineNumber ?? 1
         let side: DiffSide = line.kind == .deletion ? .old : .new
         let target = CommentTarget(path: filePath, line: lineNum, side: side)
-        let matchedComments = inlineEntries(for: filePath, lineNumber: lineNum, side: side)
+        let matchedComments = inlineLookup[target] ?? []
         let isCommentingHere = commentingTarget == target
 
+        let rowLabel = HStack(spacing: TeaPulseSpacing.sm) {
+            Text(line.oldLineNumber.map(String.init) ?? "")
+                .frame(width: 34, alignment: .trailing)
+                .foregroundStyle(TeaPulseTheme.codeMuted)
+            Text(line.newLineNumber.map(String.init) ?? "")
+                .frame(width: 34, alignment: .trailing)
+                .foregroundStyle(TeaPulseTheme.codeMuted)
+            Text(prefixSymbol(line.kind))
+                .foregroundStyle(prefixColor(line.kind))
+            Text(line.content)
+                .foregroundStyle(TeaPulseTheme.codeText)
+            Spacer(minLength: TeaPulseSpacing.md)
+        }
+        .font(TeaPulseTypography.codeMd)
+        .monospacedDigit()
+        .padding(.horizontal, TeaPulseSpacing.sm)
+        .padding(.vertical, 2)
+        .background(rowBackground(line.kind))
+        .contentShape(Rectangle())
+
         return VStack(alignment: .leading, spacing: 0) {
-            Button {
-                guard allowsCommenting else { return }
-                TeaPulseMotion.run(TeaPulseMotion.spring, reduceMotion: reduceMotion) {
-                    commentingTarget = isCommentingHere ? nil : target
+            if allowsCommenting {
+                Button {
+                    TeaPulseMotion.run(TeaPulseMotion.spring, reduceMotion: reduceMotion) {
+                        commentingTarget = isCommentingHere ? nil : target
+                    }
+                } label: {
+                    rowLabel
                 }
-            } label: {
-                HStack(spacing: TeaPulseSpacing.sm) {
-                    Text(line.oldLineNumber.map(String.init) ?? "")
-                        .frame(width: 34, alignment: .trailing)
-                        .foregroundStyle(TeaPulseTheme.codeMuted)
-                    Text(line.newLineNumber.map(String.init) ?? "")
-                        .frame(width: 34, alignment: .trailing)
-                        .foregroundStyle(TeaPulseTheme.codeMuted)
-                    Text(prefixSymbol(line.kind))
-                        .foregroundStyle(prefixColor(line.kind))
-                    Text(line.content)
-                        .foregroundStyle(TeaPulseTheme.codeText)
-                    Spacer(minLength: TeaPulseSpacing.md)
-                }
-                .font(TeaPulseTypography.codeMd)
-                .monospacedDigit()
-                .padding(.horizontal, TeaPulseSpacing.sm)
-                .padding(.vertical, 2)
-                .background(rowBackground(line.kind))
-                .contentShape(Rectangle())
+                .buttonStyle(.plain)
+            } else {
+                rowLabel
             }
-            .buttonStyle(.plain)
 
             inlineBubbleList(entries: matchedComments, lineNumber: lineNum)
 
@@ -245,33 +282,26 @@ public struct DiffReaderView: View {
         }
     }
 
-    private func inlineEntries(for filePath: String, lineNumber: Int, side: DiffSide) -> [(id: String, author: String, body: String)] {
-        var result: [(id: String, author: String, body: String)] = comments
-            .filter { $0.filePath == filePath && $0.lineNumber == lineNumber && $0.side == side }
-            .map { (id: $0.id, author: $0.author, body: $0.body) }
-        let drafts = (store.pendingInlineDrafts[prID] ?? [])
-            .filter { $0.filePath == filePath && $0.lineNumber == lineNumber && $0.side == side }
-            .enumerated()
-            .map { idx, draft in
-                (id: "draft-\(filePath)-\(lineNumber)-\(idx)", author: "草稿", body: draft.body)
-            }
-        result.append(contentsOf: drafts)
-        return result
-    }
-
-    private func splitRowView(_ row: SplitDiffRow, filePath: String) -> some View {
+    private func splitRowView(
+        _ row: SplitDiffRow,
+        filePath: String,
+        inlineLookup: [CommentTarget: [InlineEntry]]
+    ) -> some View {
+        let splitHalfWidth = max(280, floor((availableWidth - 1) / 2))
         return VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 1) {
                 splitHalf(row.left, filePath: filePath, side: .old)
-                    .frame(width: 280, alignment: .leading)
+                    .frame(width: splitHalfWidth, alignment: .leading)
                 splitHalf(row.right, filePath: filePath, side: .new)
-                    .frame(width: 280, alignment: .leading)
+                    .frame(width: splitHalfWidth, alignment: .leading)
             }
-            if let oldLine = row.left?.oldLineNumber {
-                inlineBubbleList(entries: inlineEntries(for: filePath, lineNumber: oldLine, side: .old), lineNumber: oldLine)
+            if let oldLine = row.left?.oldLineNumber,
+               let entries = inlineLookup[CommentTarget(path: filePath, line: oldLine, side: .old)] {
+                inlineBubbleList(entries: entries, lineNumber: oldLine)
             }
-            if let newLine = row.right?.newLineNumber {
-                inlineBubbleList(entries: inlineEntries(for: filePath, lineNumber: newLine, side: .new), lineNumber: newLine)
+            if let newLine = row.right?.newLineNumber,
+               let entries = inlineLookup[CommentTarget(path: filePath, line: newLine, side: .new)] {
+                inlineBubbleList(entries: entries, lineNumber: newLine)
             }
             if let target = commentingTarget, target.path == filePath,
                (target.side == .old && target.line == row.left?.oldLineNumber)
@@ -281,34 +311,37 @@ public struct DiffReaderView: View {
         }
     }
 
+    @ViewBuilder
     private func splitHalf(_ line: DiffLine?, filePath: String, side: DiffSide) -> some View {
         let lineNumber = side == .old ? line?.oldLineNumber : line?.newLineNumber
-        return Button {
-            guard allowsCommenting else { return }
-            if let targetLine = lineNumber {
+        let halfLabel = HStack(spacing: TeaPulseSpacing.xs) {
+            Text(lineNumber.map(String.init) ?? "")
+                .frame(width: 28, alignment: .trailing)
+                .foregroundStyle(TeaPulseTheme.codeMuted)
+            Text(line?.content ?? "")
+                .foregroundStyle(TeaPulseTheme.codeText)
+                .lineLimit(1)
+            Spacer(minLength: 0)
+        }
+        .font(TeaPulseTypography.codeSm)
+        .monospacedDigit()
+        .padding(.horizontal, TeaPulseSpacing.xs)
+        .padding(.vertical, 2)
+        .background(line.map { rowBackground($0.kind) } ?? TeaPulseTheme.codeSurface)
+        .contentShape(Rectangle())
+
+        if allowsCommenting, let targetLine = lineNumber {
+            Button {
                 TeaPulseMotion.run(TeaPulseMotion.spring, reduceMotion: reduceMotion) {
                     commentingTarget = CommentTarget(path: filePath, line: targetLine, side: side)
                 }
+            } label: {
+                halfLabel
             }
-        } label: {
-            HStack(spacing: TeaPulseSpacing.xs) {
-                Text(lineNumber.map(String.init) ?? "")
-                    .frame(width: 28, alignment: .trailing)
-                    .foregroundStyle(TeaPulseTheme.codeMuted)
-                Text(line?.content ?? "")
-                    .foregroundStyle(TeaPulseTheme.codeText)
-                    .lineLimit(1)
-                Spacer(minLength: 0)
-            }
-            .font(TeaPulseTypography.codeSm)
-            .monospacedDigit()
-            .padding(.horizontal, TeaPulseSpacing.xs)
-            .padding(.vertical, 2)
-            .background(line.map { rowBackground($0.kind) } ?? TeaPulseTheme.codeSurface)
-            .contentShape(Rectangle())
+            .buttonStyle(.plain)
+        } else {
+            halfLabel
         }
-        .buttonStyle(.plain)
-        .disabled(lineNumber == nil)
     }
 
     private func prefixSymbol(_ kind: DiffLineKind) -> String {

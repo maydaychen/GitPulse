@@ -67,7 +67,7 @@ public struct InboxWorkspaceView: View {
     }
 
     private var threadList: some View {
-        VStack(spacing: TeaPulseSpacing.md) {
+        LazyVStack(spacing: TeaPulseSpacing.md) {
             if store.filteredNotifications.isEmpty {
                 if store.isInitialWorkspaceLoading {
                     LoadingStateCard("正在加载通知…")

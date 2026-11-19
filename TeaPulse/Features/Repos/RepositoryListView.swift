@@ -73,7 +73,7 @@ public struct RepositoryListView: View {
                     }
                 }
 
-                VStack(spacing: TeaPulseSpacing.md) {
+                LazyVStack(spacing: TeaPulseSpacing.md) {
                     if store.filteredRepositories.isEmpty {
                         if store.isInitialWorkspaceLoading || store.isResolvingRoute {
                             LoadingStateCard("正在加载仓库列表…")
@@ -87,7 +87,7 @@ public struct RepositoryListView: View {
                         }
                     } else {
                         ForEach(store.filteredRepositories) { repo in
-                            SurfaceCard {
+                            SurfaceCard(isSelected: !shouldPushInStack && store.selectedRepoID == repo.id) {
                                 VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
                                     Button {
                                         store.selectedRepoID = repo.id
@@ -190,8 +190,10 @@ public struct RepositoryListView: View {
                 .foregroundStyle(TeaPulseTheme.onSurface)
                 .lineLimit(1)
             Spacer()
-            EndpointProbePill(health: store.health) {
-                store.isConnectionSheetPresented = true
+            if shouldPushInStack {
+                EndpointProbePill(health: store.health) {
+                    store.isConnectionSheetPresented = true
+                }
             }
         }
     }

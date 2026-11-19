@@ -49,6 +49,7 @@ public struct CommandPaletteView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(TeaPulsePressableCardStyle())
+                .keyboardShortcut(.cancelAction)
             }
             .padding(TeaPulseSpacing.md)
             .background(TeaPulseTheme.surfaceElevated)
@@ -99,6 +100,9 @@ public struct CommandPaletteView: View {
             .frame(maxHeight: 360)
         }
         .padding(TeaPulseSpacing.lg)
+        #if os(macOS)
+        .frame(minWidth: 560, idealWidth: 600, minHeight: 420, idealHeight: 460)
+        #endif
         .background(TeaPulseTheme.surface)
         .onAppear { isFocused = true }
     }

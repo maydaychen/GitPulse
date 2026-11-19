@@ -18,6 +18,14 @@ public enum ThemePreference: String, CaseIterable, Identifiable, Sendable {
         case .light: return .light
         }
     }
+
+    public var iconName: String {
+        switch self {
+        case .system: return "circle.lefthalf.filled"
+        case .dark: return "moon.stars.fill"
+        case .light: return "sun.max.fill"
+        }
+    }
 }
 
 public struct LoginDiagnosticStep: Identifiable, Equatable, Sendable {
@@ -117,6 +125,12 @@ public final class AppStore {
     internal var loadedPRIDs: Set<String> = []
     internal var loadingRunIDs: Set<String> = []
     internal var loadedRunIDs: Set<String> = []
+    internal var lastWorkspaceRefreshAt: Date?
+    internal var lastSyncedWidgetFingerprint: String?
+    internal var loadedRepoTabTimestamps: [String: Date] = [:]
+    internal var commitDiffOrder: [String] = []
+    internal var loadedFileContentOrder: [String] = []
+    internal var loadedRunLogOrder: [String] = []
     internal var pendingRoute: TeaPulseRoute?
     public internal(set) var routeNavigationID = 0
     internal let defaults: UserDefaults
@@ -302,19 +316,20 @@ public final class AppStore {
             return
         }
         let headers = credentialStore.loadCredentials(forProfileID: probingProfile.id)?.customHeaders ?? [:]
-        let proxyHealth = await probeService.measureHealthz(
+        async let proxyTask = probeService.measureHealthz(
             baseURL: probingProfile.publicURL,
             channel: .publicProxy,
             timeout: 4.0,
             additionalHeaders: headers
         )
         let lanTrimmed = probingProfile.lanURL?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let lanHealth: EndpointHealth? = lanTrimmed.isEmpty ? nil : await probeService.measureHealthz(
+        async let lanTask: EndpointHealth? = lanTrimmed.isEmpty ? nil : probeService.measureHealthz(
             baseURL: lanTrimmed,
             channel: .lanDirect,
             timeout: 0.8,
             additionalHeaders: headers
         )
+        let (proxyHealth, lanHealth) = await (proxyTask, lanTask)
         guard !isDemoMode, profile == probingProfile else { return }
 
         proxyLatencyMs = proxyHealth?.latencyMs ?? 0
@@ -450,5 +465,20 @@ public final class AppStore {
     private static func loadSavedProfile(key: String, defaults: UserDefaults) -> InstanceProfile? {
         guard let data = defaults.data(forKey: key) else { return nil }
         return try? JSONDecoder().decode(InstanceProfile.self, from: data)
+    }
+}
+
+public extension EndpointHealth {
+    var sidebarVersionBadge: (label: String, tone: StatusBadge.Tone) {
+        let raw = serverVersion.trimmingCharacters(in: .whitespacesAndNewlines)
+        if raw.isEmpty || raw == "未加载" {
+            return ("待连接", .neutral)
+        }
+        if raw.caseInsensitiveCompare("unreachable") == .orderedSame {
+            return ("离线", .error)
+        }
+        let core = raw.split(whereSeparator: { $0 == "+" || $0 == "-" }).first.map(String.init) ?? raw
+        let formatted = core.first?.isNumber == true ? "v\(core)" : core
+        return (String(formatted.prefix(10)), .primary)
     }
 }

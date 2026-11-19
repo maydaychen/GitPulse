@@ -188,6 +188,7 @@ extension AppStore {
                   let idx = entries.firstIndex(where: { $0.path == filePath }) else { return }
             entries[idx].content = text
             repoFiles[canonicalName] = entries
+            recordCachedFileContent(repoFullName: canonicalName, filePath: filePath)
         } catch {
             guard !isDemoMode, profile.id == sessionID else { return }
             showToast(error.localizedDescription)

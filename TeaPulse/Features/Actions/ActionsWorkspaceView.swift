@@ -37,9 +37,13 @@ public struct ActionsWorkspaceView: View {
                 }
 
                 if store.actionsFilter == .runners {
-                    RunnersMonitorView()
+                    if shouldPushInStack {
+                        RunnersMonitorView()
+                    } else {
+                        splitRunnerSummaryPane
+                    }
                 } else {
-                    VStack(spacing: TeaPulseSpacing.md) {
+                    LazyVStack(spacing: TeaPulseSpacing.md) {
                         if store.filteredRuns.isEmpty {
                             if store.isInitialWorkspaceLoading || store.isResolvingRoute {
                                 LoadingStateCard("正在加载工作流运行记录…")
@@ -60,7 +64,7 @@ public struct ActionsWorkspaceView: View {
                                     pushedRun = run
                                 }
                             } label: {
-                                SurfaceCard {
+                                SurfaceCard(isSelected: !shouldPushInStack && store.selectedRunID == run.id) {
                                     VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
                                         HStack(spacing: TeaPulseSpacing.sm) {
                                             StatusBadge(run.status.badgeLabel, tone: run.status.badgeTone)
@@ -119,8 +123,62 @@ public struct ActionsWorkspaceView: View {
                 .foregroundStyle(TeaPulseTheme.onSurface)
                 .lineLimit(1)
             Spacer()
-            EndpointProbePill(health: store.health) {
-                store.isConnectionSheetPresented = true
+            if shouldPushInStack {
+                EndpointProbePill(health: store.health) {
+                    store.isConnectionSheetPresented = true
+                }
+            }
+        }
+    }
+
+    private var splitRunnerSummaryPane: some View {
+        let onlineCount = store.runners.filter { $0.status == .online }.count
+        let busyCount = store.runners.filter { $0.status == .busy }.count
+        let offlineCount = store.runners.filter { $0.status == .offline }.count
+
+        return VStack(spacing: TeaPulseSpacing.md) {
+            SurfaceCard(isSelected: true) {
+                VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
+                    HStack(spacing: TeaPulseSpacing.sm) {
+                        StatusBadge("在线 \(onlineCount)", tone: .primary)
+                        StatusBadge("执行中 \(busyCount)", tone: .warning)
+                        if offlineCount > 0 {
+                            StatusBadge("离线 \(offlineCount)", tone: .error)
+                        }
+                        Spacer()
+                    }
+                    Text("右侧已展开执行节点池详情与注册令牌管理")
+                        .font(TeaPulseTypography.bodySm)
+                        .foregroundStyle(TeaPulseTheme.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+
+            ForEach(store.runners) { runner in
+                SurfaceCard {
+                    HStack(spacing: TeaPulseSpacing.sm) {
+                        PulsingStatusDot(
+                            color: runner.status == .online ? TeaPulseTheme.primary : (runner.status == .busy ? TeaPulseTheme.warning : TeaPulseTheme.error),
+                            animate: runner.status != .offline
+                        )
+                        VStack(alignment: .leading, spacing: TeaPulseSpacing.xs) {
+                            Text(runner.name)
+                                .font(TeaPulseTypography.bodySm)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(TeaPulseTheme.onSurface)
+                                .lineLimit(1)
+                            Text(runner.hostLabel)
+                                .font(TeaPulseTypography.codeSm)
+                                .foregroundStyle(TeaPulseTheme.secondary)
+                                .lineLimit(1)
+                        }
+                        Spacer()
+                        StatusBadge(
+                            runner.status.badgeLabel,
+                            tone: runner.status == .online ? .primary : (runner.status == .busy ? .warning : .error)
+                        )
+                    }
+                }
             }
         }
     }

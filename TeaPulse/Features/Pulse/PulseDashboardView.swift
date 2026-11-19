@@ -3,6 +3,17 @@ import GiteaKit
 
 public struct PulseDashboardView: View {
     @Environment(AppStore.self) private var store
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    #endif
+
+    private var showsCompactHeaderControls: Bool {
+        #if os(iOS)
+        return sizeClass == .compact
+        #else
+        return false
+        #endif
+    }
 
     public init() {}
 
@@ -43,22 +54,24 @@ public struct PulseDashboardView: View {
 
             Spacer(minLength: TeaPulseSpacing.sm)
 
-            Button {
-                store.isCommandPalettePresented = true
-            } label: {
-                Image(systemName: "magnifyingglass")
-                    .font(TeaPulseTypography.bodySm)
-                    .foregroundStyle(TeaPulseTheme.onSurface)
-                    .frame(width: 36, height: 36)
-                    .background(TeaPulseTheme.surfaceElevated)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(TeaPulseTheme.cardBorder, lineWidth: 1))
-                    .contentShape(Circle())
-            }
-            .buttonStyle(TeaPulsePressableCardStyle())
+            if showsCompactHeaderControls {
+                Button {
+                    store.isCommandPalettePresented = true
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                        .font(TeaPulseTypography.bodySm)
+                        .foregroundStyle(TeaPulseTheme.onSurface)
+                        .frame(width: 36, height: 36)
+                        .background(TeaPulseTheme.surfaceElevated)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(TeaPulseTheme.cardBorder, lineWidth: 1))
+                        .contentShape(Circle())
+                }
+                .buttonStyle(TeaPulsePressableCardStyle())
 
-            EndpointProbePill(health: store.health) {
-                store.isConnectionSheetPresented = true
+                EndpointProbePill(health: store.health) {
+                    store.isConnectionSheetPresented = true
+                }
             }
         }
     }

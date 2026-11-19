@@ -4,26 +4,29 @@ import GiteaKit
 public struct SurfaceCard<Content: View>: View {
     private let padding: CGFloat
     private let elevated: Bool
+    private let isSelected: Bool
     private let content: () -> Content
 
     public init(
         padding: CGFloat = TeaPulseSpacing.md,
         elevated: Bool = false,
+        isSelected: Bool = false,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.padding = padding
         self.elevated = elevated
+        self.isSelected = isSelected
         self.content = content
     }
 
     public var body: some View {
         content()
             .padding(padding)
-            .background(elevated ? TeaPulseTheme.surfaceElevated : TeaPulseTheme.surfaceCard)
+            .background((elevated || isSelected) ? TeaPulseTheme.surfaceElevated : TeaPulseTheme.surfaceCard)
             .clipShape(RoundedRectangle(cornerRadius: TeaPulseRadius.lg, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: TeaPulseRadius.lg, style: .continuous)
-                    .stroke(TeaPulseTheme.cardBorder, lineWidth: 1)
+                    .stroke(isSelected ? TeaPulseTheme.primary : TeaPulseTheme.cardBorder, lineWidth: isSelected ? 1.5 : 1)
             )
     }
 }
@@ -177,19 +180,22 @@ public struct PrimaryActionButtonStyle: ButtonStyle {
 }
 
 public struct SecondaryActionButtonStyle: ButtonStyle {
+    private let fullWidth: Bool
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    public init() {}
+    public init(fullWidth: Bool = false) {
+        self.fullWidth = fullWidth
+    }
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(TeaPulseTypography.bodySm)
             .foregroundStyle(TeaPulseTheme.onSurface)
             .lineLimit(1)
-            .fixedSize(horizontal: true, vertical: false)
+            .fixedSize(horizontal: !fullWidth, vertical: false)
             .padding(.horizontal, TeaPulseSpacing.md)
             .padding(.vertical, TeaPulseSpacing.xs)
-            .frame(minHeight: 36)
+            .frame(maxWidth: fullWidth ? .infinity : nil, minHeight: 36)
             .background(TeaPulseTheme.neutral.opacity(configuration.isPressed ? 0.7 : 1.0))
             .clipShape(RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous))
             .overlay(
@@ -340,5 +346,149 @@ public struct LoadingStateCard: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .transition(reduceMotion ? .opacity : .opacity.combined(with: .scale(scale: 0.98)))
+    }
+}
+
+public struct TeaPulseDropdownItem<Value: Hashable & Sendable>: Identifiable, Sendable {
+    public var id: Value { value }
+    public let value: Value
+    public let title: String
+    public let icon: String
+    public let accessibilityID: String?
+
+    public init(value: Value, title: String, icon: String, accessibilityID: String? = nil) {
+        self.value = value
+        self.title = title
+        self.icon = icon
+        self.accessibilityID = accessibilityID
+    }
+}
+
+/// Cross-platform themed dropdown selector using a custom borderless popover on macOS and native Menu on iOS.
+public struct TeaPulseDropdownMenu<Value: Hashable & Sendable>: View {
+    private let items: [TeaPulseDropdownItem<Value>]
+    @Binding private var selection: Value
+    private let triggerAccessibilityID: String?
+    private let preferredColorScheme: ColorScheme?
+    @State private var isExpanded = false
+    @State private var isTriggerHovered = false
+    @State private var hoveredValue: Value?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    public init(
+        items: [TeaPulseDropdownItem<Value>],
+        selection: Binding<Value>,
+        triggerAccessibilityID: String? = nil,
+        preferredColorScheme: ColorScheme? = nil
+    ) {
+        self.items = items
+        self._selection = selection
+        self.triggerAccessibilityID = triggerAccessibilityID
+        self.preferredColorScheme = preferredColorScheme
+    }
+
+    private var currentItem: TeaPulseDropdownItem<Value>? { items.first { $0.value == selection } ?? items.first }
+
+    public var body: some View {
+        #if os(macOS)
+        Button {
+            TeaPulseMotion.run(TeaPulseMotion.snappy, reduceMotion: reduceMotion) { isExpanded.toggle() }
+        } label: {
+            triggerLabel
+        }
+        .buttonStyle(TeaPulsePressableCardStyle())
+        .onHover { isTriggerHovered = $0 }
+        .ifLet(triggerAccessibilityID) { $0.accessibilityIdentifier($1) }
+        .popover(isPresented: $isExpanded, attachmentAnchor: .rect(.bounds), arrowEdge: .bottom) { popoverContent }
+        #else
+        Menu {
+            ForEach(items) { item in
+                Button { selection = item.value } label: {
+                    Label(item.title, systemImage: selection == item.value ? "checkmark" : item.icon)
+                }
+                .ifLet(item.accessibilityID) { $0.accessibilityIdentifier($1) }
+            }
+        } label: {
+            triggerLabel
+        }
+        .ifLet(triggerAccessibilityID) { $0.accessibilityIdentifier($1) }
+        #endif
+    }
+
+    private var triggerLabel: some View {
+        HStack(spacing: TeaPulseSpacing.sm) {
+            if let current = currentItem {
+                Image(systemName: current.icon).foregroundStyle(TeaPulseTheme.primary)
+                Text(current.title)
+            }
+            Image(systemName: "chevron.down")
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(TeaPulseTheme.secondary)
+                .rotationEffect(.degrees(isExpanded ? 180 : 0))
+        }
+        .font(TeaPulseTypography.codeSm)
+        .foregroundStyle(TeaPulseTheme.onSurface)
+        .lineLimit(1)
+        .fixedSize(horizontal: true, vertical: false)
+        .padding(.horizontal, TeaPulseSpacing.md)
+        .padding(.vertical, TeaPulseSpacing.sm)
+        .frame(minHeight: 36)
+        .background(isTriggerHovered || isExpanded ? TeaPulseTheme.neutral : TeaPulseTheme.surfaceElevated)
+        .clipShape(RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous)
+                .stroke(isExpanded ? TeaPulseTheme.primary.opacity(0.75) : TeaPulseTheme.cardBorder, lineWidth: 1)
+        )
+        .contentShape(RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous))
+    }
+
+    #if os(macOS)
+    private var popoverContent: some View {
+        VStack(alignment: .leading, spacing: TeaPulseSpacing.xs) {
+            ForEach(items) { item in
+                let isSelected = selection == item.value
+                let isHovered = hoveredValue == item.value
+                Button {
+                    selection = item.value
+                    isExpanded = false
+                } label: {
+                    HStack(spacing: TeaPulseSpacing.sm) {
+                        Image(systemName: item.icon)
+                            .frame(width: 16)
+                            .foregroundStyle(isSelected ? TeaPulseTheme.primary : TeaPulseTheme.secondary)
+                        Text(item.title)
+                            .font(TeaPulseTypography.bodySm)
+                            .foregroundStyle(TeaPulseTheme.onSurface)
+                            .lineLimit(1)
+                        Spacer(minLength: TeaPulseSpacing.md)
+                        if isSelected {
+                            Image(systemName: "checkmark").font(TeaPulseTypography.codeSm).foregroundStyle(TeaPulseTheme.primary)
+                        }
+                    }
+                    .padding(.horizontal, TeaPulseSpacing.sm)
+                    .padding(.vertical, TeaPulseSpacing.sm)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(isSelected ? TeaPulseTheme.primary.opacity(0.14) : (isHovered ? TeaPulseTheme.neutral : Color.clear))
+                    .clipShape(RoundedRectangle(cornerRadius: TeaPulseRadius.sm, style: .continuous))
+                    .contentShape(RoundedRectangle(cornerRadius: TeaPulseRadius.sm, style: .continuous))
+                }
+                .buttonStyle(.plain)
+                .onHover { hoveredValue = $0 ? item.value : (hoveredValue == item.value ? nil : hoveredValue) }
+                .ifLet(item.accessibilityID) { $0.accessibilityIdentifier($1) }
+            }
+        }
+        .padding(TeaPulseSpacing.sm)
+        .frame(minWidth: 148)
+        .background(TeaPulseTheme.surfaceElevated)
+        .presentationBackground(TeaPulseTheme.surfaceElevated)
+        .preferredColorScheme(preferredColorScheme)
+    }
+    #endif
+}
+
+private extension View {
+    @ViewBuilder
+    func ifLet<T, Transformed: View>(_ value: T?, transform: (Self, T) -> Transformed) -> some View {
+        if let value { transform(self, value) } else { self }
     }
 }

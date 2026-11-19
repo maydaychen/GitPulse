@@ -81,3 +81,35 @@ public final class URLSessionHTTPTransport: HTTPTransport, @unchecked Sendable {
         }
     }
 }
+
+public func boundedConcurrentMap<Element: Sendable, Output: Sendable>(
+    _ items: [Element],
+    maxConcurrency: Int = 6,
+    operation: @Sendable @escaping (Element) async -> Output
+) async -> [Output] {
+    guard !items.isEmpty, maxConcurrency > 0 else { return [] }
+    return await withTaskGroup(of: (Int, Output).self, returning: [Output].self) { group in
+        var results = Array<Output?>(repeating: nil, count: items.count)
+        var nextIndex = 0
+        let initialLimit = min(maxConcurrency, items.count)
+
+        while nextIndex < initialLimit {
+            let index = nextIndex
+            let item = items[index]
+            group.addTask { (index, await operation(item)) }
+            nextIndex += 1
+        }
+
+        while let (index, value) = await group.next() {
+            results[index] = value
+            if nextIndex < items.count {
+                let index = nextIndex
+                let item = items[index]
+                group.addTask { (index, await operation(item)) }
+                nextIndex += 1
+            }
+        }
+
+        return results.compactMap { $0 }
+    }
+}

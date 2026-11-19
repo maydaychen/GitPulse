@@ -22,13 +22,14 @@ struct TeaPulseApp: App {
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
                         Task {
-                            await store.refreshLiveInstanceData()
+                            _ = await store.refreshLiveInstanceDataIfStale()
                             store.consumePendingSharedRoute()
                         }
                     }
                 }
         }
         #if os(macOS)
+        .defaultSize(width: 1240, height: 820)
         .commands {
             CommandGroup(after: .toolbar) {
                 Button("命令面板") {

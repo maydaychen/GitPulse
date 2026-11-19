@@ -23,12 +23,12 @@ public struct HeatmapGridView: View {
         self.isLoading = isLoading
     }
 
-    private var showLoadingWave: Bool {
-        isLoading && days.isEmpty
+    public static func shouldAnimateContinuousWave(reduceMotion: Bool, showLoadingWave: Bool) -> Bool {
+        !reduceMotion && showLoadingWave
     }
 
-    private var hasActiveCells: Bool {
-        displayDays.contains { $0.contributions > 0 }
+    private var showLoadingWave: Bool {
+        isLoading && days.isEmpty
     }
 
     private var displayDays: [HeatmapDay] {
@@ -113,6 +113,8 @@ public struct HeatmapGridView: View {
             Text("16 周提交热力")
                 .font(TeaPulseTypography.headlineMd)
                 .foregroundStyle(TeaPulseTheme.onSurface)
+                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: false)
             Spacer()
             if showLoadingWave {
                 HStack(spacing: TeaPulseSpacing.xs) {
@@ -136,7 +138,7 @@ public struct HeatmapGridView: View {
     }
 
     private var heatmapMatrix: some View {
-        let animateTimeline = !reduceMotion && (showLoadingWave || hasActiveCells)
+        let animateTimeline = Self.shouldAnimateContinuousWave(reduceMotion: reduceMotion, showLoadingWave: showLoadingWave)
         let columns = weeks
         let totals = weeklyTotals
         let peak = peakWeeklyContributions
@@ -178,9 +180,6 @@ public struct HeatmapGridView: View {
                 .scaleEffect(reduceMotion ? 1.0 : 0.86 + wave * 0.14)
         } else {
             let isSelected = selectedDay?.id == day.id
-            let pulse = (!reduceMotion && day.contributions > 0)
-                ? 0.86 + 0.14 * (0.5 + 0.5 * sin(phase * 2.6 - Double(colIndex) * 0.4 - Double(rowIndex) * 0.25))
-                : 1.0
             Button {
                 TeaPulseMotion.run(TeaPulseMotion.snappy, reduceMotion: reduceMotion) {
                     selectedDay = isSelected ? nil : day
@@ -194,7 +193,7 @@ public struct HeatmapGridView: View {
                             .stroke(TeaPulseTheme.onSurface, lineWidth: isSelected ? 1.5 : 0)
                     )
                     .scaleEffect(isSelected ? 1.22 : (colVisible ? 1.0 : 0.6))
-                    .opacity(colVisible ? pulse : 0.0)
+                    .opacity(colVisible ? 1.0 : 0.0)
                     .animation(
                         reduceMotion ? nil : TeaPulseMotion.spring.delay(Double(colIndex) * 0.018),
                         value: colVisible

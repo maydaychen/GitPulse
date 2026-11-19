@@ -18,7 +18,14 @@ public struct BarkPushConfigSheet: View {
     }
 
     public var body: some View {
-        NavigationStack {
+        TeaPulseModalSheet(
+            title: "推送设置",
+            minWidth: 500,
+            idealWidth: 540,
+            minHeight: 340,
+            idealHeight: 380,
+            onClose: { dismiss() }
+        ) {
             VStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
                 VStack(alignment: .leading, spacing: TeaPulseSpacing.xs) {
                     Text("全局推送接收地址")
@@ -80,12 +87,6 @@ public struct BarkPushConfigSheet: View {
             }
             .padding(TeaPulseSpacing.md)
             .background(TeaPulseTheme.surface)
-            .navigationTitle("推送设置")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("关闭") { dismiss() }
-                }
-            }
         }
         .onAppear {
             barkEndpoint = store.profile.barkEndpointURL ?? ""

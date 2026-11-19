@@ -245,24 +245,21 @@ public struct GiteaClient: Sendable {
     }
 
     public func mergeActivityRepositories(
-        activities: [ActivityEvent],
-        into repositories: [RepositorySummary],
-        currentUsername: String? = nil,
-        maxFetch: Int = 8
+        activities: [ActivityEvent], into repositories: [RepositorySummary],
+        currentUsername: String? = nil, maxFetch: Int = 8
     ) async -> [RepositorySummary] {
-        var merged = repositories
         var seen = Set(repositories.map { $0.fullName.lowercased() })
-        var fetchedCount = 0
-        for act in activities where fetchedCount < maxFetch {
-            let key = act.repoFullName.lowercased()
+        var targets: [(String, String)] = []
+        for act in activities where targets.count < maxFetch {
             let parts = act.repoFullName.split(separator: "/").map(String.init)
-            guard parts.count == 2, seen.insert(key).inserted else { continue }
-            fetchedCount += 1
-            if let repo = try? await fetchRepository(owner: parts[0], repo: parts[1], currentUsername: currentUsername) {
-                merged.append(repo)
+            if parts.count == 2, seen.insert(act.repoFullName.lowercased()).inserted {
+                targets.append((parts[0], parts[1]))
             }
         }
-        return merged
+        let fetched = await boundedConcurrentMap(targets, maxConcurrency: 6) {
+            try? await self.fetchRepository(owner: $0.0, repo: $0.1, currentUsername: currentUsername)
+        }
+        return repositories + fetched.compactMap { $0 }
     }
 
     private func fetchFeeds(endpoint: String, prefix: String, limit: Int) async throws -> [ActivityEvent] {

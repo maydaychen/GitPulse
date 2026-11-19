@@ -149,6 +149,9 @@ public struct RootContainerView: View {
         .animation(reduceMotion ? nil : TeaPulseMotion.spring, value: store.statusToast)
         .background(TeaPulseTheme.surface.ignoresSafeArea())
         .tint(TeaPulseTheme.primary)
+        #if os(macOS)
+        .frame(minWidth: 980, minHeight: 680)
+        #endif
         .sheet(isPresented: $bindableStore.isCommandPalettePresented) {
             CommandPaletteView()
                 .preferredColorScheme(store.themePreference.colorScheme)
@@ -165,7 +168,7 @@ public struct RootContainerView: View {
         #else
         .sheet(isPresented: $bindableStore.isLoginGatePresented) {
             InstanceOnboardingView()
-                .frame(minWidth: 540, minHeight: 680)
+                .frame(minWidth: 560, idealWidth: 580, minHeight: 640, idealHeight: 700)
                 .preferredColorScheme(store.themePreference.colorScheme)
         }
         #endif
@@ -210,18 +213,26 @@ public struct RootContainerView: View {
     private var splitWorkspaceShell: some View {
         @Bindable var bindableStore = store
         return NavigationSplitView(columnVisibility: $columnVisibility) {
+            let badge = store.health.sidebarVersionBadge
             VStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
                 HStack(spacing: TeaPulseSpacing.sm) {
-                    Text("TeaPulse")
-                        .font(TeaPulseTypography.headlineMd)
-                        .foregroundStyle(TeaPulseTheme.onSurface)
-                    Spacer()
-                    StatusBadge(store.health.serverVersion, tone: .primary)
+                    HStack(spacing: TeaPulseSpacing.xs) {
+                        Image(systemName: "waveform.path.ecg")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(TeaPulseTheme.primary)
+                        Text("TeaPulse")
+                            .font(TeaPulseTypography.headlineMd)
+                            .foregroundStyle(TeaPulseTheme.onSurface)
+                            .lineLimit(1)
+                            .fixedSize(horizontal: true, vertical: false)
+                    }
+                    Spacer(minLength: TeaPulseSpacing.xs)
+                    StatusBadge(badge.label, tone: badge.tone)
                 }
                 .padding(.horizontal, TeaPulseSpacing.md)
                 .padding(.top, TeaPulseSpacing.md)
 
-                EndpointProbePill(health: store.health) {
+                EndpointProbePill(health: store.health, fullWidth: true) {
                     store.isConnectionSheetPresented = true
                 }
                 .padding(.horizontal, TeaPulseSpacing.md)
@@ -274,88 +285,111 @@ public struct RootContainerView: View {
 
                 Spacer()
 
-                Picker("外观", selection: $bindableStore.themePreference) {
-                    ForEach(ThemePreference.allCases) { option in
-                        Text(option.rawValue).tag(option)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal, TeaPulseSpacing.md)
+                VStack(spacing: TeaPulseSpacing.sm) {
+                    TeaPulseThemeSwitcher(selection: $bindableStore.themePreference)
 
-                Button {
-                    bindableStore.isCommandPalettePresented = true
-                } label: {
-                    HStack(spacing: TeaPulseSpacing.sm) {
-                        Image(systemName: "command")
-                            .foregroundStyle(TeaPulseTheme.secondary)
-                        Text("命令面板 ⌘K")
-                            .font(TeaPulseTypography.bodySm)
-                            .foregroundStyle(TeaPulseTheme.onSurface)
-                        Spacer()
+                    Button {
+                        bindableStore.isCommandPalettePresented = true
+                    } label: {
+                        HStack(spacing: TeaPulseSpacing.sm) {
+                            Image(systemName: "command")
+                                .foregroundStyle(TeaPulseTheme.secondary)
+                            Text("命令面板 ⌘K")
+                                .font(TeaPulseTypography.bodySm)
+                                .foregroundStyle(TeaPulseTheme.onSurface)
+                            Spacer()
+                        }
+                        .padding(.horizontal, TeaPulseSpacing.md)
+                        .padding(.vertical, TeaPulseSpacing.sm)
+                        .frame(minHeight: 36)
+                        .background(TeaPulseTheme.surfaceElevated)
+                        .clipShape(RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous))
+                        .overlay(RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous).stroke(TeaPulseTheme.cardBorder, lineWidth: 1))
+                        .contentShape(Rectangle())
                     }
-                    .padding(.horizontal, TeaPulseSpacing.md)
-                    .padding(.vertical, TeaPulseSpacing.sm)
-                    .frame(minHeight: 36)
-                    .background(TeaPulseTheme.surfaceElevated)
-                    .clipShape(RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous))
-                    .overlay(RoundedRectangle(cornerRadius: TeaPulseRadius.md, style: .continuous).stroke(TeaPulseTheme.cardBorder, lineWidth: 1))
-                    .contentShape(Rectangle())
+                    .buttonStyle(TeaPulsePressableCardStyle())
                 }
-                .buttonStyle(TeaPulsePressableCardStyle())
-                .padding(TeaPulseSpacing.md)
+                .padding(.horizontal, TeaPulseSpacing.md)
+                .padding(.bottom, TeaPulseSpacing.md)
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 250)
+            .navigationSplitViewColumnWidth(min: 228, ideal: 244, max: 276)
             .background(TeaPulseTheme.surfaceCard)
-        } content: {
-            middleColumnView
-                .animation(reduceMotion ? nil : TeaPulseMotion.snappy, value: store.selectedSection)
-                .navigationSplitViewColumnWidth(min: 300, ideal: 340, max: 400)
-                .background(TeaPulseTheme.surface)
         } detail: {
+            splitWorkspaceBody
+                .animation(reduceMotion ? nil : TeaPulseMotion.snappy, value: store.selectedSection)
+        }
+    }
+
+    @ViewBuilder
+    private var splitWorkspaceBody: some View {
+        if store.selectedSection.usesMasterDetailSplit {
+            HStack(spacing: 0) {
+                middleListColumnView
+                    .frame(width: 340)
+                    .frame(maxHeight: .infinity)
+                    .background(TeaPulseTheme.surface)
+
+                Rectangle()
+                    .fill(TeaPulseTheme.cardBorder)
+                    .frame(width: 1)
+                    .ignoresSafeArea()
+
+                NavigationStack {
+                    masterDetailRightView
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(TeaPulseTheme.surface)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        } else {
             NavigationStack {
-                detailColumnView
-                    .animation(reduceMotion ? nil : TeaPulseMotion.snappy, value: store.selectedSection)
+                singleCanvasSectionView
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(TeaPulseTheme.surface)
             }
         }
     }
 
     @ViewBuilder
-    private var middleColumnView: some View {
+    private var singleCanvasSectionView: some View {
         switch store.selectedSection {
         case .pulse:
             PulseDashboardView()
-        case .repos:
-            RepositoryListView()
-        case .actions:
-            ActionsWorkspaceView()
         case .inbox:
             InboxWorkspaceView()
         case .ops:
             OpsWorkspaceView()
+        case .repos, .actions:
+            EmptyView()
         }
     }
 
     @ViewBuilder
-    private var detailColumnView: some View {
+    private var middleListColumnView: some View {
         switch store.selectedSection {
-        case .pulse:
-            if let pr = store.selectedPullRequest {
-                PullRequestWorkspaceView(pullRequest: pr)
-            } else if let repo = store.selectedRepository {
-                RepositoryWorkspaceView(repository: repo)
-            } else {
-                PulseDashboardView()
-            }
+        case .repos:
+            RepositoryListView()
+        case .actions:
+            ActionsWorkspaceView()
+        case .pulse, .inbox, .ops:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private var masterDetailRightView: some View {
+        switch store.selectedSection {
         case .repos:
             if let pr = store.selectedPullRequest, store.selectedRepoTab == .pullRequests {
                 PullRequestWorkspaceView(pullRequest: pr)
             } else if let repo = store.selectedRepository {
                 RepositoryWorkspaceView(repository: repo)
             } else {
-                Text("选择仓库")
-                    .font(TeaPulseTypography.bodyMd)
-                    .foregroundStyle(TeaPulseTheme.secondary)
+                SplitEmptyDetailView(
+                    icon: "folder.badge.gearshape",
+                    title: "选择一个仓库",
+                    subtitle: "从左侧列表选择仓库以查看概览、源码目录、合并请求与运维设置"
+                )
             }
         case .actions:
             if store.actionsFilter == .runners {
@@ -363,18 +397,14 @@ public struct RootContainerView: View {
             } else if let run = store.selectedRun {
                 ANSITerminalLogView(run: run)
             } else {
-                RunnersMonitorView()
+                SplitEmptyDetailView(
+                    icon: "terminal",
+                    title: "选择一条工作流记录",
+                    subtitle: "从左侧列表点击构建任务以查看步骤耗时与终端日志"
+                )
             }
-        case .inbox:
-            if let pr = store.selectedPullRequest {
-                PullRequestWorkspaceView(pullRequest: pr)
-            } else if let run = store.selectedRun {
-                ANSITerminalLogView(run: run)
-            } else {
-                InboxWorkspaceView()
-            }
-        case .ops:
-            OpsWorkspaceView()
+        case .pulse, .inbox, .ops:
+            EmptyView()
         }
     }
 
@@ -392,5 +422,29 @@ public struct RootContainerView: View {
         case .warning: return TeaPulseTheme.warning.opacity(0.45)
         case .error: return TeaPulseTheme.error.opacity(0.45)
         }
+    }
+}
+
+private struct SplitEmptyDetailView: View {
+    let icon: String
+    let title: String
+    let subtitle: String
+
+    var body: some View {
+        VStack(spacing: TeaPulseSpacing.sm) {
+            Image(systemName: icon)
+                .font(.system(size: 28, weight: .semibold))
+                .foregroundStyle(TeaPulseTheme.secondary)
+            Text(title)
+                .font(TeaPulseTypography.headlineMd)
+                .foregroundStyle(TeaPulseTheme.onSurface)
+            Text(subtitle)
+                .font(TeaPulseTypography.bodySm)
+                .foregroundStyle(TeaPulseTheme.secondary)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: 320)
+        }
+        .padding(TeaPulseSpacing.lg)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

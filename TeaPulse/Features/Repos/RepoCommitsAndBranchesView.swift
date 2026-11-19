@@ -22,7 +22,14 @@ public struct RepoBranchPickerSheet: View {
     }
 
     public var body: some View {
-        NavigationStack {
+        TeaPulseModalSheet(
+            title: "切换分支 / 标签",
+            minWidth: 440,
+            idealWidth: 480,
+            minHeight: 380,
+            idealHeight: 440,
+            onClose: { dismiss() }
+        ) {
             ScrollView {
                 VStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
                     TextField("搜索分支或标签…", text: $query)
@@ -84,12 +91,6 @@ public struct RepoBranchPickerSheet: View {
                 .padding(TeaPulseSpacing.md)
             }
             .background(TeaPulseTheme.surface)
-            .navigationTitle("切换分支 / 标签")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("关闭") { dismiss() }
-                }
-            }
         }
     }
 }
@@ -210,6 +211,7 @@ public struct RepoCommitsSectionView: View {
 
 public struct CommitDiffDetailView: View {
     @Environment(AppStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
     public let repoFullName: String
     public let commit: RepoCommitItem
 
@@ -224,6 +226,18 @@ public struct CommitDiffDetailView: View {
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: TeaPulseSpacing.lg) {
+                #if os(macOS)
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("返回 \(repoFullName)", systemImage: "chevron.left")
+                    }
+                    .buttonStyle(SecondaryActionButtonStyle())
+                    Spacer()
+                }
+                #endif
+
                 SurfaceCard {
                     VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
                         HStack(spacing: TeaPulseSpacing.sm) {
@@ -286,7 +300,14 @@ public struct RepoCloneOverrideSheet: View {
         let httpsOverride = GiteaURLBuilder.overriddenCloneHTTPS(repoFullName: repoFullName, proxyBaseURL: store.profile.publicURL)
         let sshOverride = GiteaURLBuilder.overriddenCloneSSH(repoFullName: repoFullName, host: host, sshPort: store.profile.sshPortOverride)
 
-        NavigationStack {
+        TeaPulseModalSheet(
+            title: "克隆地址",
+            minWidth: 480,
+            idealWidth: 520,
+            minHeight: 260,
+            idealHeight: 290,
+            onClose: { dismiss() }
+        ) {
             VStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
                 cloneCopyCard(title: "反代 HTTPS", url: httpsOverride)
                 cloneCopyCard(title: "独立 SSH 端口", url: sshOverride)
@@ -294,12 +315,6 @@ public struct RepoCloneOverrideSheet: View {
             }
             .padding(TeaPulseSpacing.md)
             .background(TeaPulseTheme.surface)
-            .navigationTitle("克隆地址")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("关闭") { dismiss() }
-                }
-            }
         }
     }
 

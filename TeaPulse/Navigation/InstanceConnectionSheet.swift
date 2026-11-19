@@ -16,7 +16,14 @@ public struct InstanceConnectionSheet: View {
     public var body: some View {
         @Bindable var bindableStore = store
 
-        NavigationStack {
+        TeaPulseModalSheet(
+            title: "实例通道与外观",
+            minWidth: 500,
+            idealWidth: 540,
+            minHeight: 440,
+            idealHeight: 500,
+            onClose: { dismiss() }
+        ) {
             ScrollView {
                 VStack(alignment: .leading, spacing: TeaPulseSpacing.lg) {
                     SurfaceCard {
@@ -61,12 +68,7 @@ public struct InstanceConnectionSheet: View {
                                 .font(TeaPulseTypography.labelMd)
                                 .foregroundStyle(TeaPulseTheme.secondary)
 
-                            Picker("主题模式", selection: $bindableStore.themePreference) {
-                                ForEach(ThemePreference.allCases) { option in
-                                    Text(option.rawValue).tag(option)
-                                }
-                            }
-                            .pickerStyle(.segmented)
+                            TeaPulseThemeSwitcher(selection: $bindableStore.themePreference)
                         }
                     }
 
@@ -99,23 +101,11 @@ public struct InstanceConnectionSheet: View {
                         .buttonStyle(SecondaryActionButtonStyle())
 
                         Spacer()
-
-                        Button("完成") { dismiss() }
-                            .buttonStyle(SecondaryActionButtonStyle())
                     }
                 }
                 .padding(TeaPulseSpacing.md)
             }
             .background(TeaPulseTheme.surface)
-            .navigationTitle("实例通道与外观")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("关闭") { dismiss() }
-                }
-            }
         }
     }
 

@@ -108,37 +108,19 @@ public struct InstanceOnboardingView: View {
 
                 Spacer()
 
-                Menu {
-                    ForEach(ThemePreference.allCases) { option in
-                        Button {
-                            theme.wrappedValue = option
-                        } label: {
-                            if theme.wrappedValue == option {
-                                Label(option.rawValue, systemImage: "checkmark")
-                            } else {
-                                Text(option.rawValue)
-                            }
-                        }
-                        .accessibilityIdentifier("themeOption-\(option.rawValue)")
-                    }
-                } label: {
-                    HStack(spacing: TeaPulseSpacing.xs) {
-                        Image(systemName: "circle.lefthalf.filled")
-                        Text(theme.wrappedValue.rawValue)
-                    }
-                    .font(TeaPulseTypography.codeSm)
-                    .foregroundStyle(TeaPulseTheme.onSurface)
-                    .lineLimit(1)
-                    .fixedSize(horizontal: true, vertical: false)
-                    .padding(.horizontal, TeaPulseSpacing.md)
-                    .padding(.vertical, TeaPulseSpacing.sm)
-                    .frame(minHeight: 36)
-                    .background(TeaPulseTheme.surfaceElevated)
-                    .clipShape(Capsule(style: .continuous))
-                    .overlay(Capsule(style: .continuous).stroke(TeaPulseTheme.cardBorder, lineWidth: 1))
-                    .contentShape(Capsule(style: .continuous))
-                }
-                .accessibilityIdentifier("loginThemeMenu")
+                TeaPulseDropdownMenu(
+                    items: ThemePreference.allCases.map { option in
+                        TeaPulseDropdownItem(
+                            value: option,
+                            title: option.rawValue,
+                            icon: option.iconName,
+                            accessibilityID: "themeOption-\(option.rawValue)"
+                        )
+                    },
+                    selection: theme,
+                    triggerAccessibilityID: "loginThemeMenu",
+                    preferredColorScheme: theme.wrappedValue.colorScheme
+                )
             }
         }
     }
@@ -307,23 +289,42 @@ public struct InstanceOnboardingView: View {
 
     private var gatewayDisclosureCard: some View {
         SurfaceCard {
-            DisclosureGroup("高级网关配置（SSH / 推送 / Access Header）", isExpanded: Binding(
-                get: { showGatewayOptions },
-                set: { next in TeaPulseMotion.run(TeaPulseMotion.snappy, reduceMotion: reduceMotion) { showGatewayOptions = next } }
-            )) {
-                VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
-                    onboardingField(label: "实例显示名称", placeholder: "Gitea", text: $displayName)
-                    onboardingField(label: "独立 Git SSH 端口", placeholder: "2222", text: $sshPortText)
-                    onboardingField(label: "全局推送地址", placeholder: InstanceProfile.placeholderBarkURL, text: $barkURL)
-                    onboardingField(label: "网关 Header 键", placeholder: "CF-Access-Client-Id", text: $customHeaderKey)
-                    if !customHeaderKey.isEmpty {
-                        onboardingField(label: "网关 Header 值", placeholder: "secret", text: $customHeaderValue, secure: true)
+            VStack(alignment: .leading, spacing: showGatewayOptions ? TeaPulseSpacing.sm : 0) {
+                Button {
+                    TeaPulseMotion.run(TeaPulseMotion.snappy, reduceMotion: reduceMotion) { showGatewayOptions.toggle() }
+                } label: {
+                    HStack(spacing: TeaPulseSpacing.sm) {
+                        Image(systemName: "slider.horizontal.3")
+                            .font(TeaPulseTypography.codeSm)
+                            .foregroundStyle(TeaPulseTheme.primary)
+                        Text("高级网关配置（SSH / 推送 / Access Header）")
+                            .font(TeaPulseTypography.bodySm)
+                            .foregroundStyle(TeaPulseTheme.onSurface)
+                        Spacer(minLength: TeaPulseSpacing.sm)
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundStyle(TeaPulseTheme.secondary)
+                            .rotationEffect(.degrees(showGatewayOptions ? 90 : 0))
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                 }
-                .padding(.top, TeaPulseSpacing.sm)
+                .buttonStyle(TeaPulsePressableCardStyle())
+
+                if showGatewayOptions {
+                    VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
+                        onboardingField(label: "实例显示名称", placeholder: "Gitea", text: $displayName)
+                        onboardingField(label: "独立 Git SSH 端口", placeholder: "2222", text: $sshPortText)
+                        onboardingField(label: "全局推送地址", placeholder: InstanceProfile.placeholderBarkURL, text: $barkURL)
+                        onboardingField(label: "网关 Header 键", placeholder: "CF-Access-Client-Id", text: $customHeaderKey)
+                        if !customHeaderKey.isEmpty {
+                            onboardingField(label: "网关 Header 值", placeholder: "secret", text: $customHeaderValue, secure: true)
+                        }
+                    }
+                    .padding(.top, TeaPulseSpacing.xs)
+                    .transition(reduceMotion ? .opacity : .opacity.combined(with: .move(edge: .top)))
+                }
             }
-            .font(TeaPulseTypography.bodySm)
-            .foregroundStyle(TeaPulseTheme.onSurface)
         }
     }
 

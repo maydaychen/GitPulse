@@ -13,6 +13,7 @@ public struct RepositoryWorkspaceView: View {
     @State private var pushedFile: RepoFileEntry?
     @State private var pushedCommit: RepoCommitItem?
     @State private var currentDirectoryPath = ""
+    @State private var loadedRepositoryID = ""
     @State private var isLoadingDetails = false
     @State private var showCloneSheet = false
     @State private var showBranchSheet = false
@@ -78,6 +79,7 @@ public struct RepositoryWorkspaceView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .labelsHidden()
 
                 tabContent
                     .animation(reduceMotion ? nil : TeaPulseMotion.snappy, value: store.selectedRepoTab)
@@ -86,15 +88,32 @@ public struct RepositoryWorkspaceView: View {
         }
         .background(TeaPulseTheme.surface)
         .refreshable {
-            await store.loadRepositoryDetails(repoFullName: liveRepo.fullName, directoryPath: currentDirectoryPath)
+            await store.loadRepositoryTabIfNeeded(
+                repoFullName: liveRepo.fullName,
+                tab: store.selectedRepoTab,
+                directoryPath: currentDirectoryPath,
+                force: true
+            )
         }
-        .task(id: repository.id) {
+        .task(id: "\(repository.id)::\(store.selectedRepoTab.rawValue)") {
+            if loadedRepositoryID != repository.id {
+                loadedRepositoryID = repository.id
+                currentDirectoryPath = ""
+                pushedFile = nil
+                pushedCommit = nil
+            }
+            isLoadingDetails = !store.isDemoMode
+            await store.loadRepositoryTabIfNeeded(
+                repoFullName: liveRepo.fullName,
+                tab: store.selectedRepoTab,
+                directoryPath: currentDirectoryPath
+            )
+            isLoadingDetails = false
+        }
+        .onChange(of: repository.id) { _, _ in
             currentDirectoryPath = ""
             pushedFile = nil
             pushedCommit = nil
-            isLoadingDetails = !store.isDemoMode
-            await store.loadRepositoryDetails(repoFullName: liveRepo.fullName)
-            isLoadingDetails = false
         }
         .navigationDestination(item: $pushedPR) { pr in
             PullRequestWorkspaceView(pullRequest: pr)
@@ -144,20 +163,12 @@ public struct RepositoryWorkspaceView: View {
                     .buttonStyle(SecondaryActionButtonStyle())
                 }
                 HStack(spacing: TeaPulseSpacing.sm) {
-                    Button {
+                    TeaPulseBranchTrigger(
+                        branch: store.activeBranch(for: liveRepo),
+                        hasBranches: !branches.isEmpty
+                    ) {
                         showBranchSheet = true
-                    } label: {
-                        HStack(spacing: TeaPulseSpacing.xs) {
-                            BranchRoutePill(store.activeBranch(for: liveRepo))
-                            if !branches.isEmpty {
-                                Image(systemName: "chevron.down")
-                                    .font(TeaPulseTypography.codeSm)
-                                    .foregroundStyle(TeaPulseTheme.secondary)
-                            }
-                        }
                     }
-                    .buttonStyle(.plain)
-                    .disabled(branches.isEmpty)
 
                     if liveRepo.isMirror {
                         StatusBadge("镜像", tone: .tertiary)
@@ -292,7 +303,12 @@ public struct RepositoryWorkspaceView: View {
         guard !store.isDemoMode else { return }
         Task {
             isLoadingDetails = true
-            await store.loadRepositoryDetails(repoFullName: liveRepo.fullName, directoryPath: path)
+            await store.loadRepositoryTabIfNeeded(
+                repoFullName: liveRepo.fullName,
+                tab: .files,
+                directoryPath: path,
+                force: true
+            )
             isLoadingDetails = false
         }
     }
@@ -312,6 +328,7 @@ public struct RepositoryWorkspaceView: View {
                 }
             }
             .pickerStyle(.segmented)
+            .labelsHidden()
             .frame(maxWidth: 200)
 
             if prDisplayMode == .stacks && !stackedPRs.isEmpty {

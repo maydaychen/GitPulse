@@ -33,7 +33,7 @@ public struct MermaidDiagramView: View {
                     .foregroundStyle(TeaPulseTheme.secondary)
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
+            ScrollView(.horizontal, showsIndicators: TeaPulsePlatform.showsCodeHorizontalIndicators) {
                 HStack(spacing: TeaPulseSpacing.sm) {
                     ForEach(graph.edges) { edge in
                         HStack(spacing: TeaPulseSpacing.xs) {
@@ -82,12 +82,34 @@ public struct MermaidDiagramView: View {
 public struct MarkdownDocumentView: View {
     public let markdown: String
 
+    @MainActor private static var blockCache: [String: [MarkdownBlock]] = [:]
+    @MainActor private static var blockCacheOrder: [String] = []
+    @MainActor private static var inlineCache: [String: AttributedString] = [:]
+    @MainActor private static var inlineCacheOrder: [String] = []
+    private static let maxCachedBlockDocuments = 24
+    private static let maxCachedInlineStrings = 256
+
     public init(markdown: String) {
         self.markdown = markdown
     }
 
+    @MainActor
+    public static func cachedBlocks(for markdown: String) -> [MarkdownBlock] {
+        if let cached = blockCache[markdown] {
+            return cached
+        }
+        let parsed = MarkdownBlockParser.parse(markdown)
+        blockCache[markdown] = parsed
+        blockCacheOrder.append(markdown)
+        if blockCacheOrder.count > maxCachedBlockDocuments {
+            let evicted = blockCacheOrder.removeFirst()
+            blockCache.removeValue(forKey: evicted)
+        }
+        return parsed
+    }
+
     public var body: some View {
-        let blocks = MarkdownBlockParser.parse(markdown)
+        let blocks = Self.cachedBlocks(for: markdown)
         VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
             if blocks.isEmpty {
                 Text(markdown)
@@ -148,7 +170,7 @@ public struct MarkdownDocumentView: View {
                         .font(TeaPulseTypography.codeSm)
                         .foregroundStyle(TeaPulseTheme.secondary)
                 }
-                ScrollView(.horizontal, showsIndicators: false) {
+                ScrollView(.horizontal, showsIndicators: TeaPulsePlatform.showsCodeHorizontalIndicators) {
                     Text(code)
                         .font(TeaPulseTypography.codeSm)
                         .foregroundStyle(TeaPulseTheme.onSurface)
@@ -212,7 +234,7 @@ public struct MarkdownDocumentView: View {
     }
 
     private func tableView(headers: [String], rows: [[String]]) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
+        ScrollView(.horizontal, showsIndicators: TeaPulsePlatform.showsCodeHorizontalIndicators) {
             Grid(alignment: .leading, horizontalSpacing: TeaPulseSpacing.md, verticalSpacing: TeaPulseSpacing.xs) {
                 GridRow {
                     ForEach(Array(headers.enumerated()), id: \.offset) { _, cell in
@@ -248,7 +270,11 @@ public struct MarkdownDocumentView: View {
         }
     }
 
+    @MainActor
     private func inlineAttributedString(_ raw: String) -> AttributedString {
+        if let cached = Self.inlineCache[raw] {
+            return cached
+        }
         guard var parsed = try? AttributedString(
             markdown: raw,
             options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)
@@ -260,12 +286,21 @@ public struct MarkdownDocumentView: View {
             parsed[run.range].foregroundColor = TeaPulseTheme.primary
             parsed[run.range].backgroundColor = TeaPulseTheme.surfaceElevated
         }
+        if raw.count <= 2000 {
+            Self.inlineCache[raw] = parsed
+            Self.inlineCacheOrder.append(raw)
+            if Self.inlineCacheOrder.count > Self.maxCachedInlineStrings {
+                let evicted = Self.inlineCacheOrder.removeFirst()
+                Self.inlineCache.removeValue(forKey: evicted)
+            }
+        }
         return parsed
     }
 }
 
 public struct RepoFileDetailView: View {
     @Environment(AppStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
     public let repoFullName: String
     public let file: RepoFileEntry
     @State private var isLoading = false
@@ -288,6 +323,18 @@ public struct RepoFileDetailView: View {
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
+                #if os(macOS)
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("返回文件列表", systemImage: "chevron.left")
+                    }
+                    .buttonStyle(SecondaryActionButtonStyle())
+                    Spacer()
+                }
+                #endif
+
                 SurfaceCard {
                     HStack(spacing: TeaPulseSpacing.sm) {
                         VStack(alignment: .leading, spacing: TeaPulseSpacing.xs) {
@@ -318,7 +365,7 @@ public struct RepoFileDetailView: View {
                         }
                     } else {
                         SurfaceCard {
-                            ScrollView(.horizontal, showsIndicators: false) {
+                            ScrollView(.horizontal, showsIndicators: TeaPulsePlatform.showsCodeHorizontalIndicators) {
                                 Text(code)
                                     .font(TeaPulseTypography.codeSm)
                                     .foregroundStyle(TeaPulseTheme.onSurface)

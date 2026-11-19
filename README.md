@@ -17,7 +17,7 @@
 Built specifically for operators and developers running **self-hosted Gitea 1.27+** behind custom reverse-proxy ports, subpaths (such as `/gitea`), gateway auth headers, or LAN/WAN split networks. Powered by a shared Swift 6 core package (`GiteaKit`), one codebase drives iPhone, iPad, macOS, Menu Bar monitoring, WidgetKit widgets, Live Activities, and URL Share Extensions.
 
 > [!NOTE]
-> **v0.1.1 Open-Source Status**: Core networking (`GiteaKitTests`, 32 tests), mocked live-connection & `AppStore` tests (`TeaPulseTests`, 31 tests), iOS UI smoke tests (`5` tests), macOS tests (`3` tests), and the offline `--demo-mode` workspace are verified locally. End-to-end validation against live production Gitea hardware, physical iPhone Dynamic Island (`ActivityKit`), interactive desktop/Lock Screen WidgetKit refreshes, and hardware Share Extension panels remains in active integration testing.
+> **v0.1.2 Open-Source Status**: Core networking (`GiteaKitTests`, 32 tests), mocked live-connection, `AppStore` & performance regression tests (`TeaPulseTests`, 35 tests), iOS UI smoke tests (`5` tests), macOS tests (`5` tests), and the offline `--demo-mode` workspace are verified locally. End-to-end validation against live production Gitea hardware, physical iPhone Dynamic Island (`ActivityKit`), interactive desktop/Lock Screen WidgetKit refreshes, and hardware Share Extension panels remains in active integration testing.
 
 ## Live Preview (`--demo-mode` Simulator Capture)
 

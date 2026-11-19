@@ -1,4 +1,5 @@
 #if os(macOS)
+import AppKit
 import SwiftUI
 import GiteaKit
 
@@ -18,7 +19,9 @@ public struct MenuBarBuildExtraView: View {
                 StatusBadge(store.health.probePillText, tone: .primary)
             }
 
-            Divider()
+            Rectangle()
+                .fill(TeaPulseTheme.cardBorder)
+                .frame(height: 1)
 
             let runningCount = store.runs.filter { $0.status == .running }.count
             let failedCount = store.runs.filter { $0.status == .failure }.count
@@ -34,26 +37,34 @@ public struct MenuBarBuildExtraView: View {
                 .monospacedDigit()
                 .foregroundStyle(TeaPulseTheme.secondary)
 
-            Divider()
+            Rectangle()
+                .fill(TeaPulseTheme.cardBorder)
+                .frame(height: 1)
 
             if let failedRun = store.runs.first(where: { $0.status == .failure }) {
                 Button("直达失败构建 #\(failedRun.runNumber)") {
                     store.handle(deepLinkString: "teapulse://actions/\(failedRun.repoFullName)/\(failedRun.runNumber)?step=failed")
                     openWindow(id: "main")
+                    NSApp.activate(ignoringOtherApps: true)
                 }
+                .buttonStyle(PrimaryActionButtonStyle(fullWidth: true))
             }
 
             Button("打开命令面板 ⌘K") {
                 store.isCommandPalettePresented = true
                 openWindow(id: "main")
+                NSApp.activate(ignoringOtherApps: true)
             }
+            .buttonStyle(SecondaryActionButtonStyle(fullWidth: true))
 
             Button("立即刷新链路探针") {
                 Task { await store.refreshEndpointProbe() }
             }
+            .buttonStyle(SecondaryActionButtonStyle(fullWidth: true))
         }
         .padding(TeaPulseSpacing.md)
-        .frame(width: 260)
+        .frame(width: 280)
+        .background(TeaPulseTheme.surfaceCard)
     }
 }
 #endif

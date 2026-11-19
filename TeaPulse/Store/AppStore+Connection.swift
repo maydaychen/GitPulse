@@ -19,9 +19,12 @@ extension AppStore {
 
     internal func resetWorkspace(using demo: DemoSnapshot? = nil) {
         hasLoadedLiveWorkspace = false; isLoadingWorkspace = false; isResolvingRoute = false
+        lastWorkspaceRefreshAt = nil; lastSyncedWidgetFingerprint = nil
         loadingRepoNames.removeAll(); loadedRepoNames.removeAll()
         loadingPRIDs.removeAll(); loadedPRIDs.removeAll()
         loadingRunIDs.removeAll(); loadedRunIDs.removeAll()
+        loadedRepoTabTimestamps.removeAll(); commitDiffOrder.removeAll()
+        loadedFileContentOrder.removeAll(); loadedRunLogOrder.removeAll()
         triage = demo?.triage ?? []
         pinnedRepos = demo?.pinnedRepos ?? []
         heatmap = demo?.heatmap ?? []
@@ -176,28 +179,12 @@ extension AppStore {
         let nonMirrorRepos = repos.filter { !$0.isMirror }
         let openPRTargets = nonMirrorRepos.filter { $0.openPRCount > 0 }
         let prQueryTargets = openPRTargets.isEmpty ? Array(nonMirrorRepos.prefix(3)) : Array(openPRTargets.prefix(8))
-        var prs: [PullRequestDetail] = []
-        for targetRepo in prQueryTargets {
-            if let batch = try? await client.fetchPullRequests(owner: targetRepo.owner, repo: targetRepo.name) {
-                prs.append(contentsOf: batch)
-            }
-        }
-        for idx in prs.indices.prefix(8) {
-            let parts = prs[idx].repoFullName.split(separator: "/").map(String.init)
-            if parts.count == 2 {
-                prs[idx] = await enrichPullRequest(prs[idx], owner: parts[0], repo: parts[1], client: client)
-            }
-        }
 
-        var fetchedRuns: [WorkflowRun] = []
-        for repo in nonMirrorRepos.prefix(6) {
-            if let batch = try? await client.fetchRepoWorkflowRuns(
-                owner: repo.owner, repo: repo.name, defaultBranch: repo.defaultBranch
-            ) {
-                fetchedRuns.append(contentsOf: batch)
-            }
-        }
+        async let prsTask = Self.fetchOpenPRsAndEnrich(targets: prQueryTargets, client: client)
+        async let runsTask = Self.fetchRecentWorkflowRuns(repos: nonMirrorRepos, client: client)
 
+        let prs = await prsTask
+        let fetchedRuns = await runsTask
         let fetchedHeatmap = (try? await heatmapTask) ?? []
         var resolvedActivities = (try? await activitiesTask) ?? []
         if resolvedActivities.isEmpty {
@@ -205,10 +192,7 @@ extension AppStore {
             let orgCandidates = repos.filter { $0.scope == .org || $0.isOrganizationOwned }.map(\.owner)
                 + fetchedOrgs.map(\.username)
             let orgs = orgCandidates.filter { seenOrgs.insert($0.lowercased()).inserted }
-            for org in orgs.prefix(3) {
-                resolvedActivities.append(contentsOf: (try? await client.fetchOrgActivityFeeds(org: org, limit: 10)) ?? [])
-            }
-            resolvedActivities = Array(resolvedActivities.prefix(20))
+            resolvedActivities = await Self.fetchOrganizationFallbackActivities(orgs: orgs, client: client)
         }
         let mergedRepos = resolvedActivities.isEmpty ? repos : await client.mergeActivityRepositories(
             activities: resolvedActivities, into: repos, currentUsername: currentLogin
@@ -228,6 +212,8 @@ extension AppStore {
     private func applyLiveWorkspace(_ loaded: LiveWorkspace) {
         let selectDefault = !hasLoadedLiveWorkspace && pendingRoute == nil
         hasLoadedLiveWorkspace = true
+        lastWorkspaceRefreshAt = Date()
+        loadedRepoTabTimestamps.removeAll()
         isLoadingWorkspace = false
         loadedPRIDs.formUnion(loaded.pullRequests.prefix(8).map(\.id))
         profile.username = loaded.username
@@ -346,18 +332,6 @@ extension AppStore {
             if !isDemoMode, profile.id == sessionID { loadedRepoNames.insert(repoKey) }
         }
 
-        var resolvedFiles: [RepoFileEntry]
-        var contentError: Error?
-        do {
-            resolvedFiles = try await client.fetchRepoContents(
-                owner: repo.owner, repo: repo.name, path: directoryPath, ref: activeRef
-            )
-        } catch {
-            resolvedFiles = []
-            contentError = error
-        }
-        guard !isDemoMode, profile.id == sessionID else { return }
-
         if directoryPath.isEmpty {
             async let prsTask = client.fetchPullRequests(owner: repo.owner, repo: repo.name)
             async let issuesTask = client.fetchIssues(owner: repo.owner, repo: repo.name)
@@ -368,6 +342,18 @@ extension AppStore {
             async let runsTask = client.fetchRepoWorkflowRuns(owner: repo.owner, repo: repo.name, defaultBranch: repo.defaultBranch)
             async let branchesTask = client.fetchRepoBranches(owner: repo.owner, repo: repo.name, defaultBranch: repo.defaultBranch)
             async let commitsTask = client.fetchRepoCommits(owner: repo.owner, repo: repo.name, sha: activeRef)
+
+            var resolvedFiles: [RepoFileEntry]
+            var contentError: Error?
+            do {
+                resolvedFiles = try await client.fetchRepoContents(
+                    owner: repo.owner, repo: repo.name, path: directoryPath, ref: activeRef
+                )
+            } catch {
+                resolvedFiles = []
+                contentError = error
+            }
+            guard !isDemoMode, profile.id == sessionID else { return }
 
             let readmeTarget = Self.preferredReadmeEntry(in: resolvedFiles)
             var loadedReadmeText: String?
@@ -381,12 +367,8 @@ extension AppStore {
                 }
             }
 
-            var prs = try? await prsTask
-            if let count = prs?.count, count > 0 {
-                for idx in 0..<count {
-                    prs![idx] = await enrichPullRequest(prs![idx], owner: repo.owner, repo: repo.name, client: client)
-                }
-            }
+            let fetchedPRs = try? await prsTask
+            let prs = await Self.enrichFirstPRs(fetchedPRs, owner: repo.owner, repo: repo.name, client: client)
             let issues = try? await issuesTask
             let releases = try? await releasesTask
             let hooks = try? await hooksTask
@@ -420,12 +402,24 @@ extension AppStore {
                     files: resolvedFiles, contentError: contentError
                 )
             }
+            markAllRepoTabsLoaded(repoFullName: canonicalName, branch: activeRef)
+            if let contentError {
+                if case .httpStatus(404, _) = contentError as? GiteaClientError {} else { showToast(contentError.localizedDescription) }
+            }
+            repoFiles[canonicalName] = resolvedFiles
+            return
         }
 
+        var resolvedFiles: [RepoFileEntry]
+        var contentError: Error?
+        do {
+            resolvedFiles = try await client.fetchRepoContents(owner: repo.owner, repo: repo.name, path: directoryPath, ref: activeRef)
+        } catch {
+            resolvedFiles = []; contentError = error
+        }
+        guard !isDemoMode, profile.id == sessionID else { return }
         if let contentError {
-            if case .httpStatus(404, _) = contentError as? GiteaClientError {} else {
-                showToast(contentError.localizedDescription)
-            }
+            if case .httpStatus(404, _) = contentError as? GiteaClientError {} else { showToast(contentError.localizedDescription) }
         }
         repoFiles[canonicalName] = resolvedFiles
     }

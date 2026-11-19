@@ -25,6 +25,21 @@ public struct PullRequestWorkspaceView: View {
         ZStack(alignment: .bottom) {
             ScrollView {
                 VStack(alignment: .leading, spacing: TeaPulseSpacing.lg) {
+                    #if os(macOS)
+                    if store.selectedSection == .repos && store.selectedRepository != nil {
+                        HStack {
+                            Button {
+                                TeaPulseMotion.run(TeaPulseMotion.snappy, reduceMotion: reduceMotion) {
+                                    store.selectedPRID = nil
+                                }
+                            } label: {
+                                Label("返回 \(livePR.repoFullName)", systemImage: "chevron.left")
+                            }
+                            .buttonStyle(SecondaryActionButtonStyle())
+                            Spacer()
+                        }
+                    }
+                    #endif
                     stickyHeader
                     if let pos = livePR.stackPosition, let total = livePR.stackTotal {
                         stackedTrainBar(position: pos, total: total)
@@ -39,6 +54,7 @@ public struct PullRequestWorkspaceView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .labelsHidden()
 
                     Group {
                         switch store.selectedPRSegment {
@@ -237,28 +253,17 @@ public struct PullRequestWorkspaceView: View {
     private var floatingMergeDock: some View {
         let isApproved = store.approvedPRIDs.contains(livePR.id)
         return HStack(spacing: TeaPulseSpacing.sm) {
-            Menu {
-                ForEach(PRMergeStrategy.allCases, id: \.self) { strategy in
-                    Button(strategy.label) { mergeStrategy = strategy }
-                }
-            } label: {
-                HStack(spacing: TeaPulseSpacing.xs) {
-                    Text(mergeStrategy.label)
-                    Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 10, weight: .semibold))
-                        .foregroundStyle(TeaPulseTheme.secondary)
-                }
-                .font(TeaPulseTypography.codeSm)
-                .foregroundStyle(TeaPulseTheme.onSurface)
-                .lineLimit(1)
-                .fixedSize(horizontal: true, vertical: false)
-                .padding(.horizontal, TeaPulseSpacing.md)
-                .padding(.vertical, TeaPulseSpacing.sm)
-                .frame(minHeight: 36)
-                .background(TeaPulseTheme.neutral)
-                .clipShape(Capsule(style: .continuous))
-                .contentShape(Capsule(style: .continuous))
-            }
+            TeaPulseDropdownMenu(
+                items: PRMergeStrategy.allCases.map { strategy in
+                    TeaPulseDropdownItem(
+                        value: strategy,
+                        title: strategy.label,
+                        icon: mergeStrategyIcon(for: strategy)
+                    )
+                },
+                selection: $mergeStrategy,
+                preferredColorScheme: store.themePreference.colorScheme
+            )
 
             Button(isApproved ? "已批准" : "批准") {
                 Task {
@@ -286,5 +291,13 @@ public struct PullRequestWorkspaceView: View {
         .overlay(Capsule().stroke(TeaPulseTheme.cardBorder, lineWidth: 1))
         .padding(.horizontal, TeaPulseSpacing.md)
         .padding(.bottom, TeaPulseSpacing.sm)
+    }
+
+    private func mergeStrategyIcon(for strategy: PRMergeStrategy) -> String {
+        switch strategy {
+        case .squash: return "square.stack.3d.up"
+        case .merge: return "arrow.triangle.merge"
+        case .rebase: return "arrow.triangle.branch"
+        }
     }
 }

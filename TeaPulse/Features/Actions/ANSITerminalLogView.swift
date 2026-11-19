@@ -20,7 +20,14 @@ public struct WorkflowDispatchSheet: View {
     }
 
     public var body: some View {
-        NavigationStack {
+        TeaPulseModalSheet(
+            title: "手动触发 \(run.workflowFile)",
+            minWidth: 460,
+            idealWidth: 500,
+            minHeight: 300,
+            idealHeight: 360,
+            onClose: { dismiss() }
+        ) {
             ScrollView {
                 VStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
                     VStack(alignment: .leading, spacing: TeaPulseSpacing.xs) {
@@ -70,12 +77,6 @@ public struct WorkflowDispatchSheet: View {
                 .padding(TeaPulseSpacing.md)
             }
             .background(TeaPulseTheme.surface)
-            .navigationTitle("手动触发 \(run.workflowFile)")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("关闭") { dismiss() }
-                }
-            }
         }
     }
 }
@@ -213,7 +214,7 @@ public struct ANSITerminalLogView: View {
     }
 
     private var stepsTerminalCard: some View {
-        VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
+        LazyVStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
             if store.isLoadingRunLogs(liveRun) {
                 LoadingStateCard("正在拉取构建步骤与终端日志…")
             } else if liveRun.steps.isEmpty {
@@ -263,8 +264,8 @@ public struct ANSITerminalLogView: View {
                     .buttonStyle(TeaPulsePressableCardStyle())
 
                     if isOpen {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            VStack(alignment: .leading, spacing: 2) {
+                        ScrollView(.horizontal, showsIndicators: TeaPulsePlatform.showsCodeHorizontalIndicators) {
+                            LazyVStack(alignment: .leading, spacing: 2) {
                                 ForEach(step.lines) { line in
                                     HStack(spacing: TeaPulseSpacing.sm) {
                                         Text("\(line.lineNumber)")

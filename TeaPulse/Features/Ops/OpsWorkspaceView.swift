@@ -3,7 +3,18 @@ import GiteaKit
 
 public struct OpsWorkspaceView: View {
     @Environment(AppStore.self) private var store
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    #endif
     @State private var confirmCron: CronTaskItem?
+
+    private var showsCompactHeaderControls: Bool {
+        #if os(iOS)
+        return sizeClass == .compact
+        #else
+        return false
+        #endif
+    }
 
     public init() {}
 
@@ -47,8 +58,10 @@ public struct OpsWorkspaceView: View {
                 .foregroundStyle(TeaPulseTheme.onSurface)
                 .lineLimit(1)
             Spacer()
-            EndpointProbePill(health: store.health) {
-                store.isConnectionSheetPresented = true
+            if showsCompactHeaderControls {
+                EndpointProbePill(health: store.health) {
+                    store.isConnectionSheetPresented = true
+                }
             }
         }
     }

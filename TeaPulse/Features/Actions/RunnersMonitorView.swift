@@ -131,7 +131,14 @@ public struct RunnersMonitorView: View {
           --labels ubuntu-latest,docker
         """
 
-        return NavigationStack {
+        return TeaPulseModalSheet(
+            title: "节点注册命令",
+            minWidth: 520,
+            idealWidth: 560,
+            minHeight: 300,
+            idealHeight: 340,
+            onClose: { isTokenSheetPresented = false }
+        ) {
             VStack(alignment: .leading, spacing: TeaPulseSpacing.md) {
                 SurfaceCard(elevated: true) {
                     VStack(alignment: .leading, spacing: TeaPulseSpacing.sm) {
@@ -165,15 +172,6 @@ public struct RunnersMonitorView: View {
             }
             .padding(TeaPulseSpacing.md)
             .background(TeaPulseTheme.surface)
-            .navigationTitle("节点注册命令")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("关闭") { isTokenSheetPresented = false }
-                }
-            }
         }
     }
 

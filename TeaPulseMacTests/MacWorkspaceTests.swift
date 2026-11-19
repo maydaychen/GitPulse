@@ -57,4 +57,30 @@ struct MacWorkspaceTests {
         #expect(updated?.triageItems.isEmpty == false)
         #expect(AppGroupBridge.loadWidgetSnapshot(userDefaults: defaults)?.updatedAt == refreshedAt)
     }
+
+    @Test("Split workspace enables master-detail only for repos and actions")
+    func splitWorkspaceRoutingUsesSingleCanvasForOverviewInboxAndOps() {
+        #expect(AppSection.repos.usesMasterDetailSplit == true)
+        #expect(AppSection.actions.usesMasterDetailSplit == true)
+        #expect(AppSection.pulse.usesMasterDetailSplit == false)
+        #expect(AppSection.inbox.usesMasterDetailSplit == false)
+        #expect(AppSection.ops.usesMasterDetailSplit == false)
+    }
+
+    @Test("Sidebar version badge formats unreachable, unloaded, and release versions cleanly")
+    func formatsSidebarVersionBadgeAndThemeIcons() {
+        let offline = EndpointHealth(channel: .publicProxy, baseURL: "https://git.example.com", latencyMs: 0, serverVersion: "unreachable").sidebarVersionBadge
+        #expect(offline.label == "离线")
+        #expect(offline.tone == .error)
+
+        let pending = EndpointHealth(channel: .publicProxy, baseURL: "", latencyMs: 0, serverVersion: "未加载").sidebarVersionBadge
+        #expect(pending.label == "待连接")
+        #expect(pending.tone == .neutral)
+
+        let live = EndpointHealth(channel: .lanDirect, baseURL: "http://10.0.0.2:3000", latencyMs: 4, serverVersion: "1.27.3+rc1-g1234").sidebarVersionBadge
+        #expect(live.label == "v1.27.3")
+        #expect(live.tone == .primary)
+
+        #expect(ThemePreference.allCases.map(\.iconName) == ["circle.lefthalf.filled", "moon.stars.fill", "sun.max.fill"])
+    }
 }

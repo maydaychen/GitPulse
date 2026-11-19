@@ -112,6 +112,7 @@ extension AppStore {
     public func selectRepositoryBranch(repoFullName: String, branch: String) async {
         let canonical = canonicalRepoName(repoFullName)
         selectedBranchByRepo[canonical.lowercased()] = branch
+        invalidateRepoTabCache(repoFullName: canonical)
         guard !isDemoMode else {
             showToast("已切换至 \(branch)")
             return
@@ -121,7 +122,11 @@ extension AppStore {
 
     public func loadCommitDiff(repoFullName: String, sha: String) async -> [DiffFilePatch] {
         let cacheKey = "\(canonicalRepoName(repoFullName).lowercased())::\(sha.lowercased())"
-        if let cached = commitDiffsBySHA[cacheKey] { return cached }
+        if let cached = commitDiffsBySHA[cacheKey] {
+            commitDiffOrder.removeAll { $0 == cacheKey }
+            commitDiffOrder.append(cacheKey)
+            return cached
+        }
         if let demoBySHA = commitDiffsBySHA[sha] { return demoBySHA }
         guard !isDemoMode, let client = makeActiveClient() else { return [] }
         let parts = canonicalRepoName(repoFullName).split(separator: "/").map(String.init)
@@ -130,7 +135,7 @@ extension AppStore {
         do {
             let patches = try await client.fetchCommitDiff(owner: parts[0], repo: parts[1], sha: sha)
             guard !isDemoMode, profile.id == sessionID else { return patches }
-            commitDiffsBySHA[cacheKey] = patches
+            cacheCommitDiff(patches, forKey: cacheKey)
             return patches
         } catch {
             guard !isDemoMode, profile.id == sessionID else { return [] }
@@ -166,15 +171,7 @@ extension AppStore {
     internal func enrichPullRequest(
         _ pr: PullRequestDetail, owner: String, repo: String, client: GiteaClient
     ) async -> PullRequestDetail {
-        var updated = pr
-        let checkRef = (pr.headSHA?.isEmpty == false ? pr.headSHA : nil) ?? pr.headBranch
-        async let patchesTask = client.fetchPullRequestDiff(owner: owner, repo: repo, index: pr.number)
-        async let commentsTask = client.fetchPullRequestComments(owner: owner, repo: repo, index: pr.number)
-        async let checksTask = client.fetchCommitChecks(owner: owner, repo: repo, ref: checkRef)
-        if let patches = try? await patchesTask, !patches.isEmpty { updated.files = patches }
-        if let comments = try? await commentsTask, !comments.isEmpty { updated.comments = comments }
-        if let checks = try? await checksTask, !checks.isEmpty { updated.checks = checks }
-        return updated
+        await Self.enrichPullRequestConcurrent(pr, owner: owner, repo: repo, client: client)
     }
 
     public func isLoadingRunLogs(_ run: WorkflowRun) -> Bool {
@@ -210,6 +207,7 @@ extension AppStore {
         if !fetched.steps.isEmpty {
             runs[idx].steps = fetched.steps
         }
+        recordCachedRunLogs(runID: run.id)
     }
 
     // MARK: - Secrets & Variables
@@ -313,7 +311,20 @@ extension AppStore {
         AppGroupBridge.saveWidgetSnapshot(snapshot, userDefaults: userDefaults)
         #if canImport(WidgetKit)
         if userDefaults == nil {
-            WidgetCenter.shared.reloadAllTimelines()
+            let triageSig = snapshot.triageItems.map { "\($0.id)|\($0.title)|\($0.metricText)" }.joined(separator: ",")
+            let heatmapSum = snapshot.heatmapDays.reduce(0) { $0 + $1.contributions }
+            let fingerprint = [
+                profile.id, profile.publicURL, profile.lanURL ?? "", profile.activeChannel.rawValue,
+                profile.username, "\(isDemoMode)", instanceName, health.probePillText, health.serverVersion,
+                "\(snapshot.unreadInboxCount)", "\(snapshot.runningBuildCount)", "\(snapshot.failedBuildCount)",
+                "\(snapshot.onlineRunnerCount)", "\(snapshot.offlineRunnerCount)",
+                snapshot.activeRunRepo ?? "", snapshot.activeRunStep ?? "", triageSig,
+                "\(snapshot.heatmapDays.count):\(heatmapSum)"
+            ].joined(separator: "::")
+            if fingerprint != lastSyncedWidgetFingerprint {
+                lastSyncedWidgetFingerprint = fingerprint
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
         #endif
     }

@@ -17,7 +17,7 @@
 专为使用 **自定义端口 TLS 反代**（如 Nginx / Caddy、子路径部署、Cloudflare Access 请求头）以及 **内网直连 / 公网回落切换** 的 Gitea 管理员与开发者打造。底层由共享 Swift 6 核心库 `GiteaKit` 驱动，一次维护同步支持 iPhone、iPad、macOS、菜单栏监控、WidgetKit 小组件、Live Activity 与 Share Extension。
 
 > [!NOTE]
-> **当前开源状态说明（v0.1.1）**：核心网络层 `GiteaKitTests`（32 项）、iOS 单元测试（31 项）与 UI 冒烟测试（5 项）、macOS 单元测试（3 项）及 `--demo-mode` 离线演示数据均已稳定运行并通过本地回归；连接真实自托管 Gitea 实例的端到端验收以及 iOS 真机灵动岛（ActivityKit）、桌面与锁屏小组件后台真机联调、系统 Share Extension 面板仍处于持续真机联调阶段。
+> **当前开源状态说明（v0.1.2）**：核心网络层 `GiteaKitTests`（32 项）、iOS 单元测试（35 项）与 UI 冒烟测试（5 项）、macOS 单元测试（5 项）及 `--demo-mode` 离线演示数据均已稳定运行并通过本地回归；连接真实自托管 Gitea 实例的端到端验收以及 iOS 真机灵动岛（ActivityKit）、桌面与锁屏小组件后台真机联调、系统 Share Extension 面板仍处于持续真机联调阶段。
 
 ## 真实界面预览（Demo 模式实机截图）
 

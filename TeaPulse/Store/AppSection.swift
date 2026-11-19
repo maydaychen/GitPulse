@@ -28,6 +28,15 @@ public enum AppSection: String, CaseIterable, Identifiable, Sendable {
         case .ops: return "server.rack"
         }
     }
+
+    public var usesMasterDetailSplit: Bool {
+        switch self {
+        case .repos, .actions:
+            return true
+        case .pulse, .inbox, .ops:
+            return false
+        }
+    }
 }
 
 public enum RepoWorkspaceTab: String, CaseIterable, Identifiable, Sendable {
